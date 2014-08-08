@@ -1,0 +1,129 @@
+//
+//  Prefix header
+//
+//  The contents of this file are implicitly included at the beginning of every source file.
+//
+
+#import <Availability.h>
+
+#ifndef __IPHONE_3_0
+#warning "This project uses features only available in iOS SDK 3.0 and later."
+#endif
+
+#ifdef __OBJC__
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#endif
+
+#define MKMAP
+#define LOCOFFSET
+//#define MONITOR_PD
+//#define LOG_TO_EMAIL
+//#define SHOW_CIRCLES
+//#define FLY_TO_LOC
+
+// Useful Macros.
+// See http://www.cimgf.com/2010/05/02/my-current-prefix-pch-file/ for details.
+// Most current version at https://gist.github.com/325926 along with usage notes.
+
+#ifdef DEBUG
+#define DLog(...) NSLog(@"%s %@", __PRETTY_FUNCTION__, [NSString stringWithFormat:__VA_ARGS__])
+//#define ALog(...) [[NSAssertionHandler currentHandler] handleFailureInFunction:[NSString stringWithCString:__PRETTY_FUNCTION__ encoding:NSUTF8StringEncoding] file:[NSString stringWithCString:__FILE__ encoding:NSUTF8StringEncoding] lineNumber:__LINE__ description:__VA_ARGS__]
+#else
+#define DLog(...) do { } while (0)
+//#ifndef NS_BLOCK_ASSERTIONS
+//#define NS_BLOCK_ASSERTIONS
+//#endif
+//#define ALog(...) NSLog(@"%s %@", __PRETTY_FUNCTION__, [NSString stringWithFormat:__VA_ARGS__])
+#endif
+
+//#define ZAssert(condition, ...) do { if (!(condition)) { ALog(__VA_ARGS__); }} while(0)
+
+
+#ifdef LOCOFFSET
+// B0
+#define LAT_OFFSET (42.728239 - 42.919679) // 91 lancaster
+#define LON_OFFSET (-73.683575 - -78.87174)
+
+//A0
+//#define LAT_OFFSET (42.728159 - 42.919679) // 91 lancaster
+//#define LON_OFFSET (-73.683675 - -78.87174)
+
+// C
+//#define LAT_OFFSET (42.728907 - 42.919679) // 91 lancaster
+//#define LON_OFFSET (-73.683718 - -78.87174)
+
+
+#else
+#define LAT_OFFSET 0.0
+#define LON_OFFSET 0.0
+#endif
+
+
+// uncomment to debug JSON reads (and, someday, writes)
+//#ifndef DEBUG_JSON
+//#define DEBUG_JSON
+//#endif
+//
+#if defined(DEBUG_JSON) && defined(DEBUG)
+#define JSONLog(...) NSLog(@"%s %@", __PRETTY_FUNCTION__, [NSString stringWithFormat:__VA_ARGS__])
+#else
+#define JSONLog(...) do { } while (0)
+#endif
+
+// uncomment to debug JSON reads (and, someday, writes)
+//#ifndef DEBUG_LOCUPDATE
+//#define DEBUG_LOCUPDATE
+//#endif
+
+#if defined(DEBUG_LOCUPDATE) && defined(DEBUG)
+#define LocUpdateLog(...) NSLog(@"%s %@", __PRETTY_FUNCTION__, [NSString stringWithFormat:__VA_ARGS__])
+#else
+#define LocUpdateLog(...) do { } while (0)
+#endif
+
+// uncomment to debug MAPKIT Logs
+//#ifndef DEBUG_MAPKIT
+//#define DEBUG_MAPKIT
+//#endif
+
+#if defined(DEBUG_MAPKIT) && defined(DEBUG)
+#define MapKitLog(...) NSLog(@"%s %@", __PRETTY_FUNCTION__, [NSString stringWithFormat:__VA_ARGS__])
+#else
+#define MapKitLog(...) do { } while (0)
+#endif
+
+// uncomment to debug Pd Logs
+//#ifndef DEBUG_PD
+//#define DEBUG_PD
+//#endif
+
+#if defined(DEBUG_PD) && defined(DEBUG)
+#define PdLog(...) NSLog(@"%s %@", __PRETTY_FUNCTION__, [NSString stringWithFormat:__VA_ARGS__])
+#else
+#define PdLog(...) do { } while (0)
+#endif
+
+// uncomment to debug HTLP Logs
+#ifndef DEBUG_HTLP
+#define DEBUG_HTLP
+#endif
+
+#if defined(DEBUG_HTLP) && defined(DEBUG)
+#define HTLPLog(...) NSLog(@"%s %@", __PRETTY_FUNCTION__, [NSString stringWithFormat:__VA_ARGS__])
+#else
+#define HTLPLog(...) do { } while (0)
+#endif
+
+// uncomment to debug HTLP Logs
+//#ifndef DEBUG_AUDIO_ROUTER
+//#define DEBUG_AUDIO_ROUTER
+//#endif
+
+#if defined(DEBUG_AUDIO_ROUTER) && defined(DEBUG)
+#define ARLog(...) NSLog(@"%s %@", __PRETTY_FUNCTION__, [NSString stringWithFormat:__VA_ARGS__])
+#else
+#define ARLog(...) do { } while (0)
+#endif
+
+

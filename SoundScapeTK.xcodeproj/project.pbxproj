@@ -1,0 +1,655 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		860697A11930E92B000353A3 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8638E44819048C1E007371CE /* AudioToolbox.framework */; };
+		860697A21930E92B000353A3 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8638E44919048C1E007371CE /* AVFoundation.framework */; };
+		860697A31930E92B000353A3 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8638E44A19048C1E007371CE /* CoreLocation.framework */; };
+		860697A41930E92B000353A3 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8638E44B19048C1E007371CE /* CoreText.framework */; };
+		860697A51930E92B000353A3 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8638E44C19048C1E007371CE /* MapKit.framework */; };
+		860697A61930E92B000353A3 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8638E44D19048C1E007371CE /* MessageUI.framework */; };
+		860697A71930E92B000353A3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8638E44E19048C1E007371CE /* QuartzCore.framework */; };
+		860697A81930E92B000353A3 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8638E44F19048C1E007371CE /* Security.framework */; };
+		860697A91930E92B000353A3 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8638E45019048C1E007371CE /* SystemConfiguration.framework */; };
+		860697AA1930E92B000353A3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8638E3B4190489A3007371CE /* CoreGraphics.framework */; };
+		860697AB1930E92B000353A3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8638E3B6190489A3007371CE /* UIKit.framework */; };
+		860697AC1930E92B000353A3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8638E3B2190489A3007371CE /* Foundation.framework */; };
+		860697D81930EE8A000353A3 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 860697D71930EE8A000353A3 /* Default-568h@2x.png */; };
+		861105081964785A00CD810A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 861104FE1964785A00CD810A /* InfoPlist.strings */; };
+		861105091964785A00CD810A /* kflAboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 861105001964785A00CD810A /* kflAboutViewController.xib */; };
+		8611050A1964785A00CD810A /* kflGPSViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 861105021964785A00CD810A /* kflGPSViewController.xib */; };
+		8611050B1964785A00CD810A /* kflModalAboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 861105041964785A00CD810A /* kflModalAboutViewController.xib */; };
+		8611050C1964785A00CD810A /* kflScapeManagerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 861105061964785A00CD810A /* kflScapeManagerViewController.xib */; };
+		8611052B1964791B00CD810A /* kflAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8611050E1964791B00CD810A /* kflAboutViewController.m */; };
+		8611052C1964791B00CD810A /* kflAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 861105101964791B00CD810A /* kflAppDelegate.m */; };
+		8611052D1964791B00CD810A /* kflAudioFileRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = 861105121964791B00CD810A /* kflAudioFileRouter.m */; };
+		8611052E1964791B00CD810A /* kflGPSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 861105141964791B00CD810A /* kflGPSViewController.m */; };
+		861105301964791B00CD810A /* kflLAPManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 861105181964791B00CD810A /* kflLAPManager.m */; };
+		861105311964791B00CD810A /* kflLinkedCircleRegion.m in Sources */ = {isa = PBXBuildFile; fileRef = 8611051A1964791B00CD810A /* kflLinkedCircleRegion.m */; };
+		861105321964791B00CD810A /* kflLinkedRectangleRegion.m in Sources */ = {isa = PBXBuildFile; fileRef = 8611051C1964791B00CD810A /* kflLinkedRectangleRegion.m */; };
+		861105331964791B00CD810A /* kflLinkedRegion.m in Sources */ = {isa = PBXBuildFile; fileRef = 8611051E1964791B00CD810A /* kflLinkedRegion.m */; };
+		861105341964791B00CD810A /* kflLinkedSoundfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 861105201964791B00CD810A /* kflLinkedSoundfile.m */; };
+		861105351964791B00CD810A /* kflLocationSegment.m in Sources */ = {isa = PBXBuildFile; fileRef = 861105221964791B00CD810A /* kflLocationSegment.m */; };
+		861105361964791B00CD810A /* kflMKMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 861105241964791B00CD810A /* kflMKMapViewController.m */; };
+		861105371964791B00CD810A /* kflPin.m in Sources */ = {isa = PBXBuildFile; fileRef = 861105261964791B00CD810A /* kflPin.m */; };
+		861105381964791B00CD810A /* kflScapeManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 861105281964791B00CD810A /* kflScapeManagerViewController.m */; };
+		861105391964791B00CD810A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 861105291964791B00CD810A /* main.m */; };
+		861105421964796900CD810A /* 01.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8611053A1964796900CD810A /* 01.mp3 */; };
+		861105431964796900CD810A /* 02.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8611053B1964796900CD810A /* 02.mp3 */; };
+		861105441964796900CD810A /* 03.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8611053C1964796900CD810A /* 03.mp3 */; };
+		861105451964796900CD810A /* iem_mp3.c in Sources */ = {isa = PBXBuildFile; fileRef = 8611053D1964796900CD810A /* iem_mp3.c */; };
+		861105461964796900CD810A /* mp3play~.c in Sources */ = {isa = PBXBuildFile; fileRef = 8611053F1964796900CD810A /* mp3play~.c */; };
+		861105471964796900CD810A /* play_sf.pd in Resources */ = {isa = PBXBuildFile; fileRef = 861105401964796900CD810A /* play_sf.pd */; };
+		861105481964796900CD810A /* sampler4bank.pd in Resources */ = {isa = PBXBuildFile; fileRef = 861105411964796900CD810A /* sampler4bank.pd */; };
+		8611054A196481B100CD810A /* SoundScapeTK-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 86110549196481B100CD810A /* SoundScapeTK-Info.plist */; };
+		862308AB196C549D0022D8D7 /* icon1024-noALPHA.png in Resources */ = {isa = PBXBuildFile; fileRef = 862308AA196C549D0022D8D7 /* icon1024-noALPHA.png */; };
+		862D789B196487FE00CA278C /* libpd-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 861104FB1964763400CD810A /* libpd-ios.a */; };
+		862D789E19648DEA00CA278C /* kflLinkedParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = 862D789D19648DEA00CA278C /* kflLinkedParameter.m */; };
+		862D78A01964958700CA278C /* empac.gpson in Resources */ = {isa = PBXBuildFile; fileRef = 862D789F1964958700CA278C /* empac.gpson */; };
+		862D78A61964AAEA00CA278C /* kflHTLPManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 862D78A31964AAEA00CA278C /* kflHTLPManager.m */; };
+		869B3FAC1969A44900742F05 /* bpf_empac.pd in Resources */ = {isa = PBXBuildFile; fileRef = 869B3FAA1969A44900742F05 /* bpf_empac.pd */; };
+		869B3FAD1969A44900742F05 /* empac_ios.pd in Resources */ = {isa = PBXBuildFile; fileRef = 869B3FAB1969A44900742F05 /* empac_ios.pd */; };
+		869B3FB2196A0A2D00742F05 /* reverb-echo.pd in Resources */ = {isa = PBXBuildFile; fileRef = 869B3FB1196A0A2D00742F05 /* reverb-echo.pd */; };
+		86DC88B3196C4E7C00ABA100 /* Images-2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86DC88B2196C4E7C00ABA100 /* Images-2.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		861104FA1964763400CD810A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 86652094192CF92600EFFA60 /* libpd.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC07E0554694100DB518D;
+			remoteInfo = "libpd-ios";
+		};
+		861104FC1964763400CD810A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 86652094192CF92600EFFA60 /* libpd.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 119013AB1486450C00086F19;
+			remoteInfo = "libpd-osx";
+		};
+		862D78981964879200CA278C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 86652094192CF92600EFFA60 /* libpd.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC07D0554694100DB518D;
+			remoteInfo = "libpd-ios";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		860697CE1930E92B000353A3 /* SoundScapeTK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SoundScapeTK.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		860697D71930EE8A000353A3 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		861104FF1964785A00CD810A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = SoundScapeTK/en.lproj/InfoPlist.strings; sourceTree = SOURCE_ROOT; };
+		861105011964785A00CD810A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = SoundScapeTK/en.lproj/kflAboutViewController.xib; sourceTree = SOURCE_ROOT; };
+		861105031964785A00CD810A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = SoundScapeTK/en.lproj/kflGPSViewController.xib; sourceTree = SOURCE_ROOT; };
+		861105051964785A00CD810A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = SoundScapeTK/en.lproj/kflModalAboutViewController.xib; sourceTree = SOURCE_ROOT; };
+		861105071964785A00CD810A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = SoundScapeTK/en.lproj/kflScapeManagerViewController.xib; sourceTree = SOURCE_ROOT; };
+		8611050D1964791B00CD810A /* kflAboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kflAboutViewController.h; path = SoundScapeTK/kflAboutViewController.h; sourceTree = SOURCE_ROOT; };
+		8611050E1964791B00CD810A /* kflAboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = kflAboutViewController.m; path = SoundScapeTK/kflAboutViewController.m; sourceTree = SOURCE_ROOT; };
+		8611050F1964791B00CD810A /* kflAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kflAppDelegate.h; path = SoundScapeTK/kflAppDelegate.h; sourceTree = SOURCE_ROOT; };
+		861105101964791B00CD810A /* kflAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = kflAppDelegate.m; path = SoundScapeTK/kflAppDelegate.m; sourceTree = SOURCE_ROOT; };
+		861105111964791B00CD810A /* kflAudioFileRouter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kflAudioFileRouter.h; path = SoundScapeTK/kflAudioFileRouter.h; sourceTree = SOURCE_ROOT; };
+		861105121964791B00CD810A /* kflAudioFileRouter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = kflAudioFileRouter.m; path = SoundScapeTK/kflAudioFileRouter.m; sourceTree = SOURCE_ROOT; };
+		861105131964791B00CD810A /* kflGPSViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kflGPSViewController.h; path = SoundScapeTK/kflGPSViewController.h; sourceTree = SOURCE_ROOT; };
+		861105141964791B00CD810A /* kflGPSViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = kflGPSViewController.m; path = SoundScapeTK/kflGPSViewController.m; sourceTree = SOURCE_ROOT; };
+		861105171964791B00CD810A /* kflLAPManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kflLAPManager.h; path = SoundScapeTK/kflLAPManager.h; sourceTree = SOURCE_ROOT; };
+		861105181964791B00CD810A /* kflLAPManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = kflLAPManager.m; path = SoundScapeTK/kflLAPManager.m; sourceTree = SOURCE_ROOT; };
+		861105191964791B00CD810A /* kflLinkedCircleRegion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kflLinkedCircleRegion.h; path = SoundScapeTK/kflLinkedCircleRegion.h; sourceTree = SOURCE_ROOT; };
+		8611051A1964791B00CD810A /* kflLinkedCircleRegion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = kflLinkedCircleRegion.m; path = SoundScapeTK/kflLinkedCircleRegion.m; sourceTree = SOURCE_ROOT; };
+		8611051B1964791B00CD810A /* kflLinkedRectangleRegion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kflLinkedRectangleRegion.h; path = SoundScapeTK/kflLinkedRectangleRegion.h; sourceTree = SOURCE_ROOT; };
+		8611051C1964791B00CD810A /* kflLinkedRectangleRegion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = kflLinkedRectangleRegion.m; path = SoundScapeTK/kflLinkedRectangleRegion.m; sourceTree = SOURCE_ROOT; };
+		8611051D1964791B00CD810A /* kflLinkedRegion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kflLinkedRegion.h; path = SoundScapeTK/kflLinkedRegion.h; sourceTree = SOURCE_ROOT; };
+		8611051E1964791B00CD810A /* kflLinkedRegion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = kflLinkedRegion.m; path = SoundScapeTK/kflLinkedRegion.m; sourceTree = SOURCE_ROOT; };
+		8611051F1964791B00CD810A /* kflLinkedSoundfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kflLinkedSoundfile.h; path = SoundScapeTK/kflLinkedSoundfile.h; sourceTree = SOURCE_ROOT; };
+		861105201964791B00CD810A /* kflLinkedSoundfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = kflLinkedSoundfile.m; path = SoundScapeTK/kflLinkedSoundfile.m; sourceTree = SOURCE_ROOT; };
+		861105211964791B00CD810A /* kflLocationSegment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kflLocationSegment.h; path = SoundScapeTK/kflLocationSegment.h; sourceTree = SOURCE_ROOT; };
+		861105221964791B00CD810A /* kflLocationSegment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = kflLocationSegment.m; path = SoundScapeTK/kflLocationSegment.m; sourceTree = SOURCE_ROOT; };
+		861105231964791B00CD810A /* kflMKMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kflMKMapViewController.h; path = SoundScapeTK/kflMKMapViewController.h; sourceTree = SOURCE_ROOT; };
+		861105241964791B00CD810A /* kflMKMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = kflMKMapViewController.m; path = SoundScapeTK/kflMKMapViewController.m; sourceTree = SOURCE_ROOT; };
+		861105251964791B00CD810A /* kflPin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kflPin.h; path = SoundScapeTK/kflPin.h; sourceTree = SOURCE_ROOT; };
+		861105261964791B00CD810A /* kflPin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = kflPin.m; path = SoundScapeTK/kflPin.m; sourceTree = SOURCE_ROOT; };
+		861105271964791B00CD810A /* kflScapeManagerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kflScapeManagerViewController.h; path = SoundScapeTK/kflScapeManagerViewController.h; sourceTree = SOURCE_ROOT; };
+		861105281964791B00CD810A /* kflScapeManagerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = kflScapeManagerViewController.m; path = SoundScapeTK/kflScapeManagerViewController.m; sourceTree = SOURCE_ROOT; };
+		861105291964791B00CD810A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = SoundScapeTK/main.m; sourceTree = SOURCE_ROOT; };
+		8611052A1964791B00CD810A /* SoundScapeTK-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "SoundScapeTK-Prefix.pch"; path = "SoundScapeTK/SoundScapeTK-Prefix.pch"; sourceTree = SOURCE_ROOT; };
+		8611053A1964796900CD810A /* 01.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = 01.mp3; path = SoundScapeTK/pd/01.mp3; sourceTree = SOURCE_ROOT; };
+		8611053B1964796900CD810A /* 02.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = 02.mp3; path = SoundScapeTK/pd/02.mp3; sourceTree = SOURCE_ROOT; };
+		8611053C1964796900CD810A /* 03.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = 03.mp3; path = SoundScapeTK/pd/03.mp3; sourceTree = SOURCE_ROOT; };
+		8611053D1964796900CD810A /* iem_mp3.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = iem_mp3.c; path = SoundScapeTK/pd/iem_mp3.c; sourceTree = SOURCE_ROOT; };
+		8611053E1964796900CD810A /* iemlib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iemlib.h; path = SoundScapeTK/pd/iemlib.h; sourceTree = SOURCE_ROOT; };
+		8611053F1964796900CD810A /* mp3play~.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = "mp3play~.c"; path = "SoundScapeTK/pd/mp3play~.c"; sourceTree = SOURCE_ROOT; };
+		861105401964796900CD810A /* play_sf.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = play_sf.pd; path = SoundScapeTK/pd/play_sf.pd; sourceTree = SOURCE_ROOT; };
+		861105411964796900CD810A /* sampler4bank.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = sampler4bank.pd; path = SoundScapeTK/pd/sampler4bank.pd; sourceTree = SOURCE_ROOT; };
+		86110549196481B100CD810A /* SoundScapeTK-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "SoundScapeTK-Info.plist"; sourceTree = SOURCE_ROOT; };
+		862308AA196C549D0022D8D7 /* icon1024-noALPHA.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon1024-noALPHA.png"; path = "SoundScapeTK/icon1024-noALPHA.png"; sourceTree = SOURCE_ROOT; };
+		862D789C19648DEA00CA278C /* kflLinkedParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kflLinkedParameter.h; path = SoundScapeTK/kflLinkedParameter.h; sourceTree = SOURCE_ROOT; };
+		862D789D19648DEA00CA278C /* kflLinkedParameter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = kflLinkedParameter.m; path = SoundScapeTK/kflLinkedParameter.m; sourceTree = SOURCE_ROOT; };
+		862D789F1964958700CA278C /* empac.gpson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = empac.gpson; path = SoundScapeTK/empac.gpson; sourceTree = SOURCE_ROOT; };
+		862D78A21964AAEA00CA278C /* kflHTLPManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kflHTLPManager.h; path = SoundScapeTK/kflHTLPManager.h; sourceTree = SOURCE_ROOT; };
+		862D78A31964AAEA00CA278C /* kflHTLPManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = kflHTLPManager.m; path = SoundScapeTK/kflHTLPManager.m; sourceTree = SOURCE_ROOT; };
+		8638E3B2190489A3007371CE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		8638E3B4190489A3007371CE /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		8638E3B6190489A3007371CE /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		8638E3CB190489A3007371CE /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		8638E44819048C1E007371CE /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		8638E44919048C1E007371CE /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		8638E44A19048C1E007371CE /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		8638E44B19048C1E007371CE /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		8638E44C19048C1E007371CE /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		8638E44D19048C1E007371CE /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		8638E44E19048C1E007371CE /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		8638E44F19048C1E007371CE /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		8638E45019048C1E007371CE /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		86652094192CF92600EFFA60 /* libpd.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = libpd.xcodeproj; path = "../pd-for-ios/libpd/libpd.xcodeproj"; sourceTree = "<group>"; };
+		869B3FAA1969A44900742F05 /* bpf_empac.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = bpf_empac.pd; path = SoundScapeTK/bpf_empac.pd; sourceTree = SOURCE_ROOT; };
+		869B3FAB1969A44900742F05 /* empac_ios.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = empac_ios.pd; path = SoundScapeTK/empac_ios.pd; sourceTree = SOURCE_ROOT; };
+		869B3FB1196A0A2D00742F05 /* reverb-echo.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "reverb-echo.pd"; path = "SoundScapeTK/reverb-echo.pd"; sourceTree = SOURCE_ROOT; };
+		86DC88B2196C4E7C00ABA100 /* Images-2.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = "Images-2.xcassets"; path = "SoundScapeTK/Images-2.xcassets"; sourceTree = SOURCE_ROOT; };
+		86DC88B8196C529700ABA100 /* icon1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon1024.png; path = SoundScapeTK/icon1024.png; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8606979F1930E92B000353A3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				862D789B196487FE00CA278C /* libpd-ios.a in Frameworks */,
+				860697A11930E92B000353A3 /* AudioToolbox.framework in Frameworks */,
+				860697A21930E92B000353A3 /* AVFoundation.framework in Frameworks */,
+				860697A31930E92B000353A3 /* CoreLocation.framework in Frameworks */,
+				860697A41930E92B000353A3 /* CoreText.framework in Frameworks */,
+				860697A51930E92B000353A3 /* MapKit.framework in Frameworks */,
+				860697A61930E92B000353A3 /* MessageUI.framework in Frameworks */,
+				860697A71930E92B000353A3 /* QuartzCore.framework in Frameworks */,
+				860697A81930E92B000353A3 /* Security.framework in Frameworks */,
+				860697A91930E92B000353A3 /* SystemConfiguration.framework in Frameworks */,
+				860697AA1930E92B000353A3 /* CoreGraphics.framework in Frameworks */,
+				860697AB1930E92B000353A3 /* UIKit.framework in Frameworks */,
+				860697AC1930E92B000353A3 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		861104F61964763400CD810A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				861104FB1964763400CD810A /* libpd-ios.a */,
+				861104FD1964763400CD810A /* libpd-osx.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8638E3A6190489A3007371CE = {
+			isa = PBXGroup;
+			children = (
+				860697D71930EE8A000353A3 /* Default-568h@2x.png */,
+				86652094192CF92600EFFA60 /* libpd.xcodeproj */,
+				8638E3B8190489A3007371CE /* SoundScapeTK */,
+				8638E3B1190489A3007371CE /* Frameworks */,
+				8638E3B0190489A3007371CE /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		8638E3B0190489A3007371CE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				860697CE1930E92B000353A3 /* SoundScapeTK.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8638E3B1190489A3007371CE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8638E44819048C1E007371CE /* AudioToolbox.framework */,
+				8638E44919048C1E007371CE /* AVFoundation.framework */,
+				8638E44A19048C1E007371CE /* CoreLocation.framework */,
+				8638E44B19048C1E007371CE /* CoreText.framework */,
+				8638E44C19048C1E007371CE /* MapKit.framework */,
+				8638E44D19048C1E007371CE /* MessageUI.framework */,
+				8638E44E19048C1E007371CE /* QuartzCore.framework */,
+				8638E44F19048C1E007371CE /* Security.framework */,
+				8638E45019048C1E007371CE /* SystemConfiguration.framework */,
+				8638E3B2190489A3007371CE /* Foundation.framework */,
+				8638E3B4190489A3007371CE /* CoreGraphics.framework */,
+				8638E3B6190489A3007371CE /* UIKit.framework */,
+				8638E3CB190489A3007371CE /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8638E3B8190489A3007371CE /* SoundScapeTK */ = {
+			isa = PBXGroup;
+			children = (
+				862308AA196C549D0022D8D7 /* icon1024-noALPHA.png */,
+				86DC88B8196C529700ABA100 /* icon1024.png */,
+				86C1F3981937E756006F661F /* PNGs */,
+				86C1F3971937E748006F661F /* GPSONs */,
+				8638E42019048AE8007371CE /* pd */,
+				8638E3E819048A63007371CE /* en.lproj */,
+				8611050D1964791B00CD810A /* kflAboutViewController.h */,
+				8611050E1964791B00CD810A /* kflAboutViewController.m */,
+				8611050F1964791B00CD810A /* kflAppDelegate.h */,
+				861105101964791B00CD810A /* kflAppDelegate.m */,
+				861105111964791B00CD810A /* kflAudioFileRouter.h */,
+				861105121964791B00CD810A /* kflAudioFileRouter.m */,
+				861105131964791B00CD810A /* kflGPSViewController.h */,
+				861105141964791B00CD810A /* kflGPSViewController.m */,
+				862D78A21964AAEA00CA278C /* kflHTLPManager.h */,
+				862D78A31964AAEA00CA278C /* kflHTLPManager.m */,
+				861105171964791B00CD810A /* kflLAPManager.h */,
+				861105181964791B00CD810A /* kflLAPManager.m */,
+				861105191964791B00CD810A /* kflLinkedCircleRegion.h */,
+				8611051A1964791B00CD810A /* kflLinkedCircleRegion.m */,
+				862D789C19648DEA00CA278C /* kflLinkedParameter.h */,
+				862D789D19648DEA00CA278C /* kflLinkedParameter.m */,
+				8611051B1964791B00CD810A /* kflLinkedRectangleRegion.h */,
+				8611051C1964791B00CD810A /* kflLinkedRectangleRegion.m */,
+				8611051D1964791B00CD810A /* kflLinkedRegion.h */,
+				8611051E1964791B00CD810A /* kflLinkedRegion.m */,
+				8611051F1964791B00CD810A /* kflLinkedSoundfile.h */,
+				861105201964791B00CD810A /* kflLinkedSoundfile.m */,
+				861105211964791B00CD810A /* kflLocationSegment.h */,
+				861105221964791B00CD810A /* kflLocationSegment.m */,
+				861105231964791B00CD810A /* kflMKMapViewController.h */,
+				861105241964791B00CD810A /* kflMKMapViewController.m */,
+				861105251964791B00CD810A /* kflPin.h */,
+				861105261964791B00CD810A /* kflPin.m */,
+				861105271964791B00CD810A /* kflScapeManagerViewController.h */,
+				861105281964791B00CD810A /* kflScapeManagerViewController.m */,
+				86110549196481B100CD810A /* SoundScapeTK-Info.plist */,
+				8611052A1964791B00CD810A /* SoundScapeTK-Prefix.pch */,
+				86DC88B2196C4E7C00ABA100 /* Images-2.xcassets */,
+				8638E3B9190489A3007371CE /* Supporting Files */,
+			);
+			name = SoundScapeTK;
+			path = ArnoldArboretum2;
+			sourceTree = "<group>";
+		};
+		8638E3B9190489A3007371CE /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				861104FE1964785A00CD810A /* InfoPlist.strings */,
+				861105291964791B00CD810A /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		8638E3E819048A63007371CE /* en.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				861105001964785A00CD810A /* kflAboutViewController.xib */,
+				861105021964785A00CD810A /* kflGPSViewController.xib */,
+				861105041964785A00CD810A /* kflModalAboutViewController.xib */,
+				861105061964785A00CD810A /* kflScapeManagerViewController.xib */,
+			);
+			path = en.lproj;
+			sourceTree = "<group>";
+		};
+		8638E42019048AE8007371CE /* pd */ = {
+			isa = PBXGroup;
+			children = (
+				8611053A1964796900CD810A /* 01.mp3 */,
+				8611053B1964796900CD810A /* 02.mp3 */,
+				8611053C1964796900CD810A /* 03.mp3 */,
+				869B3FAA1969A44900742F05 /* bpf_empac.pd */,
+				869B3FAB1969A44900742F05 /* empac_ios.pd */,
+				869B3FB1196A0A2D00742F05 /* reverb-echo.pd */,
+				8611053D1964796900CD810A /* iem_mp3.c */,
+				8611053E1964796900CD810A /* iemlib.h */,
+				8611053F1964796900CD810A /* mp3play~.c */,
+				861105401964796900CD810A /* play_sf.pd */,
+				861105411964796900CD810A /* sampler4bank.pd */,
+			);
+			path = pd;
+			sourceTree = "<group>";
+		};
+		86C1F3971937E748006F661F /* GPSONs */ = {
+			isa = PBXGroup;
+			children = (
+				862D789F1964958700CA278C /* empac.gpson */,
+			);
+			name = GPSONs;
+			sourceTree = "<group>";
+		};
+		86C1F3981937E756006F661F /* PNGs */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = PNGs;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		860697861930E92B000353A3 /* WheelWithinWheel */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 860697CB1930E92B000353A3 /* Build configuration list for PBXNativeTarget "WheelWithinWheel" */;
+			buildPhases = (
+				860697891930E92B000353A3 /* Sources */,
+				8606979F1930E92B000353A3 /* Frameworks */,
+				860697AD1930E92B000353A3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				862D78991964879200CA278C /* PBXTargetDependency */,
+			);
+			name = WheelWithinWheel;
+			productName = ArnoldArboretum2;
+			productReference = 860697CE1930E92B000353A3 /* SoundScapeTK.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8638E3A7190489A3007371CE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = kfl;
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = "Kitefish Labs";
+			};
+			buildConfigurationList = 8638E3AA190489A3007371CE /* Build configuration list for PBXProject "SoundScapeTK" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 8638E3A6190489A3007371CE;
+			productRefGroup = 8638E3B0190489A3007371CE /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 861104F61964763400CD810A /* Products */;
+					ProjectRef = 86652094192CF92600EFFA60 /* libpd.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				860697861930E92B000353A3 /* WheelWithinWheel */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		861104FB1964763400CD810A /* libpd-ios.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libpd-ios.a";
+			remoteRef = 861104FA1964763400CD810A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		861104FD1964763400CD810A /* libpd-osx.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libpd-osx.a";
+			remoteRef = 861104FC1964763400CD810A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		860697AD1930E92B000353A3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				861105471964796900CD810A /* play_sf.pd in Resources */,
+				869B3FAD1969A44900742F05 /* empac_ios.pd in Resources */,
+				869B3FB2196A0A2D00742F05 /* reverb-echo.pd in Resources */,
+				8611050A1964785A00CD810A /* kflGPSViewController.xib in Resources */,
+				8611050B1964785A00CD810A /* kflModalAboutViewController.xib in Resources */,
+				861105091964785A00CD810A /* kflAboutViewController.xib in Resources */,
+				861105081964785A00CD810A /* InfoPlist.strings in Resources */,
+				862308AB196C549D0022D8D7 /* icon1024-noALPHA.png in Resources */,
+				861105441964796900CD810A /* 03.mp3 in Resources */,
+				8611054A196481B100CD810A /* SoundScapeTK-Info.plist in Resources */,
+				861105421964796900CD810A /* 01.mp3 in Resources */,
+				860697D81930EE8A000353A3 /* Default-568h@2x.png in Resources */,
+				861105481964796900CD810A /* sampler4bank.pd in Resources */,
+				862D78A01964958700CA278C /* empac.gpson in Resources */,
+				869B3FAC1969A44900742F05 /* bpf_empac.pd in Resources */,
+				8611050C1964785A00CD810A /* kflScapeManagerViewController.xib in Resources */,
+				86DC88B3196C4E7C00ABA100 /* Images-2.xcassets in Resources */,
+				861105431964796900CD810A /* 02.mp3 in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		860697891930E92B000353A3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8611052B1964791B00CD810A /* kflAboutViewController.m in Sources */,
+				861105461964796900CD810A /* mp3play~.c in Sources */,
+				861105361964791B00CD810A /* kflMKMapViewController.m in Sources */,
+				861105381964791B00CD810A /* kflScapeManagerViewController.m in Sources */,
+				8611052E1964791B00CD810A /* kflGPSViewController.m in Sources */,
+				861105451964796900CD810A /* iem_mp3.c in Sources */,
+				861105321964791B00CD810A /* kflLinkedRectangleRegion.m in Sources */,
+				861105391964791B00CD810A /* main.m in Sources */,
+				861105301964791B00CD810A /* kflLAPManager.m in Sources */,
+				861105311964791B00CD810A /* kflLinkedCircleRegion.m in Sources */,
+				862D78A61964AAEA00CA278C /* kflHTLPManager.m in Sources */,
+				862D789E19648DEA00CA278C /* kflLinkedParameter.m in Sources */,
+				861105371964791B00CD810A /* kflPin.m in Sources */,
+				861105331964791B00CD810A /* kflLinkedRegion.m in Sources */,
+				8611052C1964791B00CD810A /* kflAppDelegate.m in Sources */,
+				861105351964791B00CD810A /* kflLocationSegment.m in Sources */,
+				861105341964791B00CD810A /* kflLinkedSoundfile.m in Sources */,
+				8611052D1964791B00CD810A /* kflAudioFileRouter.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		862D78991964879200CA278C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "libpd-ios";
+			targetProxy = 862D78981964879200CA278C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		861104FE1964785A00CD810A /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				861104FF1964785A00CD810A /* en */,
+			);
+			name = InfoPlist.strings;
+			path = en.lproj;
+			sourceTree = "<group>";
+		};
+		861105001964785A00CD810A /* kflAboutViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				861105011964785A00CD810A /* en */,
+			);
+			name = kflAboutViewController.xib;
+			sourceTree = "<group>";
+		};
+		861105021964785A00CD810A /* kflGPSViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				861105031964785A00CD810A /* en */,
+			);
+			name = kflGPSViewController.xib;
+			sourceTree = "<group>";
+		};
+		861105041964785A00CD810A /* kflModalAboutViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				861105051964785A00CD810A /* en */,
+			);
+			name = kflModalAboutViewController.xib;
+			sourceTree = "<group>";
+		};
+		861105061964785A00CD810A /* kflScapeManagerViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				861105071964785A00CD810A /* en */,
+			);
+			name = kflScapeManagerViewController.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		860697CC1930E92B000353A3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SoundScapeTK/SoundScapeTK-Prefix.pch";
+				INFOPLIST_FILE = "SoundScapeTK-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				PRODUCT_NAME = SoundScapeTK;
+				PROVISIONING_PROFILE = "";
+				USER_HEADER_SEARCH_PATHS = "~/dev/git/pd-for-ios/libpd/** ~/dev/git/SoundScapeTK/**";
+				VALID_ARCHS = "armv7 armv7s";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		860697CD1930E92B000353A3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				COPY_PHASE_STRIP = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SoundScapeTK/SoundScapeTK-Prefix.pch";
+				INFOPLIST_FILE = "SoundScapeTK-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				PRODUCT_NAME = SoundScapeTK;
+				PROVISIONING_PROFILE = "";
+				USER_HEADER_SEARCH_PATHS = "~/dev/git/pd-for-ios/libpd/** ~/dev/git/SoundScapeTK/**";
+				VALID_ARCHS = "armv7 armv7s";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		8638E3D9190489A3007371CE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Thomas Stoll (2R3LT48JXW)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "899628E3-BB88-4437-88F7-275EA004E587";
+				SDKROOT = iphoneos;
+				VALID_ARCHS = "armv7 armv7s";
+			};
+			name = Debug;
+		};
+		8638E3DA190489A3007371CE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Thomas Stoll (85CVXQT3NW)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				PROVISIONING_PROFILE = "899628E3-BB88-4437-88F7-275EA004E587";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = "armv7 armv7s";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		860697CB1930E92B000353A3 /* Build configuration list for PBXNativeTarget "WheelWithinWheel" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				860697CC1930E92B000353A3 /* Debug */,
+				860697CD1930E92B000353A3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8638E3AA190489A3007371CE /* Build configuration list for PBXProject "SoundScapeTK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8638E3D9190489A3007371CE /* Debug */,
+				8638E3DA190489A3007371CE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 8638E3A7190489A3007371CE /* Project object */;
+}

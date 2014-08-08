@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>A3856AE1-6BA0-416A-BC14-9F7D265BBA88</string>
+	<key>IDESourceControlProjectName</key>
+	<string>ArnoldArboretum2</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>21BCAF0F-5F8A-4114-9A31-ADC553097E40</key>
+		<string>ssh://github.com/kitefishlabs/SoundScapeTK.git</string>
+		<key>320B8D4E-87AB-45D8-B96E-C4EB51DCEE8B</key>
+		<string>git://github.com/libpd/libpd.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>ArnoldArboretum2.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>21BCAF0F-5F8A-4114-9A31-ADC553097E40</key>
+		<string>../..</string>
+		<key>320B8D4E-87AB-45D8-B96E-C4EB51DCEE8B</key>
+		<string>../../../pd-for-ios/libpd</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://github.com/kitefishlabs/SoundScapeTK.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>21BCAF0F-5F8A-4114-9A31-ADC553097E40</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>320B8D4E-87AB-45D8-B96E-C4EB51DCEE8B</string>
+			<key>IDESourceControlWCCName</key>
+			<string>libpd</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>21BCAF0F-5F8A-4114-9A31-ADC553097E40</string>
+			<key>IDESourceControlWCCName</key>
+			<string>SoundScapeTK</string>
+		</dict>
+	</array>
+</dict>
+</plist>
