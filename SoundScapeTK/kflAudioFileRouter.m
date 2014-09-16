@@ -20,9 +20,8 @@
 #define HIFREQ 14.3
 
 
-@interface kflAudioFileRouter () {}
-- (int) secondsSinceMidnight:(NSDate *)date;
-@end
+//@interface kflAudioFileRouter () {}
+//@end
 
 @implementation kflAudioFileRouter
 
@@ -70,7 +69,6 @@
         DLog(@"STATE for region ID %i -- %@ ----> playing", lcr.idNum, lcr.state);
         lcr.state = @"playing";
         //trigger play
-        [NSThread sleepForTimeInterval:0.1];
         ARLog(@"PLAY: %@", [NSString stringWithFormat:@"%i_in", slot]);
         [PdBase sendMessage:@"play" withArguments:nil toReceiver:[NSString stringWithFormat:@"%i_in", slot]];
         return lsf.pausedOffset;
@@ -236,87 +234,6 @@
             [PdBase sendFloat:interpolatedParamVal toReceiver:lpB.paramName];
         }
     }
-}
-
-- (void) executeTimedParamChanges {
-    
-    float currentSecondsInDay = fmodf((float)([self secondsSinceMidnight:[NSDate dateWithTimeIntervalSinceNow:0]] - TIMEZONE_OFFSET), SECONDS_IN_DAY);
-    ARLog(@"NOW: %f", currentSecondsInDay);
-    
-    ARLog(@"2-00: %f", fmodf(currentSecondsInDay, (SECONDS_IN_DAY / powf(2.0, 0.0) )));
-    ARLog(@"2-01: %f", fmodf(currentSecondsInDay, (SECONDS_IN_DAY / powf(2.0, 1.0) )));
-    ARLog(@"2-02: %f", fmodf(currentSecondsInDay, (SECONDS_IN_DAY / powf(2.0, 2.0) )));
-    ARLog(@"2-03: %f", fmodf(currentSecondsInDay, (SECONDS_IN_DAY / powf(2.0, 3.0) )));
-    ARLog(@"2-04: %f", fmodf(currentSecondsInDay, (SECONDS_IN_DAY / powf(2.0, 4.0) )));
-    ARLog(@"2-05: %f", fmodf(currentSecondsInDay, (SECONDS_IN_DAY / powf(2.0, 5.0) )));
-    ARLog(@"2-06: %f", fmodf(currentSecondsInDay, (SECONDS_IN_DAY / powf(2.0, 6.0) )));
-    ARLog(@"2-07: %f", fmodf(currentSecondsInDay, (SECONDS_IN_DAY / powf(2.0, 7.0) )));
-    ARLog(@"2-08: %f", fmodf(currentSecondsInDay, (SECONDS_IN_DAY / powf(2.0, 8.0) )));
-    ARLog(@"2-09: %f", fmodf(currentSecondsInDay, (SECONDS_IN_DAY / powf(2.0, 9.0) )));
-    ARLog(@"2-10: %f", fmodf(currentSecondsInDay, (SECONDS_IN_DAY / powf(2.0, 10.0))));
-    ARLog(@"2-11: %f", fmodf(currentSecondsInDay, (SECONDS_IN_DAY / powf(2.0, 11.0))));
-    ARLog(@"2-12: %f", fmodf(currentSecondsInDay, (SECONDS_IN_DAY / powf(2.0, 12.0))));
-    ARLog(@"2-13: %f", fmodf(currentSecondsInDay, (SECONDS_IN_DAY / powf(2.0, 13.0))));
-    ARLog(@"2-14: %f", fmodf(currentSecondsInDay, (SECONDS_IN_DAY / powf(2.0, 14.0))));
-    ARLog(@"2-15: %f", fmodf(currentSecondsInDay, (SECONDS_IN_DAY / powf(2.0, 15.0))));
-    
-    [PdBase sendFloat:fmodf(currentSecondsInDay, (SECONDS_IN_DAY / powf(2.0, 0.0) )) toReceiver:@"0_lfo_phase"];
-    [PdBase sendFloat:fmodf(currentSecondsInDay, (SECONDS_IN_DAY / powf(2.0, 1.0) )) toReceiver:@"1_lfo_phase"];
-    [PdBase sendFloat:fmodf(currentSecondsInDay, (SECONDS_IN_DAY / powf(2.0, 2.0) )) toReceiver:@"2_lfo_phase"];
-    [PdBase sendFloat:fmodf(currentSecondsInDay, (SECONDS_IN_DAY / powf(2.0, 3.0) )) toReceiver:@"3_lfo_phase"];
-    [PdBase sendFloat:fmodf(currentSecondsInDay, (SECONDS_IN_DAY / powf(2.0, 4.0) )) toReceiver:@"4_lfo_phase"];
-    [PdBase sendFloat:fmodf(currentSecondsInDay, (SECONDS_IN_DAY / powf(2.0, 5.0) )) toReceiver:@"5_lfo_phase"];
-    [PdBase sendFloat:fmodf(currentSecondsInDay, (SECONDS_IN_DAY / powf(2.0, 6.0) )) toReceiver:@"6_lfo_phase"];
-    [PdBase sendFloat:fmodf(currentSecondsInDay, (SECONDS_IN_DAY / powf(2.0, 7.0) )) toReceiver:@"7_lfo_phase"];
-    [PdBase sendFloat:fmodf(currentSecondsInDay, (SECONDS_IN_DAY / powf(2.0, 8.0) )) toReceiver:@"8_lfo_phase"];
-    [PdBase sendFloat:fmodf(currentSecondsInDay, (SECONDS_IN_DAY / powf(2.0, 9.0) )) toReceiver:@"9_lfo_phase"];
-    [PdBase sendFloat:fmodf(currentSecondsInDay, (SECONDS_IN_DAY / powf(2.0, 10.0) )) toReceiver:@"10_lfo_phase"];
-    [PdBase sendFloat:fmodf(currentSecondsInDay, (SECONDS_IN_DAY / powf(2.0, 11.0) )) toReceiver:@"11_lfo_phase"];
-    [PdBase sendFloat:fmodf(currentSecondsInDay, (SECONDS_IN_DAY / powf(2.0, 12.0) )) toReceiver:@"12_lfo_phase"];
-    [PdBase sendFloat:fmodf(currentSecondsInDay, (SECONDS_IN_DAY / powf(2.0, 13.0) )) toReceiver:@"13_lfo_phase"];
-    [PdBase sendFloat:fmodf(currentSecondsInDay, (SECONDS_IN_DAY / powf(2.0, 14.0) )) toReceiver:@"14_lfo_phase"];
-    [PdBase sendFloat:fmodf(currentSecondsInDay, (SECONDS_IN_DAY / powf(2.0, 15.0) )) toReceiver:@"15_lfo_phase"];
-    
-    
-}
-
-- (void) executeFundamentalFrequencyChange {
-    
-    NSCalendar *currentCalendar = [NSCalendar currentCalendar];
-    NSDate *today = [NSDate date];
-    NSInteger dc = [currentCalendar  ordinalityOfUnit:NSDayCalendarUnit
-                                               inUnit:NSYearCalendarUnit
-                                              forDate:today];
-    
-    int sunrises[31] = { 0, 0, 0, 0, 0, 0, 324, 324, 325, 326, 327, 327, 328, 329, 530, 531, 531, 532, 533, 534, 535, 536, 537, 538, 539, 540, 541, 542, 543, 544, 545 }; //in minutes!
-    int sunsets[31] = { 0, 0, 0, 0, 0, 0, 995, 995, 995, 994, 994, 993, 993, 992, 992, 991, 990, 990, 989, 988, 987, 986, 986, 985, 984, 983, 982, 981, 980, 979, 977 };
-    
-    float currentSecondsInDay = fmodf((float)([self secondsSinceMidnight:[NSDate dateWithTimeIntervalSinceNow:0]] - TIMEZONE_OFFSET), SECONDS_IN_DAY);
-    ARLog(@"NOW: %f", currentSecondsInDay);
-    
-    int sr = sunrises[(dc - 182)];
-    int ss = sunsets[(dc - 182)];
-    int dl = ABS(ss - sr);
-    int nl = (SECONDS_IN_DAY - ss) + sr;
-    float freq = 0.f;
-    
-    if ((currentSecondsInDay >= 0) && (currentSecondsInDay < sr)) {
-        freq = ((((sinf((float)(currentSecondsInDay + SECONDS_IN_DAY - sr)/nl) * 0.5) + 1) * (HIFREQ - LOFREQ)) + LOFREQ);
-    } else if ((currentSecondsInDay >= sr) && (currentSecondsInDay < ss)) {
-        freq = ((((sinf((float)(currentSecondsInDay - sr)/dl) * 0.5) + 1) * (HIFREQ - LOFREQ)) + LOFREQ);
-    } else if ((currentSecondsInDay >= ss) && (currentSecondsInDay < SECONDS_IN_DAY)) {
-        freq = ((((sinf((float)(currentSecondsInDay - ss)/nl) * 0.5) + 1) * (HIFREQ - LOFREQ)) + LOFREQ);
-    }
-    ARLog(@"THE FREQUENCY IS %f RIGHT NOW!!!", freq);
-    [PdBase sendFloat:freq toReceiver:@"_center_freq"];
-}
-
-- (int) secondsSinceMidnight:(NSDate *)date {
-    NSCalendar *gregorian = [[NSCalendar alloc]
-                             initWithCalendarIdentifier:NSGregorianCalendar];
-    unsigned unitFlags =  NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;
-    NSDateComponents *components = [gregorian components:unitFlags fromDate:date];
-    return (3600 * [components hour]) + (60 * [components minute]) + [components second];
 }
 
 @end

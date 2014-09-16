@@ -17,6 +17,7 @@
     kflLinkedSoundfile *lsf = [[self alloc] initWithFileName:fileName idNum:idNum attack:attack andRelease:release];
     return lsf;
 }
+
 - (id) initWithFileName:(NSString *)soundFileName idNum:(int)regionIDNum attack:(int)attack andRelease:(int)release {
 
     if (self = [super init]) {
@@ -54,11 +55,14 @@
     return self;
 }
 
+// VERY IMPORTANT THAT THE START TIME TAKES INTO ACCOUNT THE OFFSET HERE
 - (void) markStart {
     self.startTime = [NSDate dateWithTimeIntervalSinceNow:(0 - self.pausedOffset)];
 }
-// VERY IMPORTANT THAT THE START TIME TAKES INTO ACCOUNT THE OFFSET HERE
 
+/**
+ *  Set the start to nil -- since we cannot set to 0.
+ */
 - (void) clearStart {
     self.startTime = nil;
 }
@@ -69,6 +73,9 @@
     self.pausedOffset = (float)interval;
 }
 
+/**
+ *  Set the offset back to 0.
+ */
 - (void) clearOffset {
     self.pausedOffset = 0.f;
 }

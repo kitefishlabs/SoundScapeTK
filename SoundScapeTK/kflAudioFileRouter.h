@@ -35,8 +35,5 @@
 - (int)         freeSlotForLSF:(kflLinkedSoundfile *)lsf;
 
 - (void)        executeParamChangeforLCSR:(kflLinkedCircleSynthRegion *)lcsr;
-- (void)        executeTimedParamChanges;
-
-- (void)        executeFundamentalFrequencyChange;
 
 @end
