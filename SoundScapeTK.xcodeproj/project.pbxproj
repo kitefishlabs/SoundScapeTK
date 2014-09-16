@@ -23,7 +23,6 @@
 		861105081964785A00CD810A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 861104FE1964785A00CD810A /* InfoPlist.strings */; };
 		861105091964785A00CD810A /* kflAboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 861105001964785A00CD810A /* kflAboutViewController.xib */; };
 		8611050A1964785A00CD810A /* kflStatusViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 861105021964785A00CD810A /* kflStatusViewController.xib */; };
-		8611050B1964785A00CD810A /* kflModalAboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 861105041964785A00CD810A /* kflModalAboutViewController.xib */; };
 		8611050C1964785A00CD810A /* kflScapeManagerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 861105061964785A00CD810A /* kflScapeManagerViewController.xib */; };
 		8611052B1964791B00CD810A /* kflAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8611050E1964791B00CD810A /* kflAboutViewController.m */; };
 		8611052C1964791B00CD810A /* kflAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 861105101964791B00CD810A /* kflAppDelegate.m */; };
@@ -80,7 +79,6 @@
 		861104FF1964785A00CD810A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = SoundScapeTK/en.lproj/InfoPlist.strings; sourceTree = SOURCE_ROOT; };
 		861105011964785A00CD810A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = SoundScapeTK/en.lproj/kflAboutViewController.xib; sourceTree = SOURCE_ROOT; };
 		861105031964785A00CD810A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = SoundScapeTK/en.lproj/kflStatusViewController.xib; sourceTree = SOURCE_ROOT; };
-		861105051964785A00CD810A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = SoundScapeTK/en.lproj/kflModalAboutViewController.xib; sourceTree = SOURCE_ROOT; };
 		861105071964785A00CD810A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = SoundScapeTK/en.lproj/kflScapeManagerViewController.xib; sourceTree = SOURCE_ROOT; };
 		8611050D1964791B00CD810A /* kflAboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kflAboutViewController.h; path = SoundScapeTK/kflAboutViewController.h; sourceTree = SOURCE_ROOT; };
 		8611050E1964791B00CD810A /* kflAboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = kflAboutViewController.m; path = SoundScapeTK/kflAboutViewController.m; sourceTree = SOURCE_ROOT; };
@@ -217,36 +215,24 @@
 				86C1F3971937E748006F661F /* GPSONs */,
 				8638E42019048AE8007371CE /* pd */,
 				8638E3E819048A63007371CE /* en.lproj */,
-				8611050D1964791B00CD810A /* kflAboutViewController.h */,
-				8611050E1964791B00CD810A /* kflAboutViewController.m */,
+				86E2789A19C8E3EB0032134D /* ViewControllers */,
 				8611050F1964791B00CD810A /* kflAppDelegate.h */,
 				861105101964791B00CD810A /* kflAppDelegate.m */,
 				861105111964791B00CD810A /* kflAudioFileRouter.h */,
 				861105121964791B00CD810A /* kflAudioFileRouter.m */,
-				861105131964791B00CD810A /* kflStatusViewController.h */,
-				861105141964791B00CD810A /* kflStatusViewController.m */,
 				862D78A21964AAEA00CA278C /* kflHTLPManager.h */,
 				862D78A31964AAEA00CA278C /* kflHTLPManager.m */,
 				861105171964791B00CD810A /* kflLAPManager.h */,
 				861105181964791B00CD810A /* kflLAPManager.m */,
-				861105191964791B00CD810A /* kflLinkedCircleRegion.h */,
-				8611051A1964791B00CD810A /* kflLinkedCircleRegion.m */,
+				86E2789B19C8E4470032134D /* Regions */,
 				862D789C19648DEA00CA278C /* kflLinkedParameter.h */,
 				862D789D19648DEA00CA278C /* kflLinkedParameter.m */,
-				8611051B1964791B00CD810A /* kflLinkedRectangleRegion.h */,
-				8611051C1964791B00CD810A /* kflLinkedRectangleRegion.m */,
-				8611051D1964791B00CD810A /* kflLinkedRegion.h */,
-				8611051E1964791B00CD810A /* kflLinkedRegion.m */,
 				8611051F1964791B00CD810A /* kflLinkedSoundfile.h */,
 				861105201964791B00CD810A /* kflLinkedSoundfile.m */,
 				861105211964791B00CD810A /* kflLocationSegment.h */,
 				861105221964791B00CD810A /* kflLocationSegment.m */,
-				861105231964791B00CD810A /* kflMKMapViewController.h */,
-				861105241964791B00CD810A /* kflMKMapViewController.m */,
 				861105251964791B00CD810A /* kflPin.h */,
 				861105261964791B00CD810A /* kflPin.m */,
-				861105271964791B00CD810A /* kflScapeManagerViewController.h */,
-				861105281964791B00CD810A /* kflScapeManagerViewController.m */,
 				86110549196481B100CD810A /* SoundScapeTK-Info.plist */,
 				8611052A1964791B00CD810A /* SoundScapeTK-Prefix.pch */,
 				86DC88B2196C4E7C00ABA100 /* Images-2.xcassets */,
@@ -270,7 +256,6 @@
 			children = (
 				861105001964785A00CD810A /* kflAboutViewController.xib */,
 				861105021964785A00CD810A /* kflStatusViewController.xib */,
-				861105041964785A00CD810A /* kflModalAboutViewController.xib */,
 				861105061964785A00CD810A /* kflScapeManagerViewController.xib */,
 			);
 			path = en.lproj;
@@ -316,6 +301,34 @@
 			children = (
 			);
 			name = PNGs;
+			sourceTree = "<group>";
+		};
+		86E2789A19C8E3EB0032134D /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				8611050D1964791B00CD810A /* kflAboutViewController.h */,
+				8611050E1964791B00CD810A /* kflAboutViewController.m */,
+				861105131964791B00CD810A /* kflStatusViewController.h */,
+				861105141964791B00CD810A /* kflStatusViewController.m */,
+				861105231964791B00CD810A /* kflMKMapViewController.h */,
+				861105241964791B00CD810A /* kflMKMapViewController.m */,
+				861105271964791B00CD810A /* kflScapeManagerViewController.h */,
+				861105281964791B00CD810A /* kflScapeManagerViewController.m */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		86E2789B19C8E4470032134D /* Regions */ = {
+			isa = PBXGroup;
+			children = (
+				8611051D1964791B00CD810A /* kflLinkedRegion.h */,
+				8611051E1964791B00CD810A /* kflLinkedRegion.m */,
+				861105191964791B00CD810A /* kflLinkedCircleRegion.h */,
+				8611051A1964791B00CD810A /* kflLinkedCircleRegion.m */,
+				8611051B1964791B00CD810A /* kflLinkedRectangleRegion.h */,
+				8611051C1964791B00CD810A /* kflLinkedRectangleRegion.m */,
+			);
+			name = Regions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -397,7 +410,6 @@
 				869B3FAD1969A44900742F05 /* empac_ios.pd in Resources */,
 				869B3FB2196A0A2D00742F05 /* reverb-echo.pd in Resources */,
 				8611050A1964785A00CD810A /* kflStatusViewController.xib in Resources */,
-				8611050B1964785A00CD810A /* kflModalAboutViewController.xib in Resources */,
 				861105091964785A00CD810A /* kflAboutViewController.xib in Resources */,
 				861105081964785A00CD810A /* InfoPlist.strings in Resources */,
 				862308AB196C549D0022D8D7 /* icon1024-noALPHA.png in Resources */,
@@ -468,14 +480,6 @@
 				861105031964785A00CD810A /* en */,
 			);
 			name = kflStatusViewController.xib;
-			sourceTree = "<group>";
-		};
-		861105041964785A00CD810A /* kflModalAboutViewController.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				861105051964785A00CD810A /* en */,
-			);
-			name = kflModalAboutViewController.xib;
 			sourceTree = "<group>";
 		};
 		861105061964785A00CD810A /* kflScapeManagerViewController.xib */ = {
