@@ -33,9 +33,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "860697861930E92B000353A3"
-            BuildableName = "OtherOne.app"
-            BlueprintName = "OtherOne"
-            ReferencedContainer = "container:ArnoldArboretum.xcodeproj">
+            BuildableName = "SoundScapeTK.app"
+            BlueprintName = "WheelWithinWheel"
+            ReferencedContainer = "container:SoundScapeTK.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -52,9 +52,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "860697861930E92B000353A3"
-            BuildableName = "OtherOne.app"
-            BlueprintName = "OtherOne"
-            ReferencedContainer = "container:ArnoldArboretum.xcodeproj">
+            BuildableName = "SoundScapeTK.app"
+            BlueprintName = "WheelWithinWheel"
+            ReferencedContainer = "container:SoundScapeTK.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>

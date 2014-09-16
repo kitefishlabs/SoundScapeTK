@@ -21,7 +21,7 @@
 @property (strong, nonatomic) UITabBarController                *tabController;
 @property (strong, nonatomic) kflAboutViewController            *aboutVC;
 @property (strong, nonatomic) kflScapeManagerViewController     *scapeManagerVC;
-@property (strong, nonatomic) kflStatusViewController              *gpsVC;
+@property (strong, nonatomic) kflStatusViewController           *gpsVC;
 @property (strong, nonatomic) kflMKMapViewController            *mapVC;
 
 - (void)activateAudio:(BOOL)onFlag;
