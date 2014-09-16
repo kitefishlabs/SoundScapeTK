@@ -22,13 +22,13 @@
 		860697D81930EE8A000353A3 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 860697D71930EE8A000353A3 /* Default-568h@2x.png */; };
 		861105081964785A00CD810A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 861104FE1964785A00CD810A /* InfoPlist.strings */; };
 		861105091964785A00CD810A /* kflAboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 861105001964785A00CD810A /* kflAboutViewController.xib */; };
-		8611050A1964785A00CD810A /* kflGPSViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 861105021964785A00CD810A /* kflGPSViewController.xib */; };
+		8611050A1964785A00CD810A /* kflStatusViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 861105021964785A00CD810A /* kflStatusViewController.xib */; };
 		8611050B1964785A00CD810A /* kflModalAboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 861105041964785A00CD810A /* kflModalAboutViewController.xib */; };
 		8611050C1964785A00CD810A /* kflScapeManagerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 861105061964785A00CD810A /* kflScapeManagerViewController.xib */; };
 		8611052B1964791B00CD810A /* kflAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8611050E1964791B00CD810A /* kflAboutViewController.m */; };
 		8611052C1964791B00CD810A /* kflAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 861105101964791B00CD810A /* kflAppDelegate.m */; };
 		8611052D1964791B00CD810A /* kflAudioFileRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = 861105121964791B00CD810A /* kflAudioFileRouter.m */; };
-		8611052E1964791B00CD810A /* kflGPSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 861105141964791B00CD810A /* kflGPSViewController.m */; };
+		8611052E1964791B00CD810A /* kflStatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 861105141964791B00CD810A /* kflStatusViewController.m */; };
 		861105301964791B00CD810A /* kflLAPManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 861105181964791B00CD810A /* kflLAPManager.m */; };
 		861105311964791B00CD810A /* kflLinkedCircleRegion.m in Sources */ = {isa = PBXBuildFile; fileRef = 8611051A1964791B00CD810A /* kflLinkedCircleRegion.m */; };
 		861105321964791B00CD810A /* kflLinkedRectangleRegion.m in Sources */ = {isa = PBXBuildFile; fileRef = 8611051C1964791B00CD810A /* kflLinkedRectangleRegion.m */; };
@@ -48,9 +48,8 @@
 		861105481964796900CD810A /* sampler4bank.pd in Resources */ = {isa = PBXBuildFile; fileRef = 861105411964796900CD810A /* sampler4bank.pd */; };
 		8611054A196481B100CD810A /* SoundScapeTK-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 86110549196481B100CD810A /* SoundScapeTK-Info.plist */; };
 		862308AB196C549D0022D8D7 /* icon1024-noALPHA.png in Resources */ = {isa = PBXBuildFile; fileRef = 862308AA196C549D0022D8D7 /* icon1024-noALPHA.png */; };
-		862D789B196487FE00CA278C /* libpd-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 861104FB1964763400CD810A /* libpd-ios.a */; };
 		862D789E19648DEA00CA278C /* kflLinkedParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = 862D789D19648DEA00CA278C /* kflLinkedParameter.m */; };
-		862D78A01964958700CA278C /* empac.gpson in Resources */ = {isa = PBXBuildFile; fileRef = 862D789F1964958700CA278C /* empac.gpson */; };
+		862D78A01964958700CA278C /* buffalony.gpson in Resources */ = {isa = PBXBuildFile; fileRef = 862D789F1964958700CA278C /* buffalony.gpson */; };
 		862D78A61964AAEA00CA278C /* kflHTLPManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 862D78A31964AAEA00CA278C /* kflHTLPManager.m */; };
 		869B3FAC1969A44900742F05 /* bpf_empac.pd in Resources */ = {isa = PBXBuildFile; fileRef = 869B3FAA1969A44900742F05 /* bpf_empac.pd */; };
 		869B3FAD1969A44900742F05 /* empac_ios.pd in Resources */ = {isa = PBXBuildFile; fileRef = 869B3FAB1969A44900742F05 /* empac_ios.pd */; };
@@ -59,26 +58,19 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		861104FA1964763400CD810A /* PBXContainerItemProxy */ = {
+		8667378619C683380098D1A2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 86652094192CF92600EFFA60 /* libpd.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = D2AAC07E0554694100DB518D;
 			remoteInfo = "libpd-ios";
 		};
-		861104FC1964763400CD810A /* PBXContainerItemProxy */ = {
+		8667378819C683380098D1A2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 86652094192CF92600EFFA60 /* libpd.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 119013AB1486450C00086F19;
 			remoteInfo = "libpd-osx";
-		};
-		862D78981964879200CA278C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 86652094192CF92600EFFA60 /* libpd.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = D2AAC07D0554694100DB518D;
-			remoteInfo = "libpd-ios";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -87,7 +79,7 @@
 		860697D71930EE8A000353A3 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		861104FF1964785A00CD810A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = SoundScapeTK/en.lproj/InfoPlist.strings; sourceTree = SOURCE_ROOT; };
 		861105011964785A00CD810A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = SoundScapeTK/en.lproj/kflAboutViewController.xib; sourceTree = SOURCE_ROOT; };
-		861105031964785A00CD810A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = SoundScapeTK/en.lproj/kflGPSViewController.xib; sourceTree = SOURCE_ROOT; };
+		861105031964785A00CD810A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = SoundScapeTK/en.lproj/kflStatusViewController.xib; sourceTree = SOURCE_ROOT; };
 		861105051964785A00CD810A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = SoundScapeTK/en.lproj/kflModalAboutViewController.xib; sourceTree = SOURCE_ROOT; };
 		861105071964785A00CD810A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = SoundScapeTK/en.lproj/kflScapeManagerViewController.xib; sourceTree = SOURCE_ROOT; };
 		8611050D1964791B00CD810A /* kflAboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kflAboutViewController.h; path = SoundScapeTK/kflAboutViewController.h; sourceTree = SOURCE_ROOT; };
@@ -96,8 +88,8 @@
 		861105101964791B00CD810A /* kflAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = kflAppDelegate.m; path = SoundScapeTK/kflAppDelegate.m; sourceTree = SOURCE_ROOT; };
 		861105111964791B00CD810A /* kflAudioFileRouter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kflAudioFileRouter.h; path = SoundScapeTK/kflAudioFileRouter.h; sourceTree = SOURCE_ROOT; };
 		861105121964791B00CD810A /* kflAudioFileRouter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = kflAudioFileRouter.m; path = SoundScapeTK/kflAudioFileRouter.m; sourceTree = SOURCE_ROOT; };
-		861105131964791B00CD810A /* kflGPSViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kflGPSViewController.h; path = SoundScapeTK/kflGPSViewController.h; sourceTree = SOURCE_ROOT; };
-		861105141964791B00CD810A /* kflGPSViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = kflGPSViewController.m; path = SoundScapeTK/kflGPSViewController.m; sourceTree = SOURCE_ROOT; };
+		861105131964791B00CD810A /* kflStatusViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kflStatusViewController.h; path = SoundScapeTK/kflStatusViewController.h; sourceTree = SOURCE_ROOT; };
+		861105141964791B00CD810A /* kflStatusViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = kflStatusViewController.m; path = SoundScapeTK/kflStatusViewController.m; sourceTree = SOURCE_ROOT; };
 		861105171964791B00CD810A /* kflLAPManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kflLAPManager.h; path = SoundScapeTK/kflLAPManager.h; sourceTree = SOURCE_ROOT; };
 		861105181964791B00CD810A /* kflLAPManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = kflLAPManager.m; path = SoundScapeTK/kflLAPManager.m; sourceTree = SOURCE_ROOT; };
 		861105191964791B00CD810A /* kflLinkedCircleRegion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kflLinkedCircleRegion.h; path = SoundScapeTK/kflLinkedCircleRegion.h; sourceTree = SOURCE_ROOT; };
@@ -130,7 +122,7 @@
 		862308AA196C549D0022D8D7 /* icon1024-noALPHA.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon1024-noALPHA.png"; path = "SoundScapeTK/icon1024-noALPHA.png"; sourceTree = SOURCE_ROOT; };
 		862D789C19648DEA00CA278C /* kflLinkedParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kflLinkedParameter.h; path = SoundScapeTK/kflLinkedParameter.h; sourceTree = SOURCE_ROOT; };
 		862D789D19648DEA00CA278C /* kflLinkedParameter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = kflLinkedParameter.m; path = SoundScapeTK/kflLinkedParameter.m; sourceTree = SOURCE_ROOT; };
-		862D789F1964958700CA278C /* empac.gpson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = empac.gpson; path = SoundScapeTK/empac.gpson; sourceTree = SOURCE_ROOT; };
+		862D789F1964958700CA278C /* buffalony.gpson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = buffalony.gpson; path = SoundScapeTK/buffalony.gpson; sourceTree = SOURCE_ROOT; };
 		862D78A21964AAEA00CA278C /* kflHTLPManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kflHTLPManager.h; path = SoundScapeTK/kflHTLPManager.h; sourceTree = SOURCE_ROOT; };
 		862D78A31964AAEA00CA278C /* kflHTLPManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = kflHTLPManager.m; path = SoundScapeTK/kflHTLPManager.m; sourceTree = SOURCE_ROOT; };
 		8638E3B2190489A3007371CE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -146,7 +138,7 @@
 		8638E44E19048C1E007371CE /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		8638E44F19048C1E007371CE /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		8638E45019048C1E007371CE /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		86652094192CF92600EFFA60 /* libpd.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = libpd.xcodeproj; path = "../pd-for-ios/libpd/libpd.xcodeproj"; sourceTree = "<group>"; };
+		86652094192CF92600EFFA60 /* libpd.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = libpd.xcodeproj; path = "../../tools/pd-for-ios/libpd/libpd.xcodeproj"; sourceTree = "<group>"; };
 		869B3FAA1969A44900742F05 /* bpf_empac.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = bpf_empac.pd; path = SoundScapeTK/bpf_empac.pd; sourceTree = SOURCE_ROOT; };
 		869B3FAB1969A44900742F05 /* empac_ios.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = empac_ios.pd; path = SoundScapeTK/empac_ios.pd; sourceTree = SOURCE_ROOT; };
 		869B3FB1196A0A2D00742F05 /* reverb-echo.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "reverb-echo.pd"; path = "SoundScapeTK/reverb-echo.pd"; sourceTree = SOURCE_ROOT; };
@@ -159,7 +151,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				862D789B196487FE00CA278C /* libpd-ios.a in Frameworks */,
 				860697A11930E92B000353A3 /* AudioToolbox.framework in Frameworks */,
 				860697A21930E92B000353A3 /* AVFoundation.framework in Frameworks */,
 				860697A31930E92B000353A3 /* CoreLocation.framework in Frameworks */,
@@ -178,15 +169,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		861104F61964763400CD810A /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				861104FB1964763400CD810A /* libpd-ios.a */,
-				861104FD1964763400CD810A /* libpd-osx.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		8638E3A6190489A3007371CE = {
 			isa = PBXGroup;
 			children = (
@@ -241,8 +223,8 @@
 				861105101964791B00CD810A /* kflAppDelegate.m */,
 				861105111964791B00CD810A /* kflAudioFileRouter.h */,
 				861105121964791B00CD810A /* kflAudioFileRouter.m */,
-				861105131964791B00CD810A /* kflGPSViewController.h */,
-				861105141964791B00CD810A /* kflGPSViewController.m */,
+				861105131964791B00CD810A /* kflStatusViewController.h */,
+				861105141964791B00CD810A /* kflStatusViewController.m */,
 				862D78A21964AAEA00CA278C /* kflHTLPManager.h */,
 				862D78A31964AAEA00CA278C /* kflHTLPManager.m */,
 				861105171964791B00CD810A /* kflLAPManager.h */,
@@ -287,7 +269,7 @@
 			isa = PBXGroup;
 			children = (
 				861105001964785A00CD810A /* kflAboutViewController.xib */,
-				861105021964785A00CD810A /* kflGPSViewController.xib */,
+				861105021964785A00CD810A /* kflStatusViewController.xib */,
 				861105041964785A00CD810A /* kflModalAboutViewController.xib */,
 				861105061964785A00CD810A /* kflScapeManagerViewController.xib */,
 			);
@@ -312,10 +294,19 @@
 			path = pd;
 			sourceTree = "<group>";
 		};
+		8667378219C683380098D1A2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8667378719C683380098D1A2 /* libpd-ios.a */,
+				8667378919C683380098D1A2 /* libpd-osx.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		86C1F3971937E748006F661F /* GPSONs */ = {
 			isa = PBXGroup;
 			children = (
-				862D789F1964958700CA278C /* empac.gpson */,
+				862D789F1964958700CA278C /* buffalony.gpson */,
 			);
 			name = GPSONs;
 			sourceTree = "<group>";
@@ -341,7 +332,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				862D78991964879200CA278C /* PBXTargetDependency */,
 			);
 			name = WheelWithinWheel;
 			productName = ArnoldArboretum2;
@@ -370,7 +360,7 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 861104F61964763400CD810A /* Products */;
+					ProductGroup = 8667378219C683380098D1A2 /* Products */;
 					ProjectRef = 86652094192CF92600EFFA60 /* libpd.xcodeproj */;
 				},
 			);
@@ -382,18 +372,18 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		861104FB1964763400CD810A /* libpd-ios.a */ = {
+		8667378719C683380098D1A2 /* libpd-ios.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libpd-ios.a";
-			remoteRef = 861104FA1964763400CD810A /* PBXContainerItemProxy */;
+			remoteRef = 8667378619C683380098D1A2 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		861104FD1964763400CD810A /* libpd-osx.a */ = {
+		8667378919C683380098D1A2 /* libpd-osx.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libpd-osx.a";
-			remoteRef = 861104FC1964763400CD810A /* PBXContainerItemProxy */;
+			remoteRef = 8667378819C683380098D1A2 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -406,7 +396,7 @@
 				861105471964796900CD810A /* play_sf.pd in Resources */,
 				869B3FAD1969A44900742F05 /* empac_ios.pd in Resources */,
 				869B3FB2196A0A2D00742F05 /* reverb-echo.pd in Resources */,
-				8611050A1964785A00CD810A /* kflGPSViewController.xib in Resources */,
+				8611050A1964785A00CD810A /* kflStatusViewController.xib in Resources */,
 				8611050B1964785A00CD810A /* kflModalAboutViewController.xib in Resources */,
 				861105091964785A00CD810A /* kflAboutViewController.xib in Resources */,
 				861105081964785A00CD810A /* InfoPlist.strings in Resources */,
@@ -416,7 +406,7 @@
 				861105421964796900CD810A /* 01.mp3 in Resources */,
 				860697D81930EE8A000353A3 /* Default-568h@2x.png in Resources */,
 				861105481964796900CD810A /* sampler4bank.pd in Resources */,
-				862D78A01964958700CA278C /* empac.gpson in Resources */,
+				862D78A01964958700CA278C /* buffalony.gpson in Resources */,
 				869B3FAC1969A44900742F05 /* bpf_empac.pd in Resources */,
 				8611050C1964785A00CD810A /* kflScapeManagerViewController.xib in Resources */,
 				86DC88B3196C4E7C00ABA100 /* Images-2.xcassets in Resources */,
@@ -435,7 +425,7 @@
 				861105461964796900CD810A /* mp3play~.c in Sources */,
 				861105361964791B00CD810A /* kflMKMapViewController.m in Sources */,
 				861105381964791B00CD810A /* kflScapeManagerViewController.m in Sources */,
-				8611052E1964791B00CD810A /* kflGPSViewController.m in Sources */,
+				8611052E1964791B00CD810A /* kflStatusViewController.m in Sources */,
 				861105451964796900CD810A /* iem_mp3.c in Sources */,
 				861105321964791B00CD810A /* kflLinkedRectangleRegion.m in Sources */,
 				861105391964791B00CD810A /* main.m in Sources */,
@@ -453,14 +443,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		862D78991964879200CA278C /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "libpd-ios";
-			targetProxy = 862D78981964879200CA278C /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		861104FE1964785A00CD810A /* InfoPlist.strings */ = {
@@ -480,12 +462,12 @@
 			name = kflAboutViewController.xib;
 			sourceTree = "<group>";
 		};
-		861105021964785A00CD810A /* kflGPSViewController.xib */ = {
+		861105021964785A00CD810A /* kflStatusViewController.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				861105031964785A00CD810A /* en */,
 			);
-			name = kflGPSViewController.xib;
+			name = kflStatusViewController.xib;
 			sourceTree = "<group>";
 		};
 		861105041964785A00CD810A /* kflModalAboutViewController.xib */ = {
@@ -519,7 +501,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SoundScapeTK/SoundScapeTK-Prefix.pch";
 				INFOPLIST_FILE = "SoundScapeTK-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = SoundScapeTK;
 				PROVISIONING_PROFILE = "";
 				USER_HEADER_SEARCH_PATHS = "~/dev/git/pd-for-ios/libpd/** ~/dev/git/SoundScapeTK/**";
@@ -541,7 +523,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SoundScapeTK/SoundScapeTK-Prefix.pch";
 				INFOPLIST_FILE = "SoundScapeTK-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = SoundScapeTK;
 				PROVISIONING_PROFILE = "";
 				USER_HEADER_SEARCH_PATHS = "~/dev/git/pd-for-ios/libpd/** ~/dev/git/SoundScapeTK/**";

@@ -18,9 +18,9 @@
 #import "kflHTLPManager.h"
 #import "kflMapViewController.h"
 #import "kflMKMapViewController.h"
-#import "kflGPSViewController.h"
+#import "kflStatusViewController.h"
 
-@class kflGPSViewController;
+@class kflStatusViewController;
 @class kflMKMapViewController;
 @class kflMapViewController;
 
@@ -45,7 +45,7 @@
 #else
 @property (strong, nonatomic)   kflMapViewController    *mapVC;
 #endif
-@property (strong, nonatomic)   kflGPSViewController    *gpsVC;
+@property (strong, nonatomic)   kflStatusViewController    *gpsVC;
 
 @property (strong, nonatomic)   IBOutlet UIImageView    *titleCirclesImgView;
 

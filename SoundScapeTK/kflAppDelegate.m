@@ -53,7 +53,7 @@ extern void mp3play_tilde_setup(void);
     self.mapVC.title = @"MAP";
     [self.mapVC.tabBarItem setTitlePositionAdjustment:UIOffsetMake(0, -12)];
     
-    self.gpsVC = [[kflGPSViewController alloc] initWithNibName:@"kflGPSViewController" bundle:[NSBundle mainBundle]];
+    self.gpsVC = [[kflStatusViewController alloc] initWithNibName:@"kflStatusViewController" bundle:[NSBundle mainBundle]];
     self.gpsVC.title = @"TOOLS";
     [self.gpsVC.tabBarItem setTitlePositionAdjustment:UIOffsetMake(0, -12)];
     
@@ -62,8 +62,9 @@ extern void mp3play_tilde_setup(void);
     
     self.scapeManagerVC.gpsVC.scapeManager = self.scapeManagerVC;
     
+    // add the current gpson to defaults
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:[[NSBundle mainBundle] pathForResource:@"empac" ofType:@"gpson"]
+    [defaults setObject:[[NSBundle mainBundle] pathForResource:@"buffalony" ofType:@"gpson"]
                  forKey:@"gpsonFile"];
     NSLog(@"Default GPSON file: %@", [defaults objectForKey:@"gpsonFile"]);
     [defaults synchronize];
