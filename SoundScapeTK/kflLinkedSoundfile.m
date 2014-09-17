@@ -48,6 +48,14 @@
             self.length = dumbPlayer.duration;
             self.channels = dumbPlayer.numberOfChannels;
             self.audioPlayer.volume = 1.0;
+            
+            /**
+             *  Check length as proxy for existence of file.
+             *  TODO: more robust error checking.
+             */
+            if (self.length <= 0.f) {
+                return nil;
+            }
         }
         // remember - NO communication in LSF to Pd!
         dumbPlayer = nil;
