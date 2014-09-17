@@ -12,14 +12,14 @@
 
 @interface kflLinkedRectangleRegion : kflLinkedRegion
 
-@property (strong)  NSArray     *points;
-@property           CGRect      prect;
-@property           int         numPoints;
-@property           float       halfDiag;
+@property (strong)  NSArray                 *points;
+@property           CGRect                  prect;
+@property           int                     numPoints;
+@property           float                   halfDiag;
 
 @property           int                     numLinkedSoundfiles, numLoops;
 @property           NSArray                 *linkedSoundfiles;
-@property           kflRegionLoopRule       loopRule;
+@property           kflRegionFinishRule     finishRule;
 
 
 + (kflLinkedRectangleRegion *)linkedRectangleRegionWithPoints:(NSArray *)points
@@ -28,7 +28,7 @@
                                                        attack:(int)atk
                                                       release:(int)rel
                                                         loops:(int)loops
-                                                     loopRule:(kflRegionLoopRule)rule
+                                                   finishRule:(kflRegionFinishRule)rule
                                                         lives:(int)lives
                                                        active:(BOOL)activeFlag
                                                    toActivate:(NSArray *)regionIDS

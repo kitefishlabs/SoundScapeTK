@@ -180,7 +180,7 @@
             //      else do nothing
 
             // if region.rule == 1
-            int looprule = lcr.loopRule;
+            int looprule = lcr.finishRule;
             HTLPLog(@"%i", looprule);
             if ((looprule & 1) == 1) { // cutoff bit set
 
@@ -354,8 +354,8 @@
             kflLinkedCircleSFRegion *lcr = [self.scapeRegions objectForKey:[NSString stringWithFormat:@"%i", lsf.idNum]];
             
             // if region.rule == 1
-            HTLPLog(@"loop rule: %i", lcr.loopRule);
-            if ((lcr.loopRule & 1) == 1) { // cutoff bit set
+            HTLPLog(@"loop rule: %i", lcr.finishRule);
+            if ((lcr.finishRule & 1) == 1) { // cutoff bit set
 
                 // @@@ add this region/lsf to the list of paused regions with it's time offset
 

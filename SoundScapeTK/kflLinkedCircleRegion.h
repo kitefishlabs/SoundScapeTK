@@ -15,7 +15,7 @@
 @property           float                   radius;
 @property           int                     numLinkedSoundfiles, numLoops;
 @property           NSArray                 *linkedSoundfiles;
-@property           kflRegionLoopRule       loopRule;
+@property           kflRegionFinishRule     finishRule;
 
 + (kflLinkedCircleSFRegion *)kflLinkedCircleSFRegionWithCenter:(CGPoint)center
                                                         radius:(float)radius
@@ -25,7 +25,7 @@
                                                         attack:(int)atk
                                                        release:(int)rel
                                                          loops:(int)loops
-                                                      loopRule:(kflRegionLoopRule)rule
+                                                    finishRule:(kflRegionFinishRule)rule
                                                          lives:(int)lives
                                                         active:(BOOL)activeFlag
                                                     toActivate:(NSArray *)regionIDS

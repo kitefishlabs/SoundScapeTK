@@ -18,7 +18,7 @@
                                                           attack:(int)atk
                                                          release:(int)rel
                                                            loops:(int)loops
-                                                        loopRule:(kflRegionLoopRule)rule
+                                                      finishRule:(kflRegionFinishRule)rule
                                                            lives:(int)lives
                                                           active:(BOOL)activeFlag
                                                       toActivate:(NSArray *)regionIDS
@@ -36,7 +36,7 @@
         lrr.attackTime = atk;
         lrr.releaseTime = rel;
         lrr.numLoops = loops;
-        lrr.loopRule = rule;
+        lrr.finishRule = rule;
         lrr.numLives = lives;
         lrr.active = activeFlag;
         lrr.idsToActivate = regionIDS;

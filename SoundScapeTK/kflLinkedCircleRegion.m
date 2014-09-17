@@ -10,7 +10,7 @@
 
 @implementation kflLinkedCircleSFRegion
 
-@synthesize radius, numLinkedSoundfiles, numLoops, linkedSoundfiles, loopRule;
+@synthesize radius, numLinkedSoundfiles, numLoops, linkedSoundfiles, finishRule;
 
 + (kflLinkedCircleSFRegion *)kflLinkedCircleSFRegionWithCenter:(CGPoint)center
                                               radius:(float)radius
@@ -20,7 +20,7 @@
                                               attack:(int)atk
                                              release:(int)rel
                                                loops:(int)loops
-                                            loopRule:(kflRegionLoopRule)rule
+                                            finishRule:(kflRegionFinishRule)rule
                                                lives:(int)lives
                                               active:(BOOL)activeFlag
                                           toActivate:(NSArray *)regionIDS
@@ -37,7 +37,7 @@
         lcr.numLinkedSoundfiles = [lsf count]; // should always == 1, for now...
         lcr.attackTime = atk;
         lcr.releaseTime = rel;
-        lcr.loopRule = rule;
+        lcr.finishRule = rule;
         lcr.numLives = lives;
         lcr.active = activeFlag;
         lcr.idsToActivate = regionIDS;
