@@ -196,45 +196,6 @@
     // grab the defaults for the app
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
-//    // create LSFs MANUALLY! <<when saving sound files in the app bundle>>
-//    // *** to-do: create this array (and other data structures?) dynamically based on the json file
-//    static int activeRegions[NUMBER_OF_ACTIVE_REGIONS] = {1,2,3,4,6,5,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32};
-//    
-//    // set up file manager and setup documents dir string
-//    NSFileManager *fileManager = [NSFileManager defaultManager];
-//    NSString *docDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-//    
-//    for (int i=0; i<NUMBER_OF_ACTIVE_REGIONS; i++) {
-//        // each file is named with a two digit (zero-padded) integer
-//        NSString *fileName = [NSString stringWithFormat:@"%02d.mp3", activeRegions[i]];
-//        NSString *docPath = [docDir stringByAppendingPathComponent:fileName];
-//        DLog(@"DOC PATH: %@", docPath);
-//        DLog(@"???: %i", [fileManager fileExistsAtPath:docPath]);
-//        // check whether mp3 already exists in the docs directory
-//        if (![fileManager fileExistsAtPath:docPath]) {
-//            // if not, determine bundle path for mp3
-//            NSString *filePathFromApp = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:fileName];
-//            DLog(@"BUNDLE PATH: %@", filePathFromApp);
-//            NSError *error = nil;
-//            // copy file from bundle to documents dir
-//            [fileManager copyItemAtPath:filePathFromApp toPath:docPath error:&error];
-//            if (error) {
-//                DLog(@"***ERROR: %@", [error description]);
-//            }
-//            // attempt to skip backup to iCloud or some BS that doesn't actually work, so skipping *** follow up on whther this is even necessary
-//            //BOOL res = [self addSkipBackupAttributeToItemAtURL:[NSURL URLWithString:docPath]];
-//            //DLog(@"===========RES: %i", res);
-//        }
-//        DLog(@"FILE NAME: %@", [docDir stringByAppendingPathComponent:fileName]);
-//        // create a LSF object for the file and put it in the manager's sound files list
-//        kflLinkedSoundfile *lsf = [kflLinkedSoundfile linkedSoundfileForFile:fileName idNum:activeRegions[i] attack:1000 andRelease:4000];
-//        DLog(@"LSF: %@", lsf);
-//        [htlpManager.scapeSoundfiles setObject:lsf
-//                                        forKey:[NSString stringWithFormat:@"%i", activeRegions[i]]];
-//        DLog(@"SFs: %@", htlpManager.scapeSoundfiles);
-//        
-//    }
-    
     self.jsonFilePath = [defaults objectForKey:@"gpsonFile"];
     DLog(@"Default gpson path: %@", self.jsonFilePath);
     
@@ -262,6 +223,9 @@
     raIndex = (raIndex + 1) % NPTS;
     [self.gpsVC.avgAccLbl setText:[NSString stringWithFormat:@"%.02f", (sum / (float)NPTS)]];
 }
+
+
+
 #ifdef LOG_TO_EMAIL
 #pragma mark logging to email
 
@@ -314,6 +278,8 @@
     [lapManager clearLocations];
 }
 #endif
+
+
 
 #pragma mark location managment and updating
 
@@ -621,7 +587,17 @@
                 JSONLog(@"reading release: %i", release);
            }
             
-            
+            /**
+             *  FINISHRULE BOOL: finishrule
+             *  default = 0
+             *  if set, allow sound file to finish playing once triggered
+             */
+            int finishrule = kREGION_FINISH;
+            if ([[rdict objectForKey:lrid] objectForKey:@"finishrule"] != nil) {
+                
+                finishrule = [[[rdict objectForKey:lrid] objectForKey:@"finishrule"] intValue];
+                
+            }
 
             /**
              *  LIVES INTEGER: lives
@@ -647,11 +623,11 @@
              *  REGION SPECIFIC PARSING
              *  INCOMPLETE: Only Circles are fully supported at this time!
              */
-            
-            if ([[[[rdict objectForKey:lrid] objectForKey:@"shape"] stringValue] compare:@"CIRCLE" options:NSCaseInsensitiveSearch] == NSOrderedSame) {
+            NSLog(@"%@", [[rdict objectForKey:lrid] objectForKey:@"shape"]);
+            if ([[[rdict objectForKey:lrid] objectForKey:@"shape"] compare:@"CIRCLE" options:NSCaseInsensitiveSearch] == NSOrderedSame) {
                 
                 CGPoint ctr = CGPointMake(([[[rdict objectForKey:lrid] objectForKey:@"lat"] floatValue] + originX), ([[[rdict objectForKey:lrid] objectForKey:@"lon"] floatValue] + originY));
-                float radius = [[[rdict objectForKey:lrid] objectForKey:@"lat"] floatValue];
+                float radius = [[[rdict objectForKey:lrid] objectForKey:@"rad"] floatValue];
                 
                 /**
                  *  TODO: perform logical and error testing on lat/lon/radius!
@@ -662,17 +638,16 @@
 
                 
                 /**
-                 *  Scanning for @"parameters" is the way to look for parameters.
-                 *  @"parameters" and @"trig" are totally independent!
+                 *  Scanning for @"params" is the way to look for parameters.
+                 *  @"params" and @"trig" are totally independent!
                  *
                  */
-                if ([[rdict objectForKey:lrid] objectForKey:@"parameters"] != nil) {
+                if ([[rdict objectForKey:lrid] objectForKey:@"params"] != nil) {
                 
                     JSONLog(@"reading a PARAM circle region!");
                     
                     kflLinkedParameter *lpA = nil;
                     kflLinkedParameter *lpB = nil;
-                    
 
                     /**
                      *  Defaults for parameter mappigs
@@ -682,7 +657,12 @@
                     float highValA = 1.0, highValB = 1.0;
                     float rotOffsetB = 0.0;
 
-                    NSArray *radiusArray = [[[rdict objectForKey:lrid] objectForKey:@"params"] objectForKey:@"radius"];
+                    NSDictionary *paramsDict = [[rdict objectForKey:lrid] objectForKey:@"params"];
+                    
+                    NSLog(@"keys: %@", [paramsDict allKeys]);
+                    NSArray *radiusArray = [paramsDict objectForKey:@"rad"];
+                    
+                    
                     if ((radiusArray != nil) && ([radiusArray count] == 2)) {
                         
                         /**
@@ -718,54 +698,7 @@
                         lpB = [kflLinkedParameter kflLinkedParameterWithString:@"x" lowMappedVal:0 andHighMappedValue:0];
                     }
                     
-                    // scan for linked sound file
-                    NSString *triggerString = [[[rdict objectForKey:lrid] objectForKey:@"trig"] stringValue];
-                    if ((triggerString != nil) && ([triggerString intValue] != -1)) {
-
-                        
-                        JSONLog(@"reading a SF circle region!");
-                        
-                        /**
-                         *  FINISHRULE BOOL: finishrule
-                         *  default = 0
-                         *  if set, allow sound file to finish playing once triggered
-                         */
-                        int rule = kREGION_FINISH;
-                        if ([[rdict objectForKey:lrid] objectForKey:@"finishrule"] != nil) {
-                            
-                            rule = [[[rdict objectForKey:lrid] objectForKey:@"finishrule"] intValue];
-                            
-                        }
-                        
-                        // scan for file name
-                        kflLinkedSoundfile *lsf;
-                        
-//                        
-//                        [lsf setAttackTime:attack];
-//                        [lsf setReleaseTime:release];
-//                        
-//                        kflLinkedCircleSFRegion *lcr = [kflLinkedCircleSFRegion kflLinkedCircleSFRegionWithCenter:ctr
-//                                                                                                           radius:0.003 //cpoints?
-//                                                                                                            idNum:[lrid intValue]
-//                                                                                                            label:labelString
-//                                                                                                 linkedSoundFiles:[NSArray arrayWithObject:lsf]
-//                                                                                                           attack:attack
-//                                                                                                          release:release
-//                                                                                                            loops:numloops
-//                                                                                                       finishRule:rule
-//                                                                                                            lives:lives
-//                                                                                                           active:YES
-//                                                                                                       toActivate:nil
-//                                                                                                         andState:@"ready"];
-//                        [htlpManager addRegion:lcr forIndex:lrid];
-//                        [self.mapVC addRegion:lcr];
-//                        
-//                        //    error/abort if it doesn't exist!
-//                        // error + logical tests
-//                        // lookup sfid
-//                        // create lcsfr with sfid
-                    }
-                    
+                    NSLog(@"??? %i, %i", (lpA != nil), (lpB != nil));
                     if ((lpA != nil) || (lpB != nil)) {
                         
                         kflLinkedCircleSynthRegion *lcsr = [kflLinkedCircleSynthRegion kflLinkedCircleSynthRegionWithCenter:ctr
@@ -780,15 +713,64 @@
                                                                                                                      active:YES
                                                                                                                  toActivate:nil
                                                                                                                    andState:@"ready"];
+                        NSLog(@"ADDING LCSynthR:\n%@", lcsr);
                         [htlpManager addRegion:lcsr forIndex:lrid];
                         [self.mapVC addRegion:lcsr];
                     }
+                }
+                
+                // scan for linked sound file
+                NSString *triggerString = [[rdict objectForKey:lrid] objectForKey:@"trig"];
+                
+                if ((triggerString != nil) && ([triggerString intValue] != -1)) {
+                    
+                    JSONLog(@"reading a SF circle region for filepath: %@", triggerString);
                     
                     
+                    // scan for file name
+                    
+                    kflLinkedSoundfile *lsf = [kflLinkedSoundfile linkedSoundfileForFile:triggerString
+                                                                                   idNum:[lrid intValue]
+                                                                                  attack:attack
+                                                                              andRelease:release];
+                    
+                    kflLinkedCircleSFRegion *lcr = [kflLinkedCircleSFRegion kflLinkedCircleSFRegionWithCenter:ctr
+                                                                                                       radius:radius
+                                                                                                        idNum:[lrid intValue]
+                                                                                                        label:labelString
+                                                                                             linkedSoundFiles:[NSArray arrayWithObject:lsf]
+                                                                                                       attack:attack
+                                                                                                      release:release
+                                                                                                        loops:0
+                                                                                                   finishRule:finishrule
+                                                                                                        lives:lives
+                                                                                                       active:YES
+                                                                                                   toActivate:nil
+                                                                                                     andState:@"ready"];
+                    NSLog(@"ADDING LSF:\n%@", lsf);
+                    NSLog(@"ADDING LCSFR:\n%@", lcr);
+                    [htlpManager addRegion:lcr forIndex:lrid];
+                    [self.mapVC addRegion:lcr];
+
                 }
             }
-//            } else {
-//                
+        }
+    }
+}
+
+- (void) writeScapeToJSON {
+    JSONLog(@"Write JSON...");    
+}
+
+@end
+
+
+
+
+
+
+
+
 //                NSArray *vertexes = [[rdict objectForKey:lrid] objectForKey:@"vertexes"];
 //                float lat = [[[vertexes objectAtIndex:0] objectAtIndex:0] floatValue];
 //                float lng = [[[vertexes objectAtIndex:0] objectAtIndex:1] floatValue];
@@ -797,13 +779,13 @@
 //                float minY = lat;
 //                float maxY = lat;
 //                JSONLog(@"\n\n%f||%f||%f||%f\n\n", minX, maxX, minY, maxY);
-//                
+//
 //                NSMutableArray *pts = [NSMutableArray arrayWithCapacity:4];
 //                for (int p=0; p<[[[rdict objectForKey:lrid] objectForKey:@"sides"] intValue]; p++) {
-//                    
+//
 //                    lat = [[[vertexes objectAtIndex:p] objectAtIndex:0] floatValue];
 //                    lng = [[[vertexes objectAtIndex:p] objectAtIndex:1] floatValue];
-//                    
+//
 //                    minY = MIN(lat, minY);
 //                    minX = MIN(lng, minX);
 //                    maxY = MAX(lat, maxY);
@@ -816,74 +798,25 @@
 //                CGRect rect = CGRectMake(minX, minY, (maxY - minY), (maxX - minX));
 //                rect = CGRectOffset(rect, originX, originY);
 //                JSONLog(@"RECT: %f, %f| %f %f", rect.origin.x, rect.origin.y, rect.size.width, rect.size.height);
-//                
-//                
+//
+//
 ////                JSONLog(@"THE RECT: %f-%f|%f-%f", lrr.rect.origin.x, lrr.rect.origin.y, lrr.rect.size.width, lrr.rect.size.height);
 //
-//                int numloops = 1;
-//                kflRegionLoopRule rule = kNOLOOP_CUTOFF;
-//                BOOL active = YES;
-//                NSArray *toActivate = nil;
-//                int lives = 99;
-//                int atk = 100;
-//                int rel = 1000;
-//                
-//                NSArray *sfIndexes = [[rdict objectForKey:lrid] objectForKey:@"sfIDs"];
 //
-//                NSMutableArray *linkedSFs;
-//                if (sfIndexes != nil) {
-//                    // pass a reference to the actual LSF, not its index!!!!
-//                    linkedSFs = [NSMutableArray arrayWithObject:[htlpManager.scapeSoundfiles objectForKey:[[sfIndexes objectAtIndex:0] stringValue]]];
-//                    if ([sfIndexes objectAtIndex:1] != nil)
-//                        atk = [[sfIndexes objectAtIndex:1] intValue];
-//                    if ([sfIndexes objectAtIndex:2] != nil)
-//                        rel = [[sfIndexes objectAtIndex:2] intValue];
-//                }
-//                
-//                
-//                if ([[rdict objectForKey:lrid] objectForKey:@"loops"] != nil) {
-//                    
-//                    numloops = [[[[rdict objectForKey:lrid] objectForKey:@"loops"] objectAtIndex:0] intValue];
-//                    rule = [[[[rdict objectForKey:lrid] objectForKey:@"loops"] objectAtIndex:1] intValue];
-//                    
-//                    JSONLog(@"RULE: %i (%i)", rule, [lrid intValue]);
-//                    
-//                }
-//                JSONLog(@"linkedSFs (%i): %@", [lrid intValue], [linkedSFs description]);
-//                
 //                NSArray *activeFlags = [[rdict objectForKey:lrid] objectForKey:@"ready"];
 //                if (activeFlags != nil) {
-//                    
+//
 //                    active = [[activeFlags objectAtIndex:0] boolValue];
 //                    if ([activeFlags count] == 2) { toActivate = [NSArray arrayWithArray:[activeFlags objectAtIndex:1]]; }
 //                }
-//                
-//                if ([[rdict objectForKey:lrid] objectForKey:@"lives"] != nil) {
-//                    
-//                    lives = [[[rdict objectForKey:lrid] objectForKey:@"lives"] intValue];
-//                }
 //
-////                NSNumber *r = [[[rdict objectForKey:lrid] objectForKey:@"release"] objectAtIndex:0];
-////                if (r != nil) {                    
-////                    rel = [r intValue];
-////                }
 //
 //                kflLinkedRectangleRegion *lrr = [kflLinkedRectangleRegion linkedRectangleRegionWithPoints:pts linkedSoundfiles:linkedSFs idNum:[lrid intValue] attack:atk release:rel loops:numloops loopRule:rule lives:lives active:active toActivate:toActivate state:@"ready" andRect:rect];
 //                [htlpManager addRectRegion:lrr forIndex:lrid];        // HTLP
 //
 //                JSONLog(@"RECT: %f, %f| %f %f",
-//                      [[htlpManager.scapeRegions objectForKey:lrid] prect].origin.x, 
-//                      [[htlpManager.scapeRegions objectForKey:lrid] prect].origin.y, 
-//                      [[htlpManager.scapeRegions objectForKey:lrid] prect].size.width, 
+//                      [[htlpManager.scapeRegions objectForKey:lrid] prect].origin.x,
+//                      [[htlpManager.scapeRegions objectForKey:lrid] prect].origin.y,
+//                      [[htlpManager.scapeRegions objectForKey:lrid] prect].size.width,
 //                      [[htlpManager.scapeRegions objectForKey:lrid] prect].size.height);
 //            }
-        }
-    }
-}
-
-- (void) writeScapeToJSON {
-    JSONLog(@"Write JSON...");    
-}
-
-@end
-

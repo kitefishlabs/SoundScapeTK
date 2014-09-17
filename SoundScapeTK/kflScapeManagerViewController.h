@@ -68,8 +68,10 @@
 - (void)    updateLocation;
 - (void)    stopUpdatingLocation:(NSString *)state;
 - (void)    updateRunningAccAvg:(float)amount;
+
 - (void)    readScapeFromJSON:(NSString *)jsonPath;
 - (void)    writeScapeToJSON;
+
 - (void)    flyToLocation:(CLLocationCoordinate2D)coords;
 
 @end
