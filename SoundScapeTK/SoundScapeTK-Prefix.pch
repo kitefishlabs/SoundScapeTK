@@ -16,7 +16,7 @@
 #endif
 
 #define MKMAP
-#define LOCOFFSET
+//#define LOCOFFSET
 //#define MONITOR_PD
 //#define LOG_TO_EMAIL
 //#define SHOW_CIRCLES
@@ -83,9 +83,9 @@
 #endif
 
 // uncomment to debug MAPKIT Logs
-//#ifndef DEBUG_MAPKIT
-//#define DEBUG_MAPKIT
-//#endif
+#ifndef DEBUG_MAPKIT
+#define DEBUG_MAPKIT
+#endif
 
 #if defined(DEBUG_MAPKIT) && defined(DEBUG)
 #define MapKitLog(...) NSLog(@"%s %@", __PRETTY_FUNCTION__, [NSString stringWithFormat:__VA_ARGS__])

@@ -20,6 +20,7 @@
 		860697AB1930E92B000353A3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8638E3B6190489A3007371CE /* UIKit.framework */; };
 		860697AC1930E92B000353A3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8638E3B2190489A3007371CE /* Foundation.framework */; };
 		860697D81930EE8A000353A3 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 860697D71930EE8A000353A3 /* Default-568h@2x.png */; };
+		8608EC3019C925D400B2D73B /* 02cymbal.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8608EC2F19C925D400B2D73B /* 02cymbal.wav */; };
 		861105081964785A00CD810A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 861104FE1964785A00CD810A /* InfoPlist.strings */; };
 		861105091964785A00CD810A /* kflAboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 861105001964785A00CD810A /* kflAboutViewController.xib */; };
 		8611050A1964785A00CD810A /* kflStatusViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 861105021964785A00CD810A /* kflStatusViewController.xib */; };
@@ -38,12 +39,6 @@
 		861105371964791B00CD810A /* kflPin.m in Sources */ = {isa = PBXBuildFile; fileRef = 861105261964791B00CD810A /* kflPin.m */; };
 		861105381964791B00CD810A /* kflScapeManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 861105281964791B00CD810A /* kflScapeManagerViewController.m */; };
 		861105391964791B00CD810A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 861105291964791B00CD810A /* main.m */; };
-		861105421964796900CD810A /* 01.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8611053A1964796900CD810A /* 01.mp3 */; };
-		861105431964796900CD810A /* 02.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8611053B1964796900CD810A /* 02.mp3 */; };
-		861105441964796900CD810A /* 03.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8611053C1964796900CD810A /* 03.mp3 */; };
-		861105451964796900CD810A /* iem_mp3.c in Sources */ = {isa = PBXBuildFile; fileRef = 8611053D1964796900CD810A /* iem_mp3.c */; };
-		861105461964796900CD810A /* mp3play~.c in Sources */ = {isa = PBXBuildFile; fileRef = 8611053F1964796900CD810A /* mp3play~.c */; };
-		861105471964796900CD810A /* play_sf.pd in Resources */ = {isa = PBXBuildFile; fileRef = 861105401964796900CD810A /* play_sf.pd */; };
 		861105481964796900CD810A /* sampler4bank.pd in Resources */ = {isa = PBXBuildFile; fileRef = 861105411964796900CD810A /* sampler4bank.pd */; };
 		862308AB196C549D0022D8D7 /* icon1024-noALPHA.png in Resources */ = {isa = PBXBuildFile; fileRef = 862308AA196C549D0022D8D7 /* icon1024-noALPHA.png */; };
 		862D789E19648DEA00CA278C /* kflLinkedParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = 862D789D19648DEA00CA278C /* kflLinkedParameter.m */; };
@@ -54,6 +49,9 @@
 		869B3FB2196A0A2D00742F05 /* reverb-echo.pd in Resources */ = {isa = PBXBuildFile; fileRef = 869B3FB1196A0A2D00742F05 /* reverb-echo.pd */; };
 		86DC88B3196C4E7C00ABA100 /* Images-2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86DC88B2196C4E7C00ABA100 /* Images-2.xcassets */; };
 		86E2789F19C8E79A0032134D /* libpd-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8667378719C683380098D1A2 /* libpd-ios.a */; };
+		86E278A319C9190E0032134D /* 01.wav in Resources */ = {isa = PBXBuildFile; fileRef = 86E278A019C9190E0032134D /* 01.wav */; };
+		86E278A419C9190E0032134D /* play_sf_mono.pd in Resources */ = {isa = PBXBuildFile; fileRef = 86E278A119C9190E0032134D /* play_sf_mono.pd */; };
+		86E278A519C9190E0032134D /* play_sf_stereo.pd in Resources */ = {isa = PBXBuildFile; fileRef = 86E278A219C9190E0032134D /* play_sf_stereo.pd */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +81,7 @@
 /* Begin PBXFileReference section */
 		860697CE1930E92B000353A3 /* SoundScapeTK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SoundScapeTK.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		860697D71930EE8A000353A3 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		8608EC2F19C925D400B2D73B /* 02cymbal.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = 02cymbal.wav; path = SoundScapeTK/pd/02cymbal.wav; sourceTree = SOURCE_ROOT; };
 		861104FF1964785A00CD810A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = SoundScapeTK/en.lproj/InfoPlist.strings; sourceTree = SOURCE_ROOT; };
 		861105011964785A00CD810A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = SoundScapeTK/en.lproj/kflAboutViewController.xib; sourceTree = SOURCE_ROOT; };
 		861105031964785A00CD810A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = SoundScapeTK/en.lproj/kflStatusViewController.xib; sourceTree = SOURCE_ROOT; };
@@ -115,13 +114,6 @@
 		861105281964791B00CD810A /* kflScapeManagerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = kflScapeManagerViewController.m; path = SoundScapeTK/kflScapeManagerViewController.m; sourceTree = SOURCE_ROOT; };
 		861105291964791B00CD810A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = SoundScapeTK/main.m; sourceTree = SOURCE_ROOT; };
 		8611052A1964791B00CD810A /* SoundScapeTK-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "SoundScapeTK-Prefix.pch"; path = "SoundScapeTK/SoundScapeTK-Prefix.pch"; sourceTree = SOURCE_ROOT; };
-		8611053A1964796900CD810A /* 01.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = 01.mp3; path = SoundScapeTK/pd/01.mp3; sourceTree = SOURCE_ROOT; };
-		8611053B1964796900CD810A /* 02.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = 02.mp3; path = SoundScapeTK/pd/02.mp3; sourceTree = SOURCE_ROOT; };
-		8611053C1964796900CD810A /* 03.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = 03.mp3; path = SoundScapeTK/pd/03.mp3; sourceTree = SOURCE_ROOT; };
-		8611053D1964796900CD810A /* iem_mp3.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = iem_mp3.c; path = SoundScapeTK/pd/iem_mp3.c; sourceTree = SOURCE_ROOT; };
-		8611053E1964796900CD810A /* iemlib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iemlib.h; path = SoundScapeTK/pd/iemlib.h; sourceTree = SOURCE_ROOT; };
-		8611053F1964796900CD810A /* mp3play~.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = "mp3play~.c"; path = "SoundScapeTK/pd/mp3play~.c"; sourceTree = SOURCE_ROOT; };
-		861105401964796900CD810A /* play_sf.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = play_sf.pd; path = SoundScapeTK/pd/play_sf.pd; sourceTree = SOURCE_ROOT; };
 		861105411964796900CD810A /* sampler4bank.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = sampler4bank.pd; path = SoundScapeTK/pd/sampler4bank.pd; sourceTree = SOURCE_ROOT; };
 		86110549196481B100CD810A /* SoundScapeTK-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "SoundScapeTK-Info.plist"; sourceTree = SOURCE_ROOT; };
 		862308AA196C549D0022D8D7 /* icon1024-noALPHA.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon1024-noALPHA.png"; path = "SoundScapeTK/icon1024-noALPHA.png"; sourceTree = SOURCE_ROOT; };
@@ -149,6 +141,9 @@
 		869B3FB1196A0A2D00742F05 /* reverb-echo.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "reverb-echo.pd"; path = "SoundScapeTK/reverb-echo.pd"; sourceTree = SOURCE_ROOT; };
 		86DC88B2196C4E7C00ABA100 /* Images-2.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = "Images-2.xcassets"; path = "SoundScapeTK/Images-2.xcassets"; sourceTree = SOURCE_ROOT; };
 		86DC88B8196C529700ABA100 /* icon1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon1024.png; path = SoundScapeTK/icon1024.png; sourceTree = "<group>"; };
+		86E278A019C9190E0032134D /* 01.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = 01.wav; path = SoundScapeTK/pd/01.wav; sourceTree = SOURCE_ROOT; };
+		86E278A119C9190E0032134D /* play_sf_mono.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = play_sf_mono.pd; path = SoundScapeTK/pd/play_sf_mono.pd; sourceTree = SOURCE_ROOT; };
+		86E278A219C9190E0032134D /* play_sf_stereo.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = play_sf_stereo.pd; path = SoundScapeTK/pd/play_sf_stereo.pd; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -270,16 +265,13 @@
 		8638E42019048AE8007371CE /* pd */ = {
 			isa = PBXGroup;
 			children = (
-				8611053A1964796900CD810A /* 01.mp3 */,
-				8611053B1964796900CD810A /* 02.mp3 */,
-				8611053C1964796900CD810A /* 03.mp3 */,
+				86E278A019C9190E0032134D /* 01.wav */,
+				8608EC2F19C925D400B2D73B /* 02cymbal.wav */,
+				86E278A119C9190E0032134D /* play_sf_mono.pd */,
+				86E278A219C9190E0032134D /* play_sf_stereo.pd */,
 				869B3FAA1969A44900742F05 /* bpf_demo_ios.pd */,
 				869B3FAB1969A44900742F05 /* demo_synthesizer_ios.pd */,
 				869B3FB1196A0A2D00742F05 /* reverb-echo.pd */,
-				8611053D1964796900CD810A /* iem_mp3.c */,
-				8611053E1964796900CD810A /* iemlib.h */,
-				8611053F1964796900CD810A /* mp3play~.c */,
-				861105401964796900CD810A /* play_sf.pd */,
 				861105411964796900CD810A /* sampler4bank.pd */,
 			);
 			path = pd;
@@ -415,22 +407,22 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				86E278A319C9190E0032134D /* 01.wav in Resources */,
 				8611050A1964785A00CD810A /* kflStatusViewController.xib in Resources */,
+				8608EC3019C925D400B2D73B /* 02cymbal.wav in Resources */,
 				861105091964785A00CD810A /* kflAboutViewController.xib in Resources */,
 				8611050C1964785A00CD810A /* kflScapeManagerViewController.xib in Resources */,
 				861105081964785A00CD810A /* InfoPlist.strings in Resources */,
 				862308AB196C549D0022D8D7 /* icon1024-noALPHA.png in Resources */,
 				860697D81930EE8A000353A3 /* Default-568h@2x.png in Resources */,
-				861105471964796900CD810A /* play_sf.pd in Resources */,
 				869B3FAD1969A44900742F05 /* demo_synthesizer_ios.pd in Resources */,
 				869B3FB2196A0A2D00742F05 /* reverb-echo.pd in Resources */,
 				861105481964796900CD810A /* sampler4bank.pd in Resources */,
 				869B3FAC1969A44900742F05 /* bpf_demo_ios.pd in Resources */,
+				86E278A419C9190E0032134D /* play_sf_mono.pd in Resources */,
 				86DC88B3196C4E7C00ABA100 /* Images-2.xcassets in Resources */,
+				86E278A519C9190E0032134D /* play_sf_stereo.pd in Resources */,
 				862D78A01964958700CA278C /* buffalony.gpson in Resources */,
-				861105421964796900CD810A /* 01.mp3 in Resources */,
-				861105431964796900CD810A /* 02.mp3 in Resources */,
-				861105441964796900CD810A /* 03.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -442,11 +434,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				8611052B1964791B00CD810A /* kflAboutViewController.m in Sources */,
-				861105461964796900CD810A /* mp3play~.c in Sources */,
 				861105361964791B00CD810A /* kflMKMapViewController.m in Sources */,
 				861105381964791B00CD810A /* kflScapeManagerViewController.m in Sources */,
 				8611052E1964791B00CD810A /* kflStatusViewController.m in Sources */,
-				861105451964796900CD810A /* iem_mp3.c in Sources */,
 				861105321964791B00CD810A /* kflLinkedRectangleRegion.m in Sources */,
 				861105391964791B00CD810A /* main.m in Sources */,
 				861105301964791B00CD810A /* kflLAPManager.m in Sources */,

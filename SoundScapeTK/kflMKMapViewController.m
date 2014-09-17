@@ -69,14 +69,9 @@
     _mapView.showsUserLocation = YES;
     
     CLLocationCoordinate2D centerCoodinates;
-//    centerCoodinates.latitude = 42.919679; // 91 lancaster
-//    centerCoodinates.longitude= -78.87174;
 
-    centerCoodinates.latitude = 42.728464; // EMPAC
-    centerCoodinates.longitude= -73.682347;
-
-//    centerCoodinates.latitude = 42.925617; // soldier's
-//    centerCoodinates.longitude= -78.873693;
+    centerCoodinates.latitude = 42.925704; // Soldier's Circle
+    centerCoodinates.longitude= -78.873758;
     
     MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(centerCoodinates, 100, 100);
     [_mapView setRegion:viewRegion animated:YES];
@@ -92,7 +87,7 @@
     }
     [self.regionAnnotationsTgl addTarget:self action:@selector(toggleAnnotations:) forControlEvents:UIControlEventTouchUpInside];
     [self.regionAnnotationsTgl setSelected:NO];
-   // [_mapView addSubview:regionAnnotationsTgl];
+    [_mapView addSubview:regionAnnotationsTgl];
     
     MapKitLog(@"MAP VIEW DID LOAD!");
     MapKitLog(@"regions: %i", [[self.scapeRegions allKeys] count]);

@@ -242,21 +242,6 @@
     [self readScapeFromJSON:self.jsonFilePath];
     // at this this point, this method returns, init returns, and then app delegate returns
     
-    [self.htlpManager.audioFileRouter executeTimedParamChanges];
-}
-
--(BOOL)addSkipBackupAttributeToItemAtURL:(NSURL *)URL
-{
-    DLog(@"path: %@", [URL path]);
-    assert([[NSFileManager defaultManager] fileExistsAtPath: [URL path]]);
-    
-    NSError *error = nil;
-    BOOL success = [URL setResourceValue: [NSNumber numberWithBool: YES]
-                                  forKey: NSURLIsExcludedFromBackupKey error:&error];
-    if(!success){
-        DLog(@"Error excluding %@ from backup %@", [URL lastPathComponent], error);
-    }
-    return success;
 }
 
 #pragma mark GUI update methods
@@ -414,7 +399,6 @@
     CLLocation *newLocation = [locations lastObject];
     LocUpdateLog(@"%f, %f", newLocation.coordinate.latitude, newLocation.coordinate.longitude);
     
-    [self.htlpManager.audioFileRouter executeFundamentalFrequencyChange];
     
     if ((self.bLocationTrackingActive) && (newLocation.coordinate.latitude != 0.0) && (newLocation.coordinate.longitude != 0.0) ) {
     
@@ -557,7 +541,6 @@
     JSONLog(@"%@", jsonPath);
     JSONLog(@"    grab the JSON file; throw error or exit if non-existant.");
     
-    //NSString *path = [[NSBundle mainBundle] pathForResource:jsonFilePath ofType:@"json"];
     NSError *error;
     NSString *stringFromFileAtPath = [[NSString alloc] initWithContentsOfFile:jsonPath
                                                                      encoding:NSUTF8StringEncoding
