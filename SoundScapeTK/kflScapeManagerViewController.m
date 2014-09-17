@@ -561,125 +561,136 @@
         
         JSONLog(@"    read was successful(!), clear any existing data.");
         
-        [lapManager clearLocations];
-        // clearState includes allocating/clearing scapeRegions
-        [htlpManager.scapeRegions removeAllObjects];        // SF HTLP
+        [lapManager clearLocations];                    // reinit managers! - #CLEANME
+        [htlpManager.scapeRegions removeAllObjects];
+
         JSONLog(@"HTLP SF MANAGER: %@\n%@", htlpManager.scapeRegions, htlpManager.scapeSoundfiles);
         
-//        JSONLog(@"    read and convert to temp object.");
-//        JSONLog(@"first off, the string: %@\n\n\n", stringFromFileAtPath);
+        error = nil;
+        NSMutableDictionary *dict = [NSJSONSerialization JSONObjectWithData:jsonData options:kNilOptions error:&error];
         
-//        NSDictionary *dict = [stringFromFileAtPath objectFromJSONString];
-        NSError *localError = nil;
-        NSMutableDictionary *dict = [NSJSONSerialization JSONObjectWithData:jsonData options:kNilOptions error:&localError];
-        
-        if (localError != nil) {
-            DLog(@" --error: %@", [localError description]);
+        if (error != nil) {
+            JSONLog(@" --error: %@", [error description]);
         }
-//        for (NSString *str in [dict allKeys]) {
-//            DLog(@"key: %@", str);
-//        }
-        //        DLog(@"    copy parts of temp object into appropriate data
-        DLog(@"    regions: %@\n\n", [dict objectForKey:@"regions"]);
-        
-//        JSONLog(@"    copy parts of temp object into appropriate data structures.");
-//        JSONLog(@"    regions: %@\n\n", [dict objectForKey:@"regions"]);
+        JSONLog(@"    regions: %@\n\n", [dict objectForKey:@"regions"]);
         
         NSDictionary *rdict = [dict objectForKey:@"regions"];
         NSArray *rdkeys = [rdict allKeys];
-        DLog(@"--- %@", rdkeys);
+        JSONLog(@"--- %@", rdkeys);
         
-        NSNumber *origin_X = [[dict objectForKey:@"origin"] objectAtIndex:0];
-        NSNumber *origin_Y = [[dict objectForKey:@"origin"] objectAtIndex:1];
-        NSNumber *relativeFlag = [[dict objectForKey:@"origin"] objectAtIndex:2];
+        NSNumber *origin_X = [[dict objectForKey:@"origin"] objectForKey:@"lat"];
+        NSNumber *origin_Y = [[dict objectForKey:@"origin"] objectForKey:@"lon"];
+        NSNumber *relativeFlag = [[dict objectForKey:@"origin"] objectForKey:@"rel"];
+        
         float originX = 0.f, originY = 0.f;
         BOOL relFlag = ((relativeFlag == nil) ? FALSE : [relativeFlag boolValue]);
-//        CLLocationCoordinate2D zoomLoc;
         
         JSONLog(@"origin: %@, %@, relative?: %i", origin_X, origin_Y, relFlag);
         
         if ((origin_X != nil) && (origin_Y != nil)) {
-            
-//            zoomLoc.latitude = [origin_X floatValue];
-//            zoomLoc.longitude = [origin_Y floatValue];
             
             if (relFlag) {
                 originX = [origin_X floatValue];
                 originY = [origin_Y floatValue];
             }
         }  
-//         else {
-//            // just grab the first point to use for zoomLoc, leave origin {0.0, 0.0}
-//            JSONLog(@"%@ | sides: %@", [rdict objectForKey:@"0"], [[rdict objectForKey:@"0"] objectForKey:@"sides"]);
-//            if ([[[rdict objectForKey:@"0"] objectForKey:@"sides"] intValue] > 0) {
-//                NSArray *vertexes = [[rdict objectForKey:@"0"] objectForKey:@"vertexes"];
-//                JSONLog(@"vertexes: %@", vertexes);
-//                zoomLoc.latitude = [[[vertexes objectAtIndex:0] objectAtIndex:0] floatValue];
-//                zoomLoc.longitude = [[[vertexes objectAtIndex:0] objectAtIndex:1] floatValue];
-//            } else {
-//                NSArray *cpoints = [[rdict objectForKey:@"0"] objectForKey:@"centrad"];
-//                JSONLog(@"cpts: %@", cpoints);
-//                zoomLoc.latitude = [[cpoints objectAtIndex:0] floatValue];
-//                zoomLoc.longitude = [[cpoints objectAtIndex:1] floatValue];
-//            }
-//        }
-//        JSONLog(@"ORIGIN CHECK: %f, %f, %i | zoomloc: %f, %f", originX, originY, relFlag, zoomLoc.latitude, zoomLoc.longitude);
 
         for (int i=0; i<[rdkeys count]; i++) {
             
             NSNumber *lrid = [rdkeys objectAtIndex:i];
-            JSONLog(@"------------");
-            JSONLog(@"LRID: %i", [lrid intValue]);
-            JSONLog(@"");
+            JSONLog(@"------------\nLRID: %i\n", [lrid intValue]);
             
-            if ([[[rdict objectForKey:lrid] objectForKey:@"sides"] intValue] == 0) {
+            /**
+             *  attack INTEGER: attack
+             *  default = 1000
+             *  units = milliseconds
+             */
+            int attack = 1000;
+            if ([[rdict objectForKey:lrid] objectForKey:@"attack"] != nil) {
+                attack = [[[rdict objectForKey:lrid] objectForKey:@"attack"] intValue];
+                JSONLog(@"reading attack: %i", attack);
+            }
+            /**
+             *  release INTEGER: release
+             *  default = 1000
+             *  units = milliseconds
+             */
+            int release = 1000;
+            if ([[rdict objectForKey:lrid] objectForKey:@"release"] != nil) {
+                release = [[[rdict objectForKey:lrid] objectForKey:@"release"] intValue];
+                JSONLog(@"reading release: %i", release);
+           }
+            
+            
 
-                NSArray *cpoints = [[rdict objectForKey:lrid] objectForKey:@"centrad"];
-                CGPoint ctr = CGPointMake(([[cpoints objectAtIndex:0] floatValue] + originX), ([[cpoints objectAtIndex:1] floatValue] + originY));
+            /**
+             *  LIVES INTEGER: lives
+             *  default = 99
+             */
+            int lives = 99;
+            if ([[rdict objectForKey:lrid] objectForKey:@"lives"] != nil) {
+                lives = [[[rdict objectForKey:lrid] objectForKey:@"lives"] intValue];
+                JSONLog(@"reading lives: %i", lives);
+            }
+            
+            /**
+             *  LABEL STRING: label
+             *  default = @""
+             */
+            NSString *labelString = @"";
+            if ([[rdict objectForKey:lrid] objectForKey:@"label"] != nil) {
+                labelString = [[rdict objectForKey:lrid] objectForKey:@"label"];
+                JSONLog(@"reading label: %@", labelString);
+            }
+            
+            /**
+             *  REGION SPECIFIC PARSING
+             *  INCOMPLETE: Only Circles are fully supported at this time!
+             */
+            
+            if ([[[[rdict objectForKey:lrid] objectForKey:@"shape"] stringValue] compare:@"CIRCLE" options:NSCaseInsensitiveSearch] == NSOrderedSame) {
+                
+                CGPoint ctr = CGPointMake(([[[rdict objectForKey:lrid] objectForKey:@"lat"] floatValue] + originX), ([[[rdict objectForKey:lrid] objectForKey:@"lon"] floatValue] + originY));
+                float radius = [[[rdict objectForKey:lrid] objectForKey:@"lat"] floatValue];
+                
+                /**
+                 *  TODO: perform logical and error testing on lat/lon/radius!
+                 */
+                
                 JSONLog(@"reading ctr x: %f", ctr.x);
                 JSONLog(@"reading ctr y: %f", ctr.y);
-                
-                int atk = 1000;
-                int rls = 1000;
-                
-                if ([[rdict objectForKey:lrid] objectForKey:@"attack"] != nil) {
-                    atk = [[[rdict objectForKey:lrid] objectForKey:@"attack"] intValue];
-                    JSONLog(@"reading attack: %i", atk);
-                }
-                if ([[rdict objectForKey:lrid] objectForKey:@"release"] != nil) {
-                    rls = [[[rdict objectForKey:lrid] objectForKey:@"release"] intValue];
-                    JSONLog(@"reading release: %i", rls);
-               }
-                
-                NSString *paramStringA = nil, *paramStringB = nil;
-                float lowValA = 0.0, lowValB = 0.0;
-                float highValA = 1.0, highValB = 1.0;
-                float rotOffsetB = 0.0;
 
-                int lives = 99;
-                if ([[rdict objectForKey:lrid] objectForKey:@"lives"] != nil) {
-                    lives = [[[rdict objectForKey:lrid] objectForKey:@"lives"] intValue];
-                    JSONLog(@"reading lives: %i", lives);
-                }
                 
-                NSString *labelString = nil;
-                
-                if ([[rdict objectForKey:lrid] objectForKey:@"label"] != nil) {
-                    labelString = [[rdict objectForKey:lrid] objectForKey:@"label"];
-                    JSONLog(@"reading label: %@", labelString);
-                }
-                
-                if ([[[[rdict objectForKey:lrid] objectForKey:@"sfids"] objectAtIndex:0] intValue] == -1) {
+                /**
+                 *  Scanning for @"parameters" is the way to look for parameters.
+                 *  @"parameters" and @"trig" are totally independent!
+                 *
+                 */
+                if ([[rdict objectForKey:lrid] objectForKey:@"parameters"] != nil) {
                 
                     JSONLog(@"reading a PARAM circle region!");
                     
                     kflLinkedParameter *lpA = nil;
                     kflLinkedParameter *lpB = nil;
                     
-                    if (![[[[[rdict objectForKey:lrid] objectForKey:@"params"] objectAtIndex:0] objectAtIndex:0] compare:@"x"] == NSOrderedSame) {
-                        paramStringA = [[[[rdict objectForKey:lrid] objectForKey:@"params"] objectAtIndex:0] objectAtIndex:0];
-                        lowValA = [[[[[rdict objectForKey:lrid] objectForKey:@"params"] objectAtIndex:0] objectAtIndex:1] floatValue];
-                        highValA = [[[[[rdict objectForKey:lrid] objectForKey:@"params"] objectAtIndex:0] objectAtIndex:2] floatValue];
+
+                    /**
+                     *  Defaults for parameter mappigs
+                     */
+                    NSString *paramStringA = nil, *paramStringB = nil;
+                    float lowValA = 0.0, lowValB = 0.0;
+                    float highValA = 1.0, highValB = 1.0;
+                    float rotOffsetB = 0.0;
+
+                    NSArray *radiusArray = [[[rdict objectForKey:lrid] objectForKey:@"params"] objectForKey:@"radius"];
+                    if ((radiusArray != nil) && ([radiusArray count] == 2)) {
+                        
+                        /**
+                         *  TODO: More logic and error checking
+                         */
+                        paramStringA = [radiusArray objectAtIndex:0];
+                        lowValA = [[radiusArray objectAtIndex:1] floatValue];
+                        highValA = [[radiusArray objectAtIndex:2] floatValue];
                         JSONLog(@"reading param string: %@", paramStringA);
                         JSONLog(@"reading low: %f", lowValA);
                         JSONLog(@"reading high: %f", highValA);
@@ -688,74 +699,92 @@
                         lpA = [kflLinkedParameter kflLinkedParameterWithString:@"x" lowMappedVal:0 andHighMappedValue:0];
                     }
 
-                    if (![[[[[rdict objectForKey:lrid] objectForKey:@"params"] objectAtIndex:1] objectAtIndex:0] compare:@"x"] == NSOrderedSame) {
-                        paramStringB = [[[[rdict objectForKey:lrid] objectForKey:@"params"] objectAtIndex:1] objectAtIndex:0];
-                        lowValB = [[[[[rdict objectForKey:lrid] objectForKey:@"params"] objectAtIndex:1] objectAtIndex:1] floatValue];
-                        highValB = [[[[[rdict objectForKey:lrid] objectForKey:@"params"] objectAtIndex:1] objectAtIndex:2] floatValue];
-                        rotOffsetB = [[[[[rdict objectForKey:lrid] objectForKey:@"params"] objectAtIndex:1] objectAtIndex:3] floatValue];
+                    NSArray *thetaArray = [[[rdict objectForKey:lrid] objectForKey:@"params"] objectForKey:@"theta"];
+                    if ((thetaArray != nil) && ([thetaArray count] == 3)) {
+                        
+                        /**
+                         *  TODO: More logic and error checking
+                         */
+                        paramStringB = [thetaArray objectAtIndex:0];
+                        lowValB = [[thetaArray objectAtIndex:1] floatValue];
+                        highValB = [[thetaArray objectAtIndex:2] floatValue];
+                        rotOffsetB = [[thetaArray objectAtIndex:3] floatValue];
                         JSONLog(@"reading param string: %@", paramStringB);
                         JSONLog(@"reading low: %f", lowValB);
                         JSONLog(@"reading high: %f", highValB);
                         lpB = [kflLinkedParameter kflLinkedParameterWithString:paramStringB lowMappedVal:lowValB andHighMappedValue:highValB];
+                    
                     } else {
                         lpB = [kflLinkedParameter kflLinkedParameterWithString:@"x" lowMappedVal:0 andHighMappedValue:0];
                     }
                     
-                    kflLinkedCircleSynthRegion *lcsr = [kflLinkedCircleSynthRegion kflLinkedCircleSynthRegionWithCenter:ctr
-                                                                                                                 radius:[[cpoints objectAtIndex:2] floatValue]
-                                                                                                                  idNum:[lrid intValue]
-                                                                                                                  label:labelString
-                                                                                                           linkedParams:[NSArray arrayWithObjects:lpA, lpB, nil]
-                                                                                                            angleOffset:rotOffsetB
-                                                                                                                 attack:atk
-                                                                                                                release:rls
-                                                                                                                  lives:lives
-                                                                                                                 active:YES
-                                                                                                             toActivate:nil
-                                                                                                               andState:@"ready"];
+                    // scan for linked sound file
+                    NSString *triggerString = [[[rdict objectForKey:lrid] objectForKey:@"trig"] stringValue];
+                    if ((triggerString != nil) && ([triggerString intValue] != -1)) {
 
-                    [htlpManager addRegion:lcsr forIndex:lrid];
-                    [self.mapVC addRegion:lcsr];
-                    
-                } else {
-                    
-                    int numloops = lives;
-                    int rule = kLOOP_CUTOFF;
-                    
-                    JSONLog(@"reading a SF circle region!");
-                    
-                    int sfIndex = [[[[rdict objectForKey:lrid] objectForKey:@"sfids"] objectAtIndex:0] intValue];
-                    
-                    JSONLog(@"sfid:: %i", sfIndex);
-                    
-                    kflLinkedSoundfile *lsf = [htlpManager.scapeSoundfiles objectForKey:[NSString stringWithFormat:@"%i", sfIndex]];
-                    
-                    if (([[rdict objectForKey:lrid] objectForKey:@"looprule"] != nil) && ([[rdict objectForKey:lrid] objectForKey:@"lives"] != nil)) {
                         
-                        numloops = [[[rdict objectForKey:lrid] objectForKey:@"lives"] intValue];
-                        rule = [[[rdict objectForKey:lrid] objectForKey:@"looprule"] intValue];
+                        JSONLog(@"reading a SF circle region!");
                         
+                        /**
+                         *  FINISHRULE BOOL: finishrule
+                         *  default = 0
+                         *  if set, allow sound file to finish playing once triggered
+                         */
+                        int rule = kREGION_FINISH;
+                        if ([[rdict objectForKey:lrid] objectForKey:@"finishrule"] != nil) {
+                            
+                            rule = [[[rdict objectForKey:lrid] objectForKey:@"finishrule"] intValue];
+                            
+                        }
+                        
+                        // scan for file name
+                        kflLinkedSoundfile *lsf;
+                        
+//                        
+//                        [lsf setAttackTime:attack];
+//                        [lsf setReleaseTime:release];
+//                        
+//                        kflLinkedCircleSFRegion *lcr = [kflLinkedCircleSFRegion kflLinkedCircleSFRegionWithCenter:ctr
+//                                                                                                           radius:0.003 //cpoints?
+//                                                                                                            idNum:[lrid intValue]
+//                                                                                                            label:labelString
+//                                                                                                 linkedSoundFiles:[NSArray arrayWithObject:lsf]
+//                                                                                                           attack:attack
+//                                                                                                          release:release
+//                                                                                                            loops:numloops
+//                                                                                                       finishRule:rule
+//                                                                                                            lives:lives
+//                                                                                                           active:YES
+//                                                                                                       toActivate:nil
+//                                                                                                         andState:@"ready"];
+//                        [htlpManager addRegion:lcr forIndex:lrid];
+//                        [self.mapVC addRegion:lcr];
+//                        
+//                        //    error/abort if it doesn't exist!
+//                        // error + logical tests
+//                        // lookup sfid
+//                        // create lcsfr with sfid
                     }
                     
-                    [lsf setAttackTime:atk];
-                    [lsf setReleaseTime:rls];
+                    if ((lpA != nil) || (lpB != nil)) {
+                        
+                        kflLinkedCircleSynthRegion *lcsr = [kflLinkedCircleSynthRegion kflLinkedCircleSynthRegionWithCenter:ctr
+                                                                                                                     radius:radius
+                                                                                                                      idNum:[lrid intValue]
+                                                                                                                      label:labelString
+                                                                                                               linkedParams:[NSArray    arrayWithObjects:lpA, lpB, nil]
+                                                                                                                angleOffset:rotOffsetB
+                                                                                                                     attack:attack
+                                                                                                                    release:release
+                                                                                                                      lives:lives
+                                                                                                                     active:YES
+                                                                                                                 toActivate:nil
+                                                                                                                   andState:@"ready"];
+                        [htlpManager addRegion:lcsr forIndex:lrid];
+                        [self.mapVC addRegion:lcsr];
+                    }
                     
-                    kflLinkedCircleSFRegion *lcr = [kflLinkedCircleSFRegion kflLinkedCircleSFRegionWithCenter:ctr
-                                                                                                       radius:[[cpoints objectAtIndex:2] floatValue]
-                                                                                                        idNum:[lrid intValue]
-                                                                                                        label:labelString
-                                                                                             linkedSoundFiles:[NSArray arrayWithObject:lsf]
-                                                                                                       attack: atk
-                                                                                                      release:rls
-                                                                                                        loops:numloops
-                                                                                                     loopRule:rule
-                                                                                                        lives:lives
-                                                                                                       active:YES
-                                                                                                   toActivate:nil
-                                                                                                     andState:@"ready"];
-                    [htlpManager addRegion:lcr forIndex:lrid];
-                    [self.mapVC addRegion:lcr];
-
+                    
                 }
             }
 //            } else {
