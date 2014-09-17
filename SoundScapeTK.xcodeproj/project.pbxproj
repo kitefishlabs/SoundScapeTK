@@ -20,7 +20,7 @@
 		860697AB1930E92B000353A3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8638E3B6190489A3007371CE /* UIKit.framework */; };
 		860697AC1930E92B000353A3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8638E3B2190489A3007371CE /* Foundation.framework */; };
 		860697D81930EE8A000353A3 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 860697D71930EE8A000353A3 /* Default-568h@2x.png */; };
-		8608EC3019C925D400B2D73B /* 02cymbal.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8608EC2F19C925D400B2D73B /* 02cymbal.wav */; };
+		8608EC3019C925D400B2D73B /* 02_cymbal.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8608EC2F19C925D400B2D73B /* 02_cymbal.wav */; };
 		861105081964785A00CD810A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 861104FE1964785A00CD810A /* InfoPlist.strings */; };
 		861105091964785A00CD810A /* kflAboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 861105001964785A00CD810A /* kflAboutViewController.xib */; };
 		8611050A1964785A00CD810A /* kflStatusViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 861105021964785A00CD810A /* kflStatusViewController.xib */; };
@@ -81,7 +81,7 @@
 /* Begin PBXFileReference section */
 		860697CE1930E92B000353A3 /* SoundScapeTK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SoundScapeTK.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		860697D71930EE8A000353A3 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		8608EC2F19C925D400B2D73B /* 02cymbal.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = 02cymbal.wav; path = SoundScapeTK/pd/02cymbal.wav; sourceTree = SOURCE_ROOT; };
+		8608EC2F19C925D400B2D73B /* 02_cymbal.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = 02_cymbal.wav; path = SoundScapeTK/pd/02_cymbal.wav; sourceTree = SOURCE_ROOT; };
 		861104FF1964785A00CD810A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = SoundScapeTK/en.lproj/InfoPlist.strings; sourceTree = SOURCE_ROOT; };
 		861105011964785A00CD810A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = SoundScapeTK/en.lproj/kflAboutViewController.xib; sourceTree = SOURCE_ROOT; };
 		861105031964785A00CD810A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = SoundScapeTK/en.lproj/kflStatusViewController.xib; sourceTree = SOURCE_ROOT; };
@@ -266,7 +266,7 @@
 			isa = PBXGroup;
 			children = (
 				86E278A019C9190E0032134D /* 01.wav */,
-				8608EC2F19C925D400B2D73B /* 02cymbal.wav */,
+				8608EC2F19C925D400B2D73B /* 02_cymbal.wav */,
 				86E278A119C9190E0032134D /* play_sf_mono.pd */,
 				86E278A219C9190E0032134D /* play_sf_stereo.pd */,
 				869B3FAA1969A44900742F05 /* bpf_demo_ios.pd */,
@@ -409,7 +409,7 @@
 			files = (
 				86E278A319C9190E0032134D /* 01.wav in Resources */,
 				8611050A1964785A00CD810A /* kflStatusViewController.xib in Resources */,
-				8608EC3019C925D400B2D73B /* 02cymbal.wav in Resources */,
+				8608EC3019C925D400B2D73B /* 02_cymbal.wav in Resources */,
 				861105091964785A00CD810A /* kflAboutViewController.xib in Resources */,
 				8611050C1964785A00CD810A /* kflScapeManagerViewController.xib in Resources */,
 				861105081964785A00CD810A /* InfoPlist.strings in Resources */,
