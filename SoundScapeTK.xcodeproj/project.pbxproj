@@ -49,8 +49,8 @@
 		862D789E19648DEA00CA278C /* kflLinkedParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = 862D789D19648DEA00CA278C /* kflLinkedParameter.m */; };
 		862D78A01964958700CA278C /* buffalony.gpson in Resources */ = {isa = PBXBuildFile; fileRef = 862D789F1964958700CA278C /* buffalony.gpson */; };
 		862D78A61964AAEA00CA278C /* kflHTLPManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 862D78A31964AAEA00CA278C /* kflHTLPManager.m */; };
-		869B3FAC1969A44900742F05 /* bpf_empac.pd in Resources */ = {isa = PBXBuildFile; fileRef = 869B3FAA1969A44900742F05 /* bpf_empac.pd */; };
-		869B3FAD1969A44900742F05 /* empac_ios.pd in Resources */ = {isa = PBXBuildFile; fileRef = 869B3FAB1969A44900742F05 /* empac_ios.pd */; };
+		869B3FAC1969A44900742F05 /* bpf_demo_ios.pd in Resources */ = {isa = PBXBuildFile; fileRef = 869B3FAA1969A44900742F05 /* bpf_demo_ios.pd */; };
+		869B3FAD1969A44900742F05 /* demo_synthesizer_ios.pd in Resources */ = {isa = PBXBuildFile; fileRef = 869B3FAB1969A44900742F05 /* demo_synthesizer_ios.pd */; };
 		869B3FB2196A0A2D00742F05 /* reverb-echo.pd in Resources */ = {isa = PBXBuildFile; fileRef = 869B3FB1196A0A2D00742F05 /* reverb-echo.pd */; };
 		86DC88B3196C4E7C00ABA100 /* Images-2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86DC88B2196C4E7C00ABA100 /* Images-2.xcassets */; };
 		86E2789F19C8E79A0032134D /* libpd-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8667378719C683380098D1A2 /* libpd-ios.a */; };
@@ -144,8 +144,8 @@
 		8638E44F19048C1E007371CE /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		8638E45019048C1E007371CE /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		86652094192CF92600EFFA60 /* libpd.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = libpd.xcodeproj; path = "../../tools/pd-for-ios/libpd/libpd.xcodeproj"; sourceTree = "<group>"; };
-		869B3FAA1969A44900742F05 /* bpf_empac.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = bpf_empac.pd; path = SoundScapeTK/bpf_empac.pd; sourceTree = SOURCE_ROOT; };
-		869B3FAB1969A44900742F05 /* empac_ios.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = empac_ios.pd; path = SoundScapeTK/empac_ios.pd; sourceTree = SOURCE_ROOT; };
+		869B3FAA1969A44900742F05 /* bpf_demo_ios.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = bpf_demo_ios.pd; path = SoundScapeTK/bpf_demo_ios.pd; sourceTree = SOURCE_ROOT; };
+		869B3FAB1969A44900742F05 /* demo_synthesizer_ios.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = demo_synthesizer_ios.pd; path = SoundScapeTK/demo_synthesizer_ios.pd; sourceTree = SOURCE_ROOT; };
 		869B3FB1196A0A2D00742F05 /* reverb-echo.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "reverb-echo.pd"; path = "SoundScapeTK/reverb-echo.pd"; sourceTree = SOURCE_ROOT; };
 		86DC88B2196C4E7C00ABA100 /* Images-2.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = "Images-2.xcassets"; path = "SoundScapeTK/Images-2.xcassets"; sourceTree = SOURCE_ROOT; };
 		86DC88B8196C529700ABA100 /* icon1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon1024.png; path = SoundScapeTK/icon1024.png; sourceTree = "<group>"; };
@@ -273,8 +273,8 @@
 				8611053A1964796900CD810A /* 01.mp3 */,
 				8611053B1964796900CD810A /* 02.mp3 */,
 				8611053C1964796900CD810A /* 03.mp3 */,
-				869B3FAA1969A44900742F05 /* bpf_empac.pd */,
-				869B3FAB1969A44900742F05 /* empac_ios.pd */,
+				869B3FAA1969A44900742F05 /* bpf_demo_ios.pd */,
+				869B3FAB1969A44900742F05 /* demo_synthesizer_ios.pd */,
 				869B3FB1196A0A2D00742F05 /* reverb-echo.pd */,
 				8611053D1964796900CD810A /* iem_mp3.c */,
 				8611053E1964796900CD810A /* iemlib.h */,
@@ -422,10 +422,10 @@
 				862308AB196C549D0022D8D7 /* icon1024-noALPHA.png in Resources */,
 				860697D81930EE8A000353A3 /* Default-568h@2x.png in Resources */,
 				861105471964796900CD810A /* play_sf.pd in Resources */,
-				869B3FAD1969A44900742F05 /* empac_ios.pd in Resources */,
+				869B3FAD1969A44900742F05 /* demo_synthesizer_ios.pd in Resources */,
 				869B3FB2196A0A2D00742F05 /* reverb-echo.pd in Resources */,
 				861105481964796900CD810A /* sampler4bank.pd in Resources */,
-				869B3FAC1969A44900742F05 /* bpf_empac.pd in Resources */,
+				869B3FAC1969A44900742F05 /* bpf_demo_ios.pd in Resources */,
 				86DC88B3196C4E7C00ABA100 /* Images-2.xcassets in Resources */,
 				862D78A01964958700CA278C /* buffalony.gpson in Resources */,
 				861105421964796900CD810A /* 01.mp3 in Resources */,
