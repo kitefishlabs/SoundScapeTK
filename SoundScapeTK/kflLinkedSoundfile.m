@@ -31,13 +31,39 @@
         self.assignedSlot = -1;
         self.uniqueID = [[NSDate date] timeIntervalSince1970];
 
-        NSString* documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-        NSURL *url = [NSURL fileURLWithPath:[documentsPath stringByAppendingPathComponent:fileName]];
-        DLog(@"LSF URL: %@: (GOOD:%i)", [url path], [[NSFileManager defaultManager] fileExistsAtPath:[url path]]);
+        NSString *filePathFromAppBundle = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:fileName];
+        NSURL *bundleURL = [NSURL fileURLWithPath:filePathFromAppBundle];
+        NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+        NSURL *docsURL = [NSURL fileURLWithPath:[documentsPath stringByAppendingPathComponent:fileName]];
+        
+        DLog(@"\n\nLSF BUNDLE URL: %@: \n(GOOD:%i)\n\n", [docsURL path], [[NSFileManager defaultManager] fileExistsAtPath:[bundleURL path]]);
+        DLog(@"\n\nLSF DOCS URL:   %@: \n(GOOD:%i)\n\n", [docsURL path], [[NSFileManager defaultManager] fileExistsAtPath:[docsURL path]]);
+        
+        /**
+         *  Attempt to copy file to docs dir if it exists.
+         *  Abort and return nil if there is an error.
+         *  TODO: better error reporting
+         */
+        if ((![[NSFileManager defaultManager] fileExistsAtPath:[docsURL path]]) && ([[NSFileManager defaultManager] fileExistsAtPath:[bundleURL path]])) {
+            // copy from bundle
+            DLog(@"BUNDLE PATH: %@", [bundleURL path]);
+            NSError *error = nil;
+            // copy file from bundle to documents dir
+            
+            [[NSFileManager defaultManager] copyItemAtPath:[bundleURL path] toPath:[docsURL path] error:&error];
+            if (error) {
+                DLog(@"***ERROR: %@", [error description]);
+            }
+            //            // attempt to skip backup to iCloud or some BS that doesn't actually work, so skipping *** follow up on whther this is even necessary
+            //            //BOOL res = [self addSkipBackupAttributeToItemAtURL:[NSURL URLWithString:docPath]];
+            //            //DLog(@"===========RES: %i", res);
+            
+
+        }
         
         NSError *error;
-        AVAudioPlayer *dumbPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
-        if (dumbPlayer == nil) {
+        AVAudioPlayer *dumbPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:docsURL error:&error];
+        if (error) {
             
             NSLog(@"(Dumb) AudioPlayer init error: %@", [error description]);
             return nil;
@@ -62,6 +88,7 @@
     }
     return self;
 }
+
 
 // VERY IMPORTANT THAT THE START TIME TAKES INTO ACCOUNT THE OFFSET HERE
 - (void) markStart {
