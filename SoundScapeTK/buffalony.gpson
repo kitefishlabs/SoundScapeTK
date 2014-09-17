@@ -1,10 +1,10 @@
 {
-    "origin" : [ 42.919674, -78.87145, 0 ],
+    "origin" : { "lat" : 42.919674, "lon" : -78.87145, "rel" : 0 },
     "regions" : {
         "1" : {
             "sides" : 0,
             "lat" : 42.925304,
-            "lon" : -78.873358
+            "lon" : -78.873358,
             "rad" : 0.0002,
             "trig" : "01.wav",
             "attack" : 2000,
@@ -30,10 +30,13 @@
             "lat" : 42.92625704,
             "lon" : -78.874258,
             "rad" : 0.00024,
-            "trig" : 1,
+            "trig" : "-1",
             "attack" : 1000,
             "release" : 1000,
-            "params" : [[ "4_level", 1, 0 ]],
+            "params" : {
+                "radius" : ["4_level", 1, 0 ], 
+                "theta" : ["4_phase", 0, 1, 0.5] 
+            },
             "lives" : 99,
             "finishrule" : -1,
             "label" : "no3"
