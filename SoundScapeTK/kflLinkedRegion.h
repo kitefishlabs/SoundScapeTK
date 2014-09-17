@@ -13,12 +13,10 @@
 
 @interface kflLinkedRegion : NSObject
 
-typedef enum regionRules {
-    kNOLOOP_FINISH = 0,
-    kNOLOOP_CUTOFF = 1,
-    kLOOP_FINISH = 2,
-    kLOOP_CUTOFF = 3
-} kflRegionLoopRule;
+typedef enum finishRules {
+    kREGION_FINISH = 0,
+    kREGION_CUTOFF = 1
+} kflRegionFinishRule;
 
 @property           CGPoint                 center;
 @property (strong)  NSArray                 *idsToActivate;
