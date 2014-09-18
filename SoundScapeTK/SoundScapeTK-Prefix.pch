@@ -44,14 +44,6 @@
 #define LAT_OFFSET (42.728239 - 42.919679) // 91 lancaster
 #define LON_OFFSET (-73.683575 - -78.87174)
 
-//A0
-//#define LAT_OFFSET (42.728159 - 42.919679) // 91 lancaster
-//#define LON_OFFSET (-73.683675 - -78.87174)
-
-// C
-//#define LAT_OFFSET (42.728907 - 42.919679) // 91 lancaster
-//#define LON_OFFSET (-73.683718 - -78.87174)
-
 
 #else
 #define LAT_OFFSET 0.0
@@ -60,9 +52,9 @@
 
 
 // uncomment to debug JSON reads (and, someday, writes)
-#ifndef DEBUG_JSON
-#define DEBUG_JSON
-#endif
+//#ifndef DEBUG_JSON
+//#define DEBUG_JSON
+//#endif
 
 #if defined(DEBUG_JSON) && defined(DEBUG)
 #define JSONLog(...) NSLog(@"%s %@", __PRETTY_FUNCTION__, [NSString stringWithFormat:__VA_ARGS__])
@@ -115,9 +107,9 @@
 #endif
 
 // uncomment to debug HTLP Logs
-//#ifndef DEBUG_AUDIO_ROUTER
-//#define DEBUG_AUDIO_ROUTER
-//#endif
+#ifndef DEBUG_AUDIO_ROUTER
+#define DEBUG_AUDIO_ROUTER
+#endif
 
 #if defined(DEBUG_AUDIO_ROUTER) && defined(DEBUG)
 #define ARLog(...) NSLog(@"%s %@", __PRETTY_FUNCTION__, [NSString stringWithFormat:__VA_ARGS__])

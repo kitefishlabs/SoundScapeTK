@@ -18,7 +18,6 @@
 
 @property (strong, nonatomic)   NSMutableDictionary     *scapeSoundfiles, *scapeRegions;
 @property (strong, nonatomic)   kflAudioFileRouter      *audioFileRouter;
-@property                       float                   lastLatitude;
 
 + (id)sharedManager;
 

@@ -15,7 +15,7 @@
 @implementation kflHTLPManager
 
 @synthesize scapeRegions, scapeSoundfiles; // currentActiveRegions, currentPausedRegions,
-@synthesize audioFileRouter, lastLatitude;
+@synthesize audioFileRouter;
 
 + (id)sharedManager {
     static kflHTLPManager *sharedManager = nil;
@@ -31,7 +31,7 @@
     if (self = [super init]) {
         
         [self reset];
-        self.audioFileRouter = [kflAudioFileRouter audioFileRouterForPatch:@"empac_ios.pd" withNumberOfSlots:4];
+        self.audioFileRouter = [kflAudioFileRouter audioFileRouterForPatch:@"sampler4bank.pd" withNumberOfSlots:4];
     }
     return self;    
 }
@@ -43,7 +43,6 @@
     for (NSString *key in [self.scapeRegions allKeys]) {
         [[self.scapeRegions objectForKey:key] setState:@"ready"];
     }
-    self.lastLatitude = 0.0;
 }
 
 - (void)reset {
@@ -60,7 +59,6 @@
     } else {
         [scapeSoundfiles removeAllObjects];
     }
-    self.lastLatitude = 0.0;
 }
 
 
@@ -70,11 +68,9 @@
 
 - (NSString *)hitTestRegionsWithLocation:(CGPoint)location {
     
-    HTLPLog(@"SCAPE: %@", scapeRegions);
+    HTLPLog(@"SCAPE: %i", [scapeRegions count]);
     HTLPLog(@">>HIT-TESTING LOCATION: %f, %f", location.x, location.y);
-    HTLPLog(@"loc x: %f y: %f last: %f", location.x, location.y, lastLatitude);
-    
-    if (ABS(location.x - lastLatitude) < 0.00001) { return @"Not moving..."; } else { lastLatitude = location.x; }
+    HTLPLog(@"loc x: %f y: %f", location.x, location.y);
     
     NSMutableArray *hitRegions = [NSMutableArray arrayWithCapacity:1];
     
