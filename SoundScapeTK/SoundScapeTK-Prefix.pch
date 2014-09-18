@@ -19,7 +19,7 @@
 //#define MONITOR_PD
 //#define LOG_TO_EMAIL
 //#define SHOW_CIRCLES
-//#define FLY_TO_LOC
+#define FLY_TO_LOC
 
 // Useful Macros.
 // See http://www.cimgf.com/2010/05/02/my-current-prefix-pch-file/ for details.

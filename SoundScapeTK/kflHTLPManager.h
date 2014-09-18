@@ -31,8 +31,6 @@
 
 - (NSString *)hitTestRegionsWithLocation:(CGPoint)location;
 
-- (NSString *) pairForFileName:(NSString *)fileName andRegionID:(int)rID;
-
 - (void) processEnterAndExitEvents:(NSArray *)regionList;
 
 - (void) stopLSFForRegion:(kflLinkedCircleSFRegion *)lcr;

@@ -153,11 +153,6 @@
     return nil;
 }
 
-- (NSString *)pairForFileName:(NSString *)fileName andRegionID:(int)rID {
-    
-    return [NSString stringWithFormat:@"%@-%i", fileName, rID];
-    
-}
 
 - (void)processEnterAndExitEvents:(NSArray *)regionList {
     
@@ -367,7 +362,6 @@
             } else { // else mark region for loop-end-stop
                 lcr.state = @"stopRequested";
                 HTLPLog(@"STOP REQUESTED from toBeDeleted!");
-                [[kflLAPManager sharedManager] recordPauseMarker:@"stop requested"];
             }
         }
     }
