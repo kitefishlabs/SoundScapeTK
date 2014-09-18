@@ -15,7 +15,6 @@
 #import <Foundation/Foundation.h>
 #endif
 
-#define MKMAP
 //#define LOCOFFSET
 //#define MONITOR_PD
 //#define LOG_TO_EMAIL

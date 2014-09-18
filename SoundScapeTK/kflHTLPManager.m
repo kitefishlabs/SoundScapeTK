@@ -166,7 +166,8 @@
     // if only one region, and idnum == -1, this is a signal to EXIT ALL REGIONS!
     // - pause playing ones according to the rule
     // - or allow playing ones to finish!
-    HTLPLog(@" count:: %i || region list: %@", [regionList count], [regionList objectAtIndex:0]);
+    NSLog(@" count:: %i || region list: %@", [regionList count], [regionList objectAtIndex:0]);
+    
     if (([regionList count] == 1) && ([[regionList objectAtIndex:0] intValue] == -1)) {
         
         for (NSString *activeSlot in [audioFileRouter.activeHash allKeys]) {

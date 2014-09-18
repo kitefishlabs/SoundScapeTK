@@ -39,12 +39,8 @@
 @property                       BOOL                    bLocationTrackingActive;
 @property                       float                   timeout, timedelta, runningAcc;
 
-
-#ifdef MKMAP
 @property (strong, nonatomic)   kflMKMapViewController  *mapVC;
-#else
-@property (strong, nonatomic)   kflMapViewController    *mapVC;
-#endif
+
 @property (strong, nonatomic)   kflStatusViewController    *gpsVC;
 
 @property (strong, nonatomic)   IBOutlet UIImageView    *titleCirclesImgView;

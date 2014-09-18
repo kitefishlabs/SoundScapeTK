@@ -65,12 +65,7 @@
             [locationManager setDesiredAccuracy:kCLLocationAccuracyNearestTenMeters];
 //            [locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
         }
-#ifdef MKMAP
         self.mapVC = [[kflMKMapViewController alloc] initWithScapeVC:self];
-#else
-//        self.mapVC = [[kflMapViewController alloc] initWithScapeVC:self];
-#endif
-        
     }
     return self;
 }
@@ -408,10 +403,6 @@
         } else {
             [self.gpsVC.stateLbl setText:@"No fix..."];
         }
-    #ifndef MKMAP
-        [self.mapVC didUpdateLocation:newLocation];
-    #endif
-//        [self.mapVC did :newLocation];
         [self.view setNeedsDisplay];
     }
     [self performSelector:@selector(stopUpdatingLocation:) withObject:@"Timed Out"]; // afterDelay:lapManager.timeout];
