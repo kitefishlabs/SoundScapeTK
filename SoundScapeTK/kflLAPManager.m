@@ -262,22 +262,6 @@
     [pastTrackingMarkers addObject:tm];
 }
 
-- (void) recordHitMarker:(NSString *)annotation {
-    
-}
-
-- (void) recordPlayMarker:(NSString *)annotation {
-    
-}
-
-- (void) recordPauseMarker:(NSString *)annotation {
-    
-}
-
-- (void) recordStopMarker:(NSString *)annotation {
-    
-}
-
 - (NSString *) setupMarkerString {
     NSMutableString *printString = [NSMutableString stringWithString:@""];
     [printString appendString:[NSString stringWithFormat:@"Report generated: %@\n\n", [df stringFromDate:[NSDate dateWithTimeIntervalSinceNow:0]]]];

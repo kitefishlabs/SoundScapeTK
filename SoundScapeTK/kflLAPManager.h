@@ -39,10 +39,6 @@
 - (NSString *)      dumpTrackingMarkers;
 
 - (void)            recordTrackingMarkerWithType:(NSString *)type andArgs:(NSArray *)args;
-- (void)            recordHitMarker:(NSString *)annotation;
-- (void)            recordPlayMarker:(NSString *)annotation;
-- (void)            recordPauseMarker:(NSString *)annotation;
-- (void)            recordStopMarker:(NSString *)annotation;
 - (NSString *)      setupMarkerString;
 
 - (void)            makePrediciton;

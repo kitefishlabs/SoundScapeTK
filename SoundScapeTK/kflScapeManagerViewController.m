@@ -348,7 +348,6 @@
 #endif
 }
 
-//- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
 - (void) locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
 #ifndef FLY_TO_LOC
     LocUpdateLog(@"------- did update!");
@@ -375,16 +374,15 @@
         // CLLocation with offset
         CLLocation *theLoc = [[CLLocation alloc] initWithLatitude:newLat longitude:newLon];
         
-        // record the new location to our log
-        // - check the location before recording!
-        // should be different than the last location
-        
         // most basic check...gotta be better than 10 M
         if (newLocation.horizontalAccuracy <= kCLLocationAccuracyNearestTenMeters) {
 
             CGPoint pt = [lapManager recordLocationWithLocation:theLoc];
             NSLog(@"    RES PT: %f | %f", pt.x, pt.y);
         
+            // record the new location to our log
+            // - check the location before recording!
+            // should be different than the last location
             //CGPoint pt = CGPointMake(newLat, newLocation.coordinate.longitude);
             NSString *hitRes = [htlpManager hitTestRegionsWithLocation:pt];
             
@@ -418,7 +416,7 @@
     } else if (error.code == kCLErrorLocationUnknown) {
         // retry
     } else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error retrieving location" 
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error retrieving location." 
                                                         message:[error description] 
                                                        delegate:nil 
                                               cancelButtonTitle:@"OK" 
