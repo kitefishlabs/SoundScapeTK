@@ -37,7 +37,7 @@
 @property (strong, nonatomic)   kflHTLPManager          *htlpManager;
 
 @property                       BOOL                    bLocationTrackingActive;
-@property                       float                   timeout, timedelta, runningAcc, bubbleCutoff;
+@property                       float                   timeout, timedelta, runningAcc;
 
 
 #ifdef MKMAP

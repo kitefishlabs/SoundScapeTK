@@ -149,29 +149,21 @@
         CLLocationCoordinate2D avgPt;
         
         for (CLLocation *locn in lastNLocationPoints) {
-//            float lat = newLat - locn.coordinate.latitude; // N = +
-//            float lon = newLon - locn.coordinate.longitude; // E = +
-//            float dist = sqrtf((lat*lat)+(lon*lon));
-            
-            //                LocUpdateLog(@"   raw dist: %f (bubble cutoff: %f)", dist, self.bubbleCutoff);
-            
-//            if ( dist < self.bubbleCutoff) { // distance is in degrees!
                 accum_lat += locn.coordinate.latitude;
                 accum_lon += locn.coordinate.longitude;
-                //                    LocUpdateLog(@"+=%f, %f", accum_lat, accum_lon);
                 count++;
             }
         
+        /**
+         *  post=processing : average the last 3 points, not very sophisticated
+         */
         if (count > 0) {
-            
-            
             LocUpdateLog(@"count: %i, totals: %f, %f", count, accum_lat, accum_lon);
             avgPt = CLLocationCoordinate2DMake((accum_lat/(float)count), (accum_lon/(float)count));
             
         }
         CGPoint pt = CGPointMake(avgPt.latitude, avgPt.longitude);
-        LocUpdateLog(@"        AVERAGED POINT: %f, %f", avgPt.latitude, avgPt.longitude);
-        //
+        LocUpdateLog(@"AVERAGED POINT: %f, %f", avgPt.latitude, avgPt.longitude);
         return pt;
     }
     return CGPointMake(0, 0);

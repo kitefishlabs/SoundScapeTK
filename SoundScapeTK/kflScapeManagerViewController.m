@@ -26,7 +26,7 @@
 
 @synthesize appDelegate, notifyLbl, goBtn;
 @synthesize jsonFilePath, locationManager, lapManager, htlpManager;
-@synthesize bLocationTrackingActive, timeout, timedelta, runningAcc, bubbleCutoff;
+@synthesize bLocationTrackingActive, timeout, timedelta, runningAcc;
 @synthesize titleCirclesImgView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -40,8 +40,6 @@
         timeout = 0.75;             // time to wait for a location fix after requesting it
         timedelta = 1.0;            // time interval between location requests
         runningAcc = 0.0;           // var for tracking the running avg. of the accuracy
-
-        bubbleCutoff = 0.00009;     //
         
         for (int i=0; i<NPTS; i++) {    //
             runningAvgs[i] = 0.0;
