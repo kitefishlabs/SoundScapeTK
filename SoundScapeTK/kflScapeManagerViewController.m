@@ -278,7 +278,7 @@
 
 - (void)backgroundUpdate
 {
-    DLog(@"check loc. active flag: %i", self.bLocationTrackingActive);
+    //DLog(@"check loc. active flag: %i", self.bLocationTrackingActive);
     if (self.bLocationTrackingActive) {
         [self updateLocation];
     LocUpdateLog(@"check that loc. tracking is active: %i", self.bLocationTrackingActive);

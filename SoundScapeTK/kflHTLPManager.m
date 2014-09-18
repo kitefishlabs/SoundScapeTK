@@ -124,21 +124,24 @@
             }
         }
     }
-    HTLPLog(@"hit regions count: %i", [hitRegions count]);
+    HTLPLog(@"hit regions: count: %i", [hitRegions count]);
+    for (kflLinkedCircleSFRegion *r in hitRegions) {
+        NSLog(@"hr: %@, %@, %i", r, [[r.linkedSoundfiles objectAtIndex:0] fileName], r.idNum);
+    }
     if ([hitRegions count] > 0) {
-        
+        HTLPLog(@"ACTIVE HASH AFTER hit----: %@", audioFileRouter.activeHash);
         [self processEnterAndExitEvents:hitRegions];
         return [NSString stringWithFormat:@"HIT(S): %i", [hitRegions count]];
-
+        
     } else { // nothing hit!
         
-        // if there are no hit regions, then process-enter-and-exit events with a dummy event    
-        HTLPLog(@"miss...");
+        HTLPLog(@"ACTIVE HASH AFTER miss----: %@", audioFileRouter.activeHash);
+        // if there are no hit regions, then process-enter-and-exit events with a dummy event
         [self processEnterAndExitEvents:[NSArray arrayWithObject:[NSNumber numberWithInt:-1]]];
         return @"MISS!";
-        
     }
     return nil;
+
 }
 
 
@@ -169,18 +172,17 @@
 
             // if region.rule == 1
             int finishrule = lcr.finishRule;
-            HTLPLog(@"%i", finishrule);
-            if ((finishrule & 1) == 1) { // cutoff bit set
+            HTLPLog(@"fr: %i", finishrule);
+            if ((finishrule & 1) == 0) { // let-finish bit IS NOT set
 
                 // now stop it (also removes from activeHash!
                 DLog(@"\nSTOP from COMPLETE MISS!\nrid: %@ | %i | %i", lcr, lcr.idNum, lsf.idNum);
                 lcr.state = @"stop";
                 [self scheduleLSFToStopForRegion:lcr];
                 
-            } else if (([lcr.state compare:@"playing"] == NSOrderedSame)) { // else mark region for loop-end-stop -- cutoff bit not set; allow sound to finish
+            } else if (([lcr.state compare:@"playing"] == NSOrderedSame)) { // else mark region for loop-end-stop -- let-finish bit IS set; allow sound to finish
                 lcr.state = @"stopRequested";
                 DLog(@"STOP REQUESTED from COMPLETE MISS!");
-                //[[LAPManager sharedManager] recordPauseMarker:@"stop signalled"];
             }
         }
         // update ALL the synth regions
@@ -434,12 +436,11 @@
             
             // audio file router sets state to @"playing"
             [[kflLAPManager sharedManager] recordTrackingMarkerWithType:@"PLAY" andArgs:[NSArray arrayWithObject:[NSNumber numberWithInt:lsf.idNum]]];
-            float offset = [self.audioFileRouter playLinkedSoundFile:lsf
-                                                      forRegion:lcsfr
-                                                       atVolume:MAX((1.0 - lcsfr.internalDistance),0.0)];
-            //            [NSThread sleepForTimeInterval:()];
-            
-            
+            [self.audioFileRouter playLinkedSoundFile:lsf
+                                            forRegion:lcsfr
+                                             atVolume:MAX((1.0 - lcsfr.internalDistance),0.0)];
+            // DON't NEED TO KNOW OFFSET
+            // not actually keeping this thread alive!
         }
         
         dispatch_async(dispatch_get_main_queue(), ^{
