@@ -21,7 +21,10 @@
 - (void)        resetRouter;
 
 - (float)       playLinkedSoundFile:(kflLinkedSoundfile *)lsf forRegion:(kflLinkedCircleSFRegion *)lcr atVolume:(float)vol;
-- (void)        stopLinkedSoundFile:(kflLinkedSoundfile *)lsf forRegion:(kflLinkedCircleSFRegion *)lcr;
+- (void)        stopLinkedSoundFileForRegion:(kflLinkedCircleSFRegion *)lcr;
+- (void)        stopLinkedSoundFileForTimer:(NSTimer *)timer;
+- (void)        resetLinkedSoundFileForRegion:(kflLinkedCircleSFRegion *)lcr;
+- (void)        resetLinkedSoundFileForTimer:(NSTimer *)timer;
 
 - (void)        openSFilePath:(NSString *)sfilePath inSlot:(int)slot withOnsetTime:(int)onset;
 

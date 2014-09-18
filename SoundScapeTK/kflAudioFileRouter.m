@@ -13,12 +13,6 @@
 #define SLOTS 4
 #define PI 3.141592653589793
 #define TWO_PI (2.0*PI)
-#define SECONDS_IN_DAY 86400.0
-#define TIMEZONE_OFFSET 0.0 //2160.0
-
-#define LOFREQ 7.83
-#define HIFREQ 14.3
-
 
 //@interface kflAudioFileRouter () {}
 //@end
@@ -89,30 +83,132 @@
     return [NSString stringWithFormat:@"%i", rID];
 }
 
-- (void)stopLinkedSoundFile:(kflLinkedSoundfile *)lsf forRegion:(kflLinkedCircleSFRegion *)lcr {
+- (void)stopLinkedSoundFileForRegion:(kflLinkedCircleSFRegion *)lcr {
     
-    DLog(@"stop SF with ID: %i", lsf.idNum);
+    kflLinkedSoundfile *lsf = [lcr.linkedSoundfiles objectAtIndex:0];
     
-    int slot = lsf.assignedSlot;
-    if (slot > -1) {
-        [PdBase sendMessage:@"stop" withArguments:nil toReceiver:[NSString stringWithFormat:@"%i_in", slot]];
+    if ([lcr.state compare:@"stop"] == NSOrderedSame) {
+        
+        [lsf markOffset];
+        
+        if (lsf.pausedOffset > (lsf.length - 1)) {
+            [lsf clearOffset];
+        }
+        
+        DLog(@"stopping SF with ID: %i", lsf.idNum);
+        int slot = lsf.assignedSlot;
+        if (slot > -1) {
+            [PdBase sendMessage:@"stop" withArguments:nil toReceiver:[NSString stringWithFormat:@"%i_in", slot]];
+        }
+        // mark the offset for a paused sound
+        [[lcr.linkedSoundfiles objectAtIndex:0] setUniqueID:0]; // invalidate the shit out of it
+        // @@@ have to remove the file from the active hash!
+        DLog(@"STATE for region ID %i -- %@ ----> fadingOut", lcr.idNum, lcr.state);
+        lcr.state = @"fadingOut";
+        
+        NSLog(@"is validated?: %i", lcr.stopTimer.isValid);
+        if ([lcr.stopTimer isValid]) {
+            NSLog(@"stop region: %@ (%i)", lcr.stopTimer, lcr.stopTimer.isValid);
+            [lcr.stopTimer invalidate];
+            NSLog(@"is validated?: %i", lcr.stopTimer.isValid);
+            lcr.stopTimer = nil;
+        }
+    } else {
+        NSLog(@"UH-OH! not coming from a playing state! stop region: %@ (%i, %@)", lcr, lcr.idNum, lcr.state);
+        //        if (lcr.stopTimer != nil) {
+        //            [lcr.stopTimer invalidate];
+        //            lcr.stopTimer = nil;
+        //        }
     }
-    // mark the offset for a paused sound
+}
+
+- (void)stopLinkedSoundFileForTimer:(NSTimer *)timer {
     
+    kflLinkedCircleSFRegion *lcr = [[timer userInfo] objectForKey:@"lcr"];
+    kflLinkedSoundfile *lsf = [lcr.linkedSoundfiles objectAtIndex:0];
     
-    // @@@ have to remove the file from the active hash!
-    DLog(@"removing slot: %i from active hash", slot);
-    [self.activeHash removeObjectForKey:[NSString stringWithFormat:@"%i", slot]];
+    if ([lcr.state compare:@"playing"] == NSOrderedSame) {
+        
+        [lsf clearOffset];
+        [lsf clearStart];
+        
+        DLog(@"stopping SF with TIMER with ID: %i", lsf.idNum);
+        int slot = lsf.assignedSlot;
+        if (slot > -1) {
+            [PdBase sendMessage:@"stop" withArguments:nil toReceiver:[NSString stringWithFormat:@"%i_in", slot]];
+        }
+        // mark the offset for a paused sound
+        [[lcr.linkedSoundfiles objectAtIndex:0] setUniqueID:0]; // invalidate the shit out of it
+        // @@@ have to remove the file from the active hash!
+        DLog(@"STATE for region ID %i -- %@ ----> fadingOut", lcr.idNum, lcr.state);
+        lcr.state = @"fadingOut";
+        
+        NSLog(@"is validated?: %i", lcr.stopTimer.isValid);
+        if ([lcr.stopTimer isValid]) {
+            NSLog(@"stop timer: %@ (%i)", lcr.stopTimer, lcr.stopTimer.isValid);
+            [lcr.stopTimer invalidate];
+            NSLog(@"is validated?: %i", lcr.stopTimer.isValid);
+            lcr.stopTimer = nil;
+        }
+        
+        NSDictionary *dict = [NSDictionary dictionaryWithObject:lcr forKey:@"lcr"];
+        NSLog(@"schedule timer for reset %f seconds from now.", (lsf.releaseTime * 0.001));
+        [NSTimer scheduledTimerWithTimeInterval:(lsf.releaseTime * 0.001) target:self selector:@selector(resetLinkedSoundFileForTimer:) userInfo:dict repeats:NO];
+    } else {
+        NSLog(@"UH-OH! not coming from a playing state! stop TIMER: %@ (%i)", lcr.stopTimer, lcr.stopTimer.isValid);
+        //        if (lcr.stopTimer != nil) {
+        //            [lcr.stopTimer invalidate];
+        //            lcr.stopTimer = nil;
+        //        }
+    }
+}
+
+- (void)resetLinkedSoundFileForRegion:(kflLinkedCircleSFRegion *)lcr {
     
-    [self freeSlotForLSF:lsf];
+    if ([lcr.state compare:@"fadingOut"] == NSOrderedSame) {
+        kflLinkedSoundfile *lsf = [lcr.linkedSoundfiles objectAtIndex:0];
+        int slot = lsf.assignedSlot;
+        
+        DLog(@"removing slot: %i from active hash", slot);
+        [self.activeHash removeObjectForKey:[NSString stringWithFormat:@"%i", slot]];
+        DLog(@"STATE for region ID %i -- %@ ----> ready", lcr.idNum, lcr.state);
+        [self freeSlotForLSF:lsf];
+        lcr.state = @"ready";
+        DLog(@"state is now: %@", lcr.state);
+    } else {
+        NSLog(@"UH-OH! not coming from a fadingOut state! stop region: %@ (%i, %@)", lcr, lcr.idNum, lcr.state);
+        //        if (lcr.stopTimer != nil) {
+        //            NSLog(@"have to invalidate, too!");
+        //            [lcr.stopTimer invalidate];
+        //            lcr.stopTimer = nil;
+        //        }
+    }
+}
+
+- (void)resetLinkedSoundFileForTimer:(NSTimer *)timer {
     
-    DLog(@"STATE for region ID %i -- %@ ----> ready", lcr.idNum, lcr.state);
-    lcr.state = @"ready";
-    DLog(@"state is now: %@", lcr.state);
-//    DLog(@"adding slot %i back to iPool.", slot);
-////    [self.iPool addObject:[NSNumber numberWithInt:slot]];
-//    // should now have < SLOTS in the active hash
-//    DLog(@"after NOT adding back to ipool:\n%@\n%@", self.iPool, self.activeHash);
+    kflLinkedCircleSFRegion *lcr = [[timer userInfo] objectForKey:@"lcr"];
+    kflLinkedSoundfile *lsf = [lcr.linkedSoundfiles objectAtIndex:0];
+    
+    if ([lcr.state compare:@"fadingOut"] == NSOrderedSame) {
+        
+        int slot = lsf.assignedSlot;
+        
+        DLog(@"removing slot: %i from active hash", slot);
+        [self.activeHash removeObjectForKey:[NSString stringWithFormat:@"%i", slot]];
+        DLog(@"STATE for region ID %i -- %@ ----> ready", lcr.idNum, lcr.state);
+        [self freeSlotForLSF:lsf];
+        lcr.state = @"ready";
+        DLog(@"state is now: %@", lcr.state);
+        
+    } else {
+        NSLog(@"UH-OH! not coming from a fadingOut state! stop TIMER: %@ (%i)", lcr.stopTimer, lcr.stopTimer.isValid);
+        //        if (lcr.stopTimer != nil) {
+        //            NSLog(@"have to invalidate, too!");
+        //            [lcr.stopTimer invalidate];
+        //            lcr.stopTimer = nil;
+        //        }
+    }
 }
 
 - (void)adjustAttackForLSF:(kflLinkedSoundfile *)lsf to:(int)attack {

@@ -104,9 +104,9 @@
 #endif
 
 // uncomment to debug HTLP Logs
-//#ifndef DEBUG_HTLP
-//#define DEBUG_HTLP
-//#endif
+#ifndef DEBUG_HTLP
+#define DEBUG_HTLP
+#endif
 
 #if defined(DEBUG_HTLP) && defined(DEBUG)
 #define HTLPLog(...) NSLog(@"%s %@", __PRETTY_FUNCTION__, [NSString stringWithFormat:__VA_ARGS__])

@@ -33,9 +33,8 @@
 
 - (void) processEnterAndExitEvents:(NSArray *)regionList;
 
-- (void) stopLSFForRegion:(kflLinkedCircleSFRegion *)lcr;
+- (void)scheduleLSFToStopForRegion:(kflLinkedCircleSFRegion *)lcr;
 
-- (void) scheduleLSFToPlay:(kflLinkedSoundfile *)lsf forRegion:(kflLinkedCircleSFRegion *)lcr afterDelay:(NSTimeInterval)delay;
-//- (void) cancelLSF:(NSNumber *)idNum afterDelay:(NSTimeInterval)delay;
+- (void) scheduleLSFToPlayForRegion:(kflLinkedCircleSFRegion *)lcsfr afterDelay:(NSTimeInterval)delay;
 
 @end

@@ -8,7 +8,6 @@
 
 #import "kflHTLPManager.h"
 #import "PdBase.h"
-#import "kflLinkedCircleRegion.h"
 
 #define PI 3.141592653589793
 #define TWO_PI (2.0*PI)
@@ -64,13 +63,6 @@
     self.lastLatitude = 0.0;
 }
 
-//- (void)addCircRegion:(kflLinkedCircleSFRegion *)lcr forIndex:(NSNumber *)index {
-//    [self.scapeRegions setObject:lcr forKey:index];
-//}
-//
-//- (void)addRectRegion:(kflLinkedRectangleRegion *)lrr forIndex:(NSNumber *)index {
-//    [self.scapeRegions setObject:lrr forKey:index];
-//}
 
 -(void) addRegion:(kflLinkedRegion *)lr forIndex:(NSNumber *)index {
     [self.scapeRegions setObject:lr forKey:index];
@@ -145,8 +137,8 @@
     } else { // nothing hit!
         
         // if there are no hit regions, then process-enter-and-exit events with a dummy event    
-        [self processEnterAndExitEvents:[NSArray arrayWithObject:[NSNumber numberWithInt:-1]]];
         HTLPLog(@"miss...");
+        [self processEnterAndExitEvents:[NSArray arrayWithObject:[NSNumber numberWithInt:-1]]];
         return @"MISS!";
         
     }
@@ -163,9 +155,13 @@
     // - or allow playing ones to finish!
     NSLog(@" count:: %i || region list: %@", [regionList count], [regionList objectAtIndex:0]);
     
-    if (([regionList count] == 1) && ([[regionList objectAtIndex:0] intValue] == -1)) {
+    if ([[regionList objectAtIndex:0] respondsToSelector:@selector(idNum)]) {
+        HTLPLog(@" count:: %i || id num: %i", [regionList count], [[regionList objectAtIndex:0] idNum]);
+    }
+    if (([regionList count] == 1) && (![[regionList objectAtIndex:0] respondsToSelector:@selector(idNum)])) {
         
-        for (NSString *activeSlot in [audioFileRouter.activeHash allKeys]) {
+        // read the list of ACTIVE regions and schedule stop for all of them
+        for (NSString *activeSlot in [self.audioFileRouter.activeHash allKeys]) {
             HTLPLog(@"region ID: %@", activeSlot);
             
             kflLinkedSoundfile *lsf = [self.audioFileRouter.activeHash objectForKey:activeSlot];
@@ -176,42 +172,30 @@
             //      else do nothing
 
             // if region.rule == 1
-            int looprule = lcr.finishRule;
-            HTLPLog(@"%i", looprule);
-            if ((looprule & 1) == 1) { // cutoff bit set
-
-                // @@@ add this region/lsf to the list of paused regions with it's time offset
-//                NSDate *now = [NSDate dateWithTimeIntervalSinceNow:0];
-                
-                // activeHash is the list of active regions
-                // keys are filename/regionid pairs
-                
-                // pull the end time from the pair and calculate delta
-//                NSDate *then = lsf.startTime;
-//                NSTimeInterval delta = [now timeIntervalSinceDate:then];
-//                DLog(@"now: %@ - then: %@ = delta: %f", now, then, delta);
-                
-                // ===== set offset time and pause this region's LSF
+            int finishrule = lcr.finishRule;
+            HTLPLog(@"%i", finishrule);
+            if ((finishrule & 1) == 1) { // cutoff bit set
 
                 // now stop it (also removes from activeHash!
                 DLog(@"\nSTOP from COMPLETE MISS!\nrid: %@ | %i | %i", lcr, lcr.idNum, lsf.idNum);
                 lcr.state = @"stop";
-                [self stopLSFForRegion:lcr];
+                [self scheduleLSFToStopForRegion:lcr];
                 
-            } else { // else mark region for loop-end-stop -- cutoff bit not set; allow sound to finish
+            } else if (([lcr.state compare:@"playing"] == NSOrderedSame)) { // else mark region for loop-end-stop -- cutoff bit not set; allow sound to finish
                 lcr.state = @"stopRequested";
                 DLog(@"STOP REQUESTED from COMPLETE MISS!");
-//                [[LAPManager sharedManager] recordPauseMarker:@"stop signalled"];
+                //[[LAPManager sharedManager] recordPauseMarker:@"stop signalled"];
             }
-        } // end audio file for loop
-        
+        }
+        // update ALL the synth regions
+        // - set ALL *_level params to 0
         
         for (NSString *lrkey in self.scapeRegions) {
-            NSLog(@"%@", lrkey);
+            HTLPLog(@"%@", lrkey);
             id region = [self.scapeRegions objectForKey:lrkey];
             if ([region isKindOfClass:[kflLinkedCircleSynthRegion class]]) {
                 kflLinkedCircleSynthRegion *lcsr = region;
-                NSLog(@"lcsr: %@", lcsr);
+                HTLPLog(@"lcsr: %@", lcsr);
                 NSArray *params = lcsr.linkedParameters;
                 for (kflLinkedParameter *param in params) {
                     // adjust it to 0.0 if it's a _level pararam
@@ -224,12 +208,15 @@
                 lcsr.state = @"ready";
             }
         }
-        NSLog(@"***MASTER VOLUME ---> 0.0!");
+        // set master volume to 0 (global mute)
+        HTLPLog(@"***MASTER VOLUME ---> 0.0!");
         [PdBase sendFloat:0.0 toReceiver:@"_master_volume"];
         
         // empty out region list and return????
         
     } else {
+        
+        // positive trigger events, handle the regions in the list!
         
         for (id region in regionList) {
             
@@ -256,8 +243,7 @@
                         int foundSlot = [self.audioFileRouter assignSlotForLSF:lsf];
                         HTLPLog(@"assigned to slot: %i", foundSlot);
                         if (foundSlot > -1) {
-                            [self scheduleLSFToPlay:lsf
-                                          forRegion:lcr afterDelay:0.f];
+                            [self scheduleLSFToPlayForRegion:lcr afterDelay:0.f];;
                         }
                         
                         // ===== scheduleLSFToPlay should cause audiofilerouter to put this LSF/region into an active hash
@@ -308,12 +294,13 @@
             }
         }
         
- // done processing region list...
-        
+        /**
+         *  Step 3: done processing region list, now filter deactivated regions...
+         */
         
         NSMutableArray *lsfsNotInLastRegionHit = [NSMutableArray arrayWithCapacity:1];
         
-        HTLPLog(@"curr. active hash (before set-differencing): %@", audioFileRouter.activeHash);
+        HTLPLog(@"curr. active hash (before set-differencing): %@", self.audioFileRouter.activeHash);
 
         NSMutableArray *lcrsLSFs = [NSMutableArray arrayWithCapacity:1];
         
@@ -340,8 +327,6 @@
                 [lsfsNotInLastRegionHit addObject:activeLSF];
             }
         }
-        //DLog(@"curr. REGIONs' LSFs list (after set-differencing and removal(s)): %@", lcrsLSFs);
-
         
         HTLPLog(@"to be deleted: %@", lsfsNotInLastRegionHit);
         for (kflLinkedSoundfile *lsf in lsfsNotInLastRegionHit) {
@@ -357,7 +342,7 @@
 
                 HTLPLog(@"STOP from toBeDeleted!   LCR: %@", lcr);
                 lcr.state = @"stop";
-                [self stopLSFForRegion:lcr];
+                [self scheduleLSFToStopForRegion:lcr];
                 
             } else { // else mark region for loop-end-stop
                 lcr.state = @"stopRequested";
@@ -367,32 +352,59 @@
     }
 }
 
-- (void)stopLSFForRegion:(kflLinkedCircleSFRegion *)lcr {
+- (void)scheduleLSFToStopForRegion:(kflLinkedCircleSFRegion *)lcr {
     
     kflLinkedSoundfile *lsf = [lcr.linkedSoundfiles objectAtIndex:0];
     
-    HTLPLog(@"stop this LSF: %@", lsf);
+    NSLog(@"stop this LSF: %@", lsf);
+    
+    __block UIBackgroundTaskIdentifier bgTaskID = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler: ^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (bgTaskID != UIBackgroundTaskInvalid)
+            {
+                [[UIApplication sharedApplication] endBackgroundTask:bgTaskID];
+                bgTaskID = UIBackgroundTaskInvalid;
+            }
+        });
+    }];
     
     if ([lcr.state compare:@"stop"] == NSOrderedSame) {
-        
-        HTLPLog(@"stop region with lsfID: %i", lcr.idNum);
-        [audioFileRouter stopLinkedSoundFile:lsf forRegion:lcr];
         [lsf markOffset];
-        lcr.state = @"ready";
-        HTLPLog(@"set paused offset: %f (ID: %i)", lsf.pausedOffset, lsf.idNum);
-        
     } else if ([lcr.state compare:@"stopRequested"] == NSOrderedSame) {
-        
-        [audioFileRouter stopLinkedSoundFile:lsf forRegion:lcr];
         // mark lsf's offset as current time - start time
         [lsf clearOffset];
     }
-    HTLPLog(@"ACTIVE HASH AFTER STOP: %@", audioFileRouter.activeHash);
+    
+    DLog(@" ==== schedule LSF to stop...");
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        //                [[LAPManager sharedManager] recordTrackingMarkerWithType:@"PLAY" andArgs:[NSArray arrayWithObject:[NSNumber numberWithInt:lsf.idNum]]];
+        NSLog(@"stop region with lsfID: %i", lcr.idNum);
+        [self.audioFileRouter stopLinkedSoundFileForRegion:lcr];
+        
+        [NSThread sleepForTimeInterval:(lsf.releaseTime * 0.001)];
+        
+        [self.audioFileRouter resetLinkedSoundFileForRegion:lcr];
+        NSLog(@"set paused offset: %f (ID: %i)", lsf.pausedOffset, lsf.idNum);
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (bgTaskID != UIBackgroundTaskInvalid)
+            {
+                // if you don't call endBackgroundTask, the OS will exit your app.
+                [[UIApplication sharedApplication] endBackgroundTask:bgTaskID];
+                bgTaskID = UIBackgroundTaskInvalid;
+            }
+        });
+    });
+    
+    HTLPLog(@"ACTIVE HASH AFTER STOP: %@", self.audioFileRouter.activeHash);
     HTLPLog(@"LCR state: %@", lcr.state);
 }
 
 
-- (void) scheduleLSFToPlay:(kflLinkedSoundfile *)lsf forRegion:(kflLinkedCircleSFRegion *)lcr afterDelay:(NSTimeInterval)delay {
+- (void) scheduleLSFToPlayForRegion:(kflLinkedCircleSFRegion *)lcsfr afterDelay:(NSTimeInterval)delay {
+    
+    kflLinkedSoundfile *lsf = [lcsfr.linkedSoundfiles objectAtIndex:0];
     
     __block UIBackgroundTaskIdentifier bgTaskID = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler: ^{
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -405,77 +417,33 @@
     }];
     
     DLog(@" ==== schedule LSF to play...");
-    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
         // HERE IS WHERE THE PLAYBACK LOGIC IS HOOKED IN...
         
-        float duration = lsf.length;
+        //        float duration = lsf.length;
         [NSThread sleepForTimeInterval:delay];
         
         // read out the lsf's current id number
         lsf.uniqueID = [[NSDate date] timeIntervalSince1970];
         int currentID = lsf.uniqueID;
         
-        HTLPLog(@"generating unique ID: %i for LSF ID: %i", currentID, lsf.idNum);
+        NSLog(@"generating unique ID: %i for LSF ID: %i", currentID, lsf.idNum);
         
         // default is to play the sound file until told otherwise or until max num. of loops have played
-        for (int i=0; i<lcr.numLoops; i++) {
-
-            HTLPLog(@"testing unique ID: %i for LSF ID: %i -- should not be equal if invalidated!", currentID, lsf.uniqueID);
-            // if state == stopRequested, we stop it at the end of its duration (several loops might have already played)
-            if (([lcr.state compare:@"stopRequested"] == NSOrderedSame) && (lsf.assignedSlot > -1) && (currentID == lsf.uniqueID)) {
-            
-//                [[LAPManager sharedManager] recordPauseMarker:@"STOP REQUESTED SIGNAL --> PAUSED"];
-                break; // break out of the for loop
-            
-            } else if (([lcr.state compare:@"ready"] == NSOrderedSame) && (lsf.assignedSlot > -1) && (currentID == lsf.uniqueID)) {
-                
-                lcr.numLives -= 1;
-            
-                // audio file router sets state to @"playing"
-                [[kflLAPManager sharedManager] recordTrackingMarkerWithType:@"PLAY" andArgs:[NSArray arrayWithObject:[NSNumber numberWithInt:lsf.idNum]]];
-                float offset = [audioFileRouter playLinkedSoundFile:lsf
-                                                          forRegion:lcr
-                                                           atVolume:MAX((1.0 - lcr.internalDistance),0.0)];
-                if (offset >= 0.) {
-                    HTLPLog(@"async play command, sleep for: %f", (duration-offset));
-                    [NSThread sleepForTimeInterval:(duration-offset)]; // sleep for the duration less the offset
-                }
-            
-            // already playing (and looping), so play again!
-                
-            } else if (([lcr.state compare:@"playing"] == NSOrderedSame) && (lsf.assignedSlot > -1) && (currentID == lsf.uniqueID)) {
-                
-                HTLPLog(@"inside playing condition.");
-                
-                lcr.numLives -= 1;
-                lsf.pausedOffset = 0.0; // just in case, should already be set!
-                
-                // audio file router sets state to @"playing" (keeps it at @"playing", actually) OFFSET HAD BETTER == 0 on a loop iteration after the first!
-                [[kflLAPManager sharedManager] recordTrackingMarkerWithType:@"PLAY" andArgs:[NSArray arrayWithObject:[NSNumber numberWithInt:lsf.idNum]]];
-                float offset = [audioFileRouter playLinkedSoundFile:lsf
-                                                          forRegion:lcr
-                                                           atVolume:MAX((1.0 - lcr.internalDistance),0.0)];
-                HTLPLog(@"loop-sleep offset should be zero: %f", offset);
-                [NSThread sleepForTimeInterval:duration]; // sleep for the duration less the offset
-            } else {
-                HTLPLog(@"BREAK");
-                break;
-            }
-            DLog(@"just inside the for-loop");
-        }
         
-        if ((lsf.assignedSlot > -1) && (currentID == lsf.uniqueID)) {
+        if (([lcsfr.state compare:@"ready"] == NSOrderedSame) && (lsf.assignedSlot > -1) && (currentID == lsf.uniqueID)) {
             
-            HTLPLog(@"Last time!");
-            // last time through, we will get here and can stop the player here at the end of the last loop
-            lcr.state = @"stop";
+            lcsfr.numLives -= 1;
             
-            // audioFileRouter will clean up!
-            [audioFileRouter stopLinkedSoundFile:lsf forRegion:lcr];
-    //        [[LAPManager sharedManager] recordTrackingMarkerWithType:@"STOP (from loop clean up)" andArgs:[NSArray arrayWithObject:[NSNumber numberWithInt:lsf.idNum]]];
-            // we have to stop the LSF and clean up if we reach this point
+            // audio file router sets state to @"playing"
+            [[kflLAPManager sharedManager] recordTrackingMarkerWithType:@"PLAY" andArgs:[NSArray arrayWithObject:[NSNumber numberWithInt:lsf.idNum]]];
+            float offset = [self.audioFileRouter playLinkedSoundFile:lsf
+                                                      forRegion:lcsfr
+                                                       atVolume:MAX((1.0 - lcsfr.internalDistance),0.0)];
+            //            [NSThread sleepForTimeInterval:()];
+            
+            
         }
         
         dispatch_async(dispatch_get_main_queue(), ^{
