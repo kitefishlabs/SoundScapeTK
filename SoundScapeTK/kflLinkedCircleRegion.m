@@ -44,6 +44,7 @@
         lcr.numLoops = loops;
         lcr.state = state;
         lcr.anchor = CLLocationCoordinate2DMake(center.x, center.y);
+        lcr.stopTimer = nil;
         lcr.internalDistance = 0.0;
     }    
     return lcr;
@@ -86,6 +87,7 @@
         lcr.anchor = CLLocationCoordinate2DMake(center.x, center.y);
         lcr.internalDistance = 0.0;
         lcr.angle = 0.0;
+        lcr.stopTimer = nil;
         lcr.angleOffset = aoffset;
     }    
     return lcr;

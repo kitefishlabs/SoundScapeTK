@@ -25,5 +25,6 @@ typedef enum finishRules {
 @property (strong)  NSString                *state, *label;
 @property           CLLocationCoordinate2D  anchor;
 @property           float                   internalDistance;
+@property           NSTimer                 *stopTimer;
 
 @end

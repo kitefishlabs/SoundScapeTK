@@ -11,6 +11,6 @@
 
 @implementation kflLinkedRegion
 
-@synthesize center, idsToActivate, active, idNum, numLives, attackTime, releaseTime, state, label, anchor, internalDistance;
+@synthesize center, idsToActivate, active, idNum, numLives, attackTime, releaseTime, state, label, anchor, internalDistance, stopTimer;
 
 @end
