@@ -36,6 +36,8 @@ public class ScapeManager {
 				Log.v("regionID: ", key);
 				JSONObject reg = regions.getJSONObject(key);
 				
+				String type = reg.getString("type");
+				
 				float lat = Float.valueOf( reg.getString("lat") );
 				float lon = Float.valueOf( reg.getString("lon") );
 				float rad = Float.valueOf( reg.getString("rad") );
@@ -48,26 +50,14 @@ public class ScapeManager {
 				Log.v("atk: ", reg.getString("attack"));
 				Log.v("rls: ", reg.getString("release"));
 				
-				JSONArray params = reg.getJSONArray("params");
-				float basefreq = Float.valueOf( params.getString(0) ); 
-				int harms = Integer.valueOf( params.getString(1) );
-				float lfofreqrate = Float.valueOf( params.getString(2) );
-				float lfoamprate = Float.valueOf( params.getString(3) );
-				float lfofreqdepth = Float.valueOf( params.getString(4) );
-				float lfoampdepth = Float.valueOf( params.getString(5) );
+				JSONArray params = reg.getJSON  ("params");
 				
 				Log.v("A: ", params.getString(0));
-				Log.v("B: ", params.getString(1));
-				Log.v("C: ", params.getString(2));
-				Log.v("D: ", params.getString(3));
-				Log.v("E: ", params.getString(4));
-				Log.v("F: ", params.getString(5));
 				
-				float amp = Float.valueOf( reg.getString("amp") );
-				float maxdur= Float.valueOf( reg.getString("maxdur") );
-				Log.v("amp: ", reg.getString("amp"));
-				Log.v("max dur: ", reg.getString("maxdur"));
-				
+				String lives = reg.getString("lives");
+				Log.v("lives: ", reg.getString("lives"));
+				String finishrule = reg.getString("finishrule");
+				Log.v("finishrule: ", reg.getString("finishrule"));
 				String lbl = reg.getString("label");
 				Log.v("lbl: ", reg.getString("label"));
 				
@@ -75,7 +65,7 @@ public class ScapeManager {
 				//LinkedCircleRegion (int id, float lat, float lon, float rad, int atk, int rel, 
 				//	float fFreq, int nHarms, float fRate, float aRate, float fDepth, float aDepth, float amp, int maxdur, String lbl) {
 				LinkedCircleRegion lcr = new LinkedCircleRegion(k, lat, lon, rad, atk, rls, 
-					basefreq, harms, lfofreqrate, lfoamprate, lfofreqdepth, lfoampdepth, amp, maxdur, lbl);
+					lbl);
 				Log.v("LCR: ", lcr.toString());
 			}
 		} catch (JSONException e) {
