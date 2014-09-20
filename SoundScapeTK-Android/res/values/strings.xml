@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">soundscapeTK</string>
+    <string name="title_main">Main</string>
+    <string name="title_status">Status</string>
+    <string name="title_map">Map</string>
+    <string name="action_settings">Settings</string>
+    <string name="button_start">START</string>
+    <string name="gps_section_title">GPS Info</string>
+    <string name="gps_status_label">GPS:</string>
+    <string name="gps_status">OFF</string>
+    <string name="gps_state_label">State:</string>
+    <string name="gps_state">Not Tracking</string>
+    <string name="loc_section_title">Location Info</string>
+    <string name="loc_lat_label">Lat:</string>
+    <string name="loc_lat">0.000000</string>
+    <string name="loc_lon_label">Lon:</string>
+    <string name="loc_lon">0.000000</string>
+    <string name="audio_section_title">Audio Info</string>
+    <string name="audio_status_label">Audio:</string>
+    <string name="audio_status">OFF</string>
+    <string name="audio_num_regions_label">Num Regions:</string>
+    <string name="audio_num_regions">0</string>
+    <string name="audio_regions_label">Regions:</string>
+    <string name="audio_regions">N/A</string>
+
+</resources>

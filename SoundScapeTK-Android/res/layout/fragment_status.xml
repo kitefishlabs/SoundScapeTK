@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.soundscapetk.MainActivity$StatusFragment"
+    android:id="@+id/status"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin">
+
+    <TextView
+        android:id="@+id/gps_section_title"
+	    android:layout_width="wrap_content"
+  	    android:layout_height="wrap_content"
+        android:text="@string/gps_section_title"
+	    android:textAppearance="?android:attr/textAppearanceSmall"
+	    android:layout_marginTop="5dip" />
+ 	<LinearLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+    	<TextView
+        	android:id="@+id/gps_status_label"
+	        android:layout_width="fill_parent"
+    	    android:layout_height="wrap_content"
+    	    android:layout_weight="1"
+    	    android:text="@string/gps_status_label"
+        	android:textAppearance="?android:attr/textAppearanceSmall" />
+    	<TextView
+        	android:id="@+id/gps_status"
+	        android:layout_width="fill_parent"
+    	    android:layout_height="wrap_content"
+    	    android:layout_weight="1"
+    	    android:text="@string/gps_status"
+        	android:textAppearance="?android:attr/textAppearanceSmall" />
+	</LinearLayout>
+	<LinearLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+    	<TextView
+        	android:id="@+id/gps_state_label"
+	        android:layout_width="fill_parent"
+    	    android:layout_height="wrap_content"
+    	    android:layout_weight="1"
+    	    android:text="@string/gps_state_label"
+        	android:textAppearance="?android:attr/textAppearanceSmall" />
+    	<TextView
+        	android:id="@+id/gps_state"
+	        android:layout_width="fill_parent"
+    	    android:layout_height="wrap_content"
+    	    android:layout_weight="1"
+    	    android:text="@string/gps_state"
+        	android:textAppearance="?android:attr/textAppearanceSmall" />
+	</LinearLayout>
+	<TextView
+        android:id="@+id/loc_section_title"
+	    android:layout_width="wrap_content"
+  	    android:layout_height="wrap_content"
+        android:text="@string/loc_section_title"
+	    android:textAppearance="?android:attr/textAppearanceSmall"
+	    android:layout_marginTop="5dip" />
+ 	<LinearLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+    	<TextView
+        	android:id="@+id/loc_lat_label"
+	        android:layout_width="fill_parent"
+    	    android:layout_height="wrap_content"
+    	    android:layout_weight="1"
+    	    android:text="@string/loc_lat_label"
+        	android:textAppearance="?android:attr/textAppearanceSmall" />
+    	<TextView
+        	android:id="@+id/loc_lat"
+	        android:layout_width="fill_parent"
+    	    android:layout_height="wrap_content"
+    	    android:layout_weight="1"
+    	    android:text="@string/loc_lat"
+        	android:textAppearance="?android:attr/textAppearanceSmall" />
+	</LinearLayout>
+	<LinearLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+    	<TextView
+        	android:id="@+id/loc_lon_label"
+	        android:layout_width="fill_parent"
+    	    android:layout_height="wrap_content"
+    	    android:layout_weight="1"
+    	    android:text="@string/loc_lon_label"
+        	android:textAppearance="?android:attr/textAppearanceSmall" />
+    	<TextView
+        	android:id="@+id/loc_lon"
+	        android:layout_width="fill_parent"
+    	    android:layout_height="wrap_content"
+    	    android:layout_weight="1"
+    	    android:text="@string/loc_lon"
+        	android:textAppearance="?android:attr/textAppearanceSmall" />
+	</LinearLayout>
+	<TextView
+        android:id="@+id/audio_section_title"
+	    android:layout_width="wrap_content"
+  	    android:layout_height="wrap_content"
+        android:text="@string/audio_section_title"
+	    android:textAppearance="?android:attr/textAppearanceSmall"
+	    android:layout_marginTop="5dip" />
+ 	<LinearLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+    	<TextView
+        	android:id="@+id/audio_status_label"
+	        android:layout_width="fill_parent"
+    	    android:layout_height="wrap_content"
+    	    android:layout_weight="1"
+    	    android:text="@string/audio_status_label"
+        	android:textAppearance="?android:attr/textAppearanceSmall" />
+    	<TextView
+        	android:id="@+id/audio_status"
+	        android:layout_width="fill_parent"
+    	    android:layout_height="wrap_content"
+    	    android:layout_weight="1"
+    	    android:text="@string/audio_status"
+        	android:textAppearance="?android:attr/textAppearanceSmall" />
+	</LinearLayout>
+	<LinearLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+    	<TextView
+        	android:id="@+id/audio_num_regions_label"
+	        android:layout_width="fill_parent"
+    	    android:layout_height="wrap_content"
+    	    android:layout_weight="1"
+    	    android:text="@string/audio_num_regions_label"
+        	android:textAppearance="?android:attr/textAppearanceSmall" />
+    	<TextView
+        	android:id="@+id/audio_num_regions"
+	        android:layout_width="fill_parent"
+    	    android:layout_height="wrap_content"
+    	    android:layout_weight="1"
+    	    android:text="@string/audio_num_regions"
+        	android:textAppearance="?android:attr/textAppearanceSmall" />
+	</LinearLayout>
+	<LinearLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+    	<TextView
+        	android:id="@+id/audio_regions_label"
+	        android:layout_width="fill_parent"
+    	    android:layout_height="wrap_content"
+    	    android:layout_weight="1"
+    	    android:text="@string/audio_regions_label"
+        	android:textAppearance="?android:attr/textAppearanceSmall" />
+    	<TextView
+        	android:id="@+id/audio_regions"
+	        android:layout_width="fill_parent"
+    	    android:layout_height="wrap_content"
+    	    android:layout_weight="1"
+    	    android:text="@string/audio_regions"
+        	android:textAppearance="?android:attr/textAppearanceSmall" />
+	</LinearLayout>
+</LinearLayout>
