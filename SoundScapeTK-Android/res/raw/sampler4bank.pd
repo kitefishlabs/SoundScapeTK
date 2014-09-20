@@ -1,0 +1,25 @@
+#N canvas 76 366 802 303 10;
+#X obj -186 -6 dac~;
+#X msg -13 -223 /Users/kfl/dev/git/public_projects/SoundScapeTK/SoundScapeTK/pd/01.wav
+0;
+#X msg -96 -253 play;
+#X msg -60 -253 stop;
+#X msg -22 -253 level 1;
+#X obj -65 -136 play_sf_stereo 3;
+#X obj -167 -136 play_sf_stereo 2;
+#X obj -270 -136 play_sf_stereo 1;
+#X obj -373 -136 play_sf_stereo 0;
+#X obj -96 -167 s 1_in;
+#X obj -13 -181 s 1_open;
+#X connect 1 0 10 0;
+#X connect 2 0 9 0;
+#X connect 3 0 9 0;
+#X connect 4 0 9 0;
+#X connect 5 0 0 0;
+#X connect 5 1 0 1;
+#X connect 6 0 0 0;
+#X connect 6 1 0 1;
+#X connect 7 0 0 0;
+#X connect 7 1 0 1;
+#X connect 8 0 0 0;
+#X connect 8 1 0 1;
