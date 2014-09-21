@@ -14,6 +14,7 @@ public class LinkedCircleSFRegion {
 		radius = rad;
 		idNum = id;
 		label = lbl;
+//		linkedSoundFiles = lsf;
 		attackTime = atk;
 		releaseTime = rel;
 		finishRule = rule;

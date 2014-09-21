@@ -12,6 +12,9 @@ public class LinkedCircleSynthRegion {
 		radius = rad;
 		idNum = id;
 		label = lbl;
+//        lcr.linkedParameters = params;
+//        lcr.numLinkedParams = [params count]; // should always == 2 for param regions
+
 		attackTime = atk;
 		releaseTime = rel;
 		finishRule = frule;

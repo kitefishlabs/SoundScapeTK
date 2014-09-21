@@ -50,9 +50,9 @@ public class ScapeManager {
 				Log.v("atk: ", reg.getString("attack"));
 				Log.v("rls: ", reg.getString("release"));
 				
-				JSONArray params = reg.getJSON  ("params");
+				JSONObject params = reg.getJSONObject("params");
 				
-				Log.v("A: ", params.getString(0));
+				Log.v("A: ", params.toString());
 				
 				String lives = reg.getString("lives");
 				Log.v("lives: ", reg.getString("lives"));
@@ -64,9 +64,8 @@ public class ScapeManager {
 				int k = Integer.parseInt(key);
 				//LinkedCircleRegion (int id, float lat, float lon, float rad, int atk, int rel, 
 				//	float fFreq, int nHarms, float fRate, float aRate, float fDepth, float aDepth, float amp, int maxdur, String lbl) {
-				LinkedCircleRegion lcr = new LinkedCircleRegion(k, lat, lon, rad, atk, rls, 
-					lbl);
-				Log.v("LCR: ", lcr.toString());
+//				LinkedCircleRegion lcr = new LinkedCircleRegion(k, lat, lon, rad, atk, rls, lbl);
+//				Log.v("LCR: ", lcr.toString());
 			}
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
