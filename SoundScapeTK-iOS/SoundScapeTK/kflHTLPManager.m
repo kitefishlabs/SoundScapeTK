@@ -68,7 +68,7 @@
 
 - (NSString *)hitTestRegionsWithLocation:(CGPoint)location {
     
-    HTLPLog(@"SCAPE: %lul", (unsigned long)[scapeRegions count]);
+    HTLPLog(@"SCAPE: %lu", (unsigned long)[scapeRegions count]);
     HTLPLog(@">>HIT-TESTING LOCATION: %f, %f", location.x, location.y);
     HTLPLog(@"loc x: %f y: %f", location.x, location.y);
     
@@ -76,62 +76,41 @@
     
     for (NSString *lrkey in self.scapeRegions) {
         HTLPLog(@"::: %@", [scapeRegions objectForKey:lrkey]);
-        if ([[scapeRegions objectForKey:lrkey] isKindOfClass:[kflLinkedCircleSFRegion class]]) {
+        if (([[scapeRegions objectForKey:lrkey] isKindOfClass:[kflLinkedCircleSFRegion class]]) || ([[scapeRegions objectForKey:lrkey] isKindOfClass:[kflLinkedCircleSynthRegion class]])) {
             
-            kflLinkedCircleSFRegion *lcr = [scapeRegions objectForKey:lrkey];
-//            HTLPLog(@"lr key: %@ || pt: %f, %f | rad: %f", lrkey, lcr.center.x, lcr.center.y, lcr.radius);
+            kflLinkedCircleRegion *lcr = [scapeRegions objectForKey:lrkey];
             float dist = sqrtf(powf((lcr.center.x - location.x), 2.0) + powf((lcr.center.y - location.y), 2.0));
             
-            //HTLPLog(@"lat/lon/radius||x,y: %f, %f, %f || %f, %f", lcr.center.x, lcr.center.y, (lcr.radius+0.00001), location.x, location.y);
-            
-            if (dist <= (lcr.radius+0.00001)) { // && (![[self.scapeSoundfiles objectForKey:[lcr.linkedSoundfiles objectAtIndex:0]] playing])) {
+            if (dist <= lcr.radius) {
                 
-                lcr.internalDistance = dist / lcr.radius;
-                HTLPLog(@"====== circle HIT: %ul ====== int. dist: %f", lcr.idNum, lcr.internalDistance);
-                [hitRegions addObject:lcr];
-            }
-            
-        } else if ([[scapeRegions objectForKey:lrkey] isKindOfClass:[kflLinkedCircleSynthRegion class]]) {
-            
-            kflLinkedCircleSynthRegion *lcsr = [scapeRegions objectForKey:lrkey];
-            //            HTLPLog(@"lr key: %@ || pt: %f, %f | rad: %f", lrkey, lcr.center.x, lcr.center.y, lcr.radius);
-            float dist = sqrtf(powf((lcsr.center.x - location.x), 2.0) + powf((lcsr.center.y - location.y), 2.0));
-            
-            //HTLPLog(@"lat/lon/radius||x,y: %f, %f, %f || %f, %f", lcr.center.x, lcr.center.y, (lcr.radius+0.00001), location.x, location.y);
-            
-            if (dist <= lcsr.radius) {
-                
-                float angle = atan2f((location.y - lcsr.center.y), (location.x - lcsr.center.x));
+                float angle = atan2f((location.y - lcr.center.y), (location.x - lcr.center.x));
                 NSLog(@"angle----------");
                 NSLog(@"angle1: %f", angle);
                 
-                lcsr.internalDistance = dist / lcsr.radius;
-                
-                angle -= (lcsr.angleOffset * PI);
+                lcr.internalDistance = dist / lcr.radius;
+                angle -= (lcr.angleOffset * PI);
                 NSLog(@"angle2: %f", angle);
                 
-                if (angle <= -PI) {
-                    angle += TWO_PI;
-                }
+                if (angle <= -PI) { angle += TWO_PI; }
                 NSLog(@"angle3: %f", angle);
                 
                 angle = ABS(angle);
                 NSLog(@"angle4: %f", angle);
                 
-                lcsr.angle = angle;
-                HTLPLog(@"====== circle HIT: %ul ====== int. dist: %f", lcsr.idNum, lcsr.internalDistance);
-                [hitRegions addObject:lcsr];
+                lcr.angle = angle;
+                HTLPLog(@"====== circle HIT: %ul ====== int. dist: %f", lcr.idNum, lcr.internalDistance);
+                [hitRegions addObject:lcr];
             }
         }
     }
-    HTLPLog(@"hit regions: count: %lul", (unsigned long)[hitRegions count]);
-    for (kflLinkedCircleSFRegion *r in hitRegions) {
-        NSLog(@"hr: %@, %@, %i", r, [[r.linkedSoundfiles objectAtIndex:0] fileName], r.idNum);
-    }
+    HTLPLog(@"hit regions: count: %lu", (unsigned long)[hitRegions count]);
+//    for (kflLinkedCircleSFRegion *reg in hitRegions) {
+//        NSLog(@"hr: %@, %@, %i", reg, [[reg.linkedSoundfiles objectAtIndex:0] fileName], reg.idNum);
+//    }
     if ([hitRegions count] > 0) {
         HTLPLog(@"ACTIVE HASH AFTER hit----: %@", audioFileRouter.activeHash);
         [self processEnterAndExitEvents:hitRegions];
-        return [NSString stringWithFormat:@"HIT(S): %lul", (unsigned long)[hitRegions count]];
+        return [NSString stringWithFormat:@"HIT(S): %lu", (unsigned long)[hitRegions count]];
         
     } else { // nothing hit!
         
@@ -152,10 +131,10 @@
     // if only one region, and idnum == -1, this is a signal to EXIT ALL REGIONS!
     // - pause playing ones according to the rule
     // - or allow playing ones to finish!
-    NSLog(@" count:: %lul || region list: %@", (unsigned long)[regionList count], [regionList objectAtIndex:0]);
+    NSLog(@" count:: %ul || region list: %@", (unsigned long)[regionList count], [regionList objectAtIndex:0]);
     
     if ([[regionList objectAtIndex:0] respondsToSelector:@selector(idNum)]) {
-        HTLPLog(@" count:: %lul || id num: %ul", (unsigned long)[regionList count], [[regionList objectAtIndex:0] idNum]);
+        HTLPLog(@" count:: %lu || id num: %ul", (unsigned long)[regionList count], [[regionList objectAtIndex:0] idNum]);
     }
     if (([regionList count] == 1) && (![[regionList objectAtIndex:0] respondsToSelector:@selector(idNum)])) {
         
@@ -171,8 +150,6 @@
             //      else do nothing
 
             // if region.rule == 1
-            int finishrule = lcr.finishRule;
-            HTLPLog(@"fr: %ul", finishrule);
             if ((finishrule & 1) == 0) { // let-finish bit IS NOT set
 
                 // now stop it (also removes from activeHash!
@@ -197,7 +174,7 @@
                 NSArray *params = lcsr.linkedParameters;
                 for (kflLinkedParameter *param in params) {
                     // adjust it to 0.0 if it's a _level pararam
-                    if (([param.paramName rangeOfString:@"_noise_level"].location != NSNotFound) || ([param.paramName rangeOfString:@"_pulse_level"].location != NSNotFound)) {
+                    if (([param.paramName rangeOfString:@"_level"].location != NSNotFound) || ([param.paramName rangeOfString:@"_level"].location != NSNotFound)) {
 
                         [PdBase sendFloat:0.0 toReceiver:param.paramName];
                     }
@@ -319,21 +296,16 @@
         for (kflLinkedSoundfile *lsf in lsfsNotInLastRegionHit) {
             
             // get the lcr by looking it up by its region ID (should match)
-            kflLinkedCircleSFRegion *lcr = [self.scapeRegions objectForKey:[NSString stringWithFormat:@"%ul", lsf.idNum]];
+            LinkedCircleRegion *lcr = [self.scapeRegions objectForKey:[NSString stringWithFormat:@"%i", lsf.regIdNum]];
             
-            // if region.rule == 1
-            HTLPLog(@"loop rule: %ul", lcr.finishRule);
-            if ((lcr.finishRule & 1) == 1) { // cutoff bit set
-
+            // ONLY stop if PLAYING
+            if ([lcr.state compare:@"playing"] == NSOrderedSame) { // cutoff bit set
+                
                 // @@@ add this region/lsf to the list of paused regions with it's time offset
-
-                HTLPLog(@"STOP from toBeDeleted!   LCR: %@", lcr);
+                
+                HTLPLog(@"HTLP stop from diff\nSTATE for region ID %i -- %@ ----> stop", lcr.idNum, lcr.state);
                 lcr.state = @"stop";
                 [self scheduleLSFToStopForRegion:lcr];
-                
-            } else { // else mark region for loop-end-stop
-                lcr.state = @"stopRequested";
-                HTLPLog(@"STOP REQUESTED from toBeDeleted!");
             }
         }
     }
@@ -365,7 +337,7 @@
     DLog(@" ==== schedule LSF to stop...");
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
-        //                [[LAPManager sharedManager] recordTrackingMarkerWithType:@"PLAY" andArgs:[NSArray arrayWithObject:[NSNumber numberWithInt:lsf.idNum]]];
+        //[[LAPManager sharedManager] recordTrackingMarkerWithType:@"STOP" andArgs:[NSArray arrayWithObject:[NSNumber numberWithInt:lsf.idNum]]];
         NSLog(@"stop region with lsfID: %ul", lcr.idNum);
         [self.audioFileRouter stopLinkedSoundFileForRegion:lcr];
         
