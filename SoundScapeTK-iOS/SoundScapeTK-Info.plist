@@ -81,5 +81,7 @@
 			</dict>
 		</dict>
 	</array>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>SoundScapeTK uses your location to trigger audio playback and synthesis.</string>
 </dict>
 </plist>
