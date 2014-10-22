@@ -79,7 +79,7 @@
     NSString *openSlot = [NSString stringWithFormat:@"%i_open", slot];
     ARLog(@"openslot: %@", openSlot);
     [PdBase sendMessage:sfilePath
-          withArguments:[NSArray arrayWithObject:[NSNumber numberWithFloat:onset]] //onsetTime is in seconds!
+          withArguments:[NSArray arrayWithObject:[NSNumber numberWithInt:(int)(onset * 44100.0)]] // BEWARE: onsetTime is in seconds!
              toReceiver:openSlot];
 }
 
