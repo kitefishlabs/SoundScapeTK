@@ -143,7 +143,7 @@
             HTLPLog(@"region ID: %@", activeSlot);
             
             kflLinkedSoundfile *lsf = [self.audioFileRouter.activeHash objectForKey:activeSlot];
-            kflLinkedCircleSFRegion *lcsfr = [self.scapeRegions objectForKey:[NSString stringWithFormat:@"%ul", lsf.idNum]];
+            kflLinkedCircleSFRegion *lcsfr = [self.scapeRegions objectForKey:[NSString stringWithFormat:@"%i", lsf.idNum]];
             
             // check each active region:
             //      if cutoff bit == 1, kill & remove
@@ -152,7 +152,7 @@
             // if playing, call stop (also removes from activeHash!
             if (([lcsfr.state compare:@"playing"] == NSOrderedSame)) {
             
-                DLog(@"\nSTOP from COMPLETE MISS!\nrid: %@ | %ul | %ul", lcsfr, lcsfr.idNum, lsf.idNum);
+                DLog(@"\nSTOP from COMPLETE MISS!\nrid: %@ | %i | %i", lcsfr, lcsfr.idNum, lsf.idNum);
                 lcsfr.state = @"stop";
                 [self scheduleLSFToStopForRegion:lcsfr];
             }
@@ -217,7 +217,7 @@
                         HTLPLog(@"assigned to slot: %i", foundSlot);
                         if (foundSlot > -1) {
                             [self scheduleLSFToPlayForRegion:lcsfr afterDelay:0.f];
-                            //                        assert(lsf.assignedSlot == foundSlot);
+                            [PdBase sendFloat:1.0 toReceiver:@"_master_volume"];
                         }
                         
                         // ===== scheduleLSFToPlay should cause audiofilerouter to put this LSF/region into an active hash
@@ -309,9 +309,9 @@
     }
 }
 
-- (void)scheduleLSFToStopForRegion:(kflLinkedCircleSFRegion *)lcr {
+- (void)scheduleLSFToStopForRegion:(kflLinkedCircleSFRegion *)lcsfr {
     
-    kflLinkedSoundfile *lsf = [lcr.linkedSoundfiles objectAtIndex:0];
+    kflLinkedSoundfile *lsf = [lcsfr.linkedSoundfiles objectAtIndex:0];
     
     NSLog(@"stop this LSF: %@", lsf);
     
@@ -325,9 +325,9 @@
         });
     }];
     
-    if ([lcr.state compare:@"stop"] == NSOrderedSame) {
+    if ([lcsfr.state compare:@"stop"] == NSOrderedSame) {
         [lsf markOffset];
-    } else if ([lcr.state compare:@"stopRequested"] == NSOrderedSame) {
+    } else if ([lcsfr.state compare:@"stopRequested"] == NSOrderedSame) {
         // mark lsf's offset as current time - start time
         [lsf clearOffset];
     }
@@ -336,13 +336,17 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
         //[[LAPManager sharedManager] recordTrackingMarkerWithType:@"STOP" andArgs:[NSArray arrayWithObject:[NSNumber numberWithInt:lsf.idNum]]];
-        NSLog(@"stop region with lsfID: %ul", lcr.idNum);
-        [self.audioFileRouter stopLinkedSoundFileForRegion:lcr];
+        NSLog(@"stop region with lsfID: %i", lcsfr.idNum);
+        HTLPLog(@"LCR state: %@", lcsfr.state);
+        [self.audioFileRouter stopLinkedSoundFileForRegion:lcsfr];
+        HTLPLog(@"LCR state: %@", lcsfr.state);
         
         [NSThread sleepForTimeInterval:(lsf.releaseTime * 0.001)];
         
-        [self.audioFileRouter resetLinkedSoundFileForRegion:lcr];
-        NSLog(@"set paused offset: %f (ID: %ul)", lsf.pausedOffset, lsf.idNum);
+        HTLPLog(@"LCR state: %@", lcsfr.state);
+        [self.audioFileRouter resetLinkedSoundFileForRegion:lcsfr];
+        HTLPLog(@"LCR state: %@", lcsfr.state);
+        NSLog(@"set paused offset: %f (ID: %i)", lsf.pausedOffset, lsf.idNum);
         
         dispatch_async(dispatch_get_main_queue(), ^{
             if (bgTaskID != UIBackgroundTaskInvalid)
@@ -355,7 +359,7 @@
     });
     
     HTLPLog(@"ACTIVE HASH AFTER STOP: %@", self.audioFileRouter.activeHash);
-    HTLPLog(@"LCR state: %@", lcr.state);
+    HTLPLog(@"LCR state: %@", lcsfr.state);
 }
 
 
@@ -385,7 +389,7 @@
         lsf.uniqueID = [[NSDate date] timeIntervalSince1970];
         int currentID = lsf.uniqueID;
         
-        NSLog(@"generating unique ID: %ul for LSF ID: %ul", currentID, lsf.idNum);
+        NSLog(@"generating unique ID: %i for LSF ID: %i", currentID, lsf.idNum);
         
         // default is to play the sound file until told otherwise or until max num. of loops have played
         

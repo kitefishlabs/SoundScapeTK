@@ -55,7 +55,11 @@
         ARLog(@"path: %@", lsf.fileName);
         ARLog(@"slot: %i", slot);
         ARLog(@"onset: %f", lsf.pausedOffset);
-        [self openSFilePath:lsf.fileName inSlot:slot withOnsetTime:lsf.pausedOffset];
+        
+        NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+        NSURL *docsURL = [NSURL fileURLWithPath:[documentsPath stringByAppendingPathComponent:lsf.fileName]];
+        
+        [self openSFilePath:[docsURL path] inSlot:slot withOnsetTime:lsf.pausedOffset];
         [self adjustVolumeForLSF:lsf to:vol withRampTime:1000];
         [self adjustAttackForLSF:lsf to:lsf.attackTime];
         [self adjustReleaseForLSF:lsf to:lsf.releaseTime];
@@ -316,7 +320,7 @@
         
         kflLinkedParameter *lpB = [lcsr.linkedParameters objectAtIndex:1];
         ARLog(@"lpB type: %@", [lpB class]);
-        ARLog(@"lpB type: %@", [lpB.paramName class]);
+        ARLog(@"lpB type: %@, %@, %i", [lpB.paramName class], lpB.paramName, [lpB.paramName intValue]);
         
         if ([lpB.paramName compare:@"x"] != NSOrderedSame) {
             float angle = lcsr.angle;

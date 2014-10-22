@@ -10,7 +10,6 @@
             "attack" : 2000,
             "release" : 4000,
             "lives" : 99,
-            "finishrule" : 0,
             "label" : "no1"
         },
         "2" : {
@@ -22,7 +21,6 @@
             "attack" : 1000,
             "release" : 1000,
             "lives" : 99,
-            "finishrule" : 0,
             "label" : "no2"
         },
         "3" : {
@@ -34,11 +32,10 @@
             "attack" : 1000,
             "release" : 1000,
             "params" : {
-                "rad" : ["4_level", 1, 0 ],
-                "theta" : ["4_phase", 0, 1, 0.5] 
+                "rad" : ["10_level", 1, 0 ],
+                "theta" : ["10_phase", 0, 1, 0.5]
             },
             "lives" : 99,
-            "finishrule" : 0,
             "label" : "no3"
         }
     }
