@@ -81,6 +81,7 @@ extern void mp3play_tilde_setup(void);
 #ifdef MONITOR_PD
     [PdBase subscribe:@"print"];
     [PdBase subscribe:@"lvl"];
+    [PdBase subscribe:@"msgin"];
     [PdBase subscribe:@"ramp"];
     [PdBase subscribe:@"open"];
     [PdBase subscribe:@"play"];

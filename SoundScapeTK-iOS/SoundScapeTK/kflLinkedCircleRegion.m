@@ -66,7 +66,7 @@
                                                               radius:(float)radius
                                                                idNum:(int)idNum
                                                                label:(NSString *)label
-                                                        linkedParams:(NSArray *)params
+                                                        linkedParams:(NSDictionary *)params
                                                          angleOffset:(float)aoffset
                                                               attack:(int)atk
                                                              release:(int)rel
