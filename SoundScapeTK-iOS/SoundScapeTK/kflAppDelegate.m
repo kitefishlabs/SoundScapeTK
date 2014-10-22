@@ -32,7 +32,6 @@ extern void mp3play_tilde_setup(void);
     
     self.audioController = [[PdAudioController alloc] init];
     [self.audioController configurePlaybackWithSampleRate:44100 numberChannels:2 inputEnabled:NO mixingEnabled:YES];
-//    mp3play_tilde_setup();
     [PdBase setDelegate:self];
     
     self.aboutVC = [[kflAboutViewController alloc] initWithNibName:@"kflAboutViewController"
@@ -75,14 +74,6 @@ extern void mp3play_tilde_setup(void);
     [self.window makeKeyAndVisible];
     
     [self.tabController setSelectedViewController:self.scapeManagerVC];
-    
-//    NSArray *ver = [[UIDevice currentDevice].systemVersion componentsSeparatedByString:@"."];
-//    if ([[ver objectAtIndex:0] intValue] >= 7) {
-//        self.tabController.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
-//        self.tabController.navigationController.navigationBar.translucent = NO;
-//    }else {
-//        self.tabController.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-//    }
 
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
@@ -96,11 +87,8 @@ extern void mp3play_tilde_setup(void);
     [PdBase subscribe:@"stop"];
 #endif
     
-    
-    
     // kick off loc. tracking
     [self.scapeManagerVC toggleLocationTracking];
-    [NSThread sleepForTimeInterval:1];
     [self launchMapView];
     return YES;
 }

@@ -17,7 +17,6 @@
 @interface kflAppDelegate : UIResponder <UIApplicationDelegate, PdListener, PdReceiverDelegate>
 
 @property (strong, nonatomic) UIWindow                          *window;
-//@property (strong, nonatomic) UINavigationController          *navController;
 @property (strong, nonatomic) UITabBarController                *tabController;
 @property (strong, nonatomic) kflAboutViewController            *aboutVC;
 @property (strong, nonatomic) kflScapeManagerViewController     *scapeManagerVC;
