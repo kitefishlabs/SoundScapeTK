@@ -12,8 +12,15 @@
 
 @property   NSString    *paramName;
 @property   float       lowValue, highValue;
+@property   float       angle, angleOffset;
 
 + (kflLinkedParameter *)kflLinkedParameterWithString:(NSString *)name
                                         lowMappedVal:(float)low
-                                     andHighMappedValue:(float)high;
+                                  andHighMappedValue:(float)high;
+
++ (kflLinkedParameter *)kflLinkedParameterWithString:(NSString *)name
+                                        lowMappedVal:(float)low
+                                     highMappedValue:(float)high
+                                               angle:(float)angl
+                                      andAngleOffset:(float)anglOffset;
 @end
