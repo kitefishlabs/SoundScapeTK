@@ -94,7 +94,7 @@ extern void mp3play_tilde_setup(void);
 }
 
 - (void)launchMapView {
-    NSLog(@"number of regions: %lul", (unsigned long)[self.mapVC.scapeRegions count]);
+    NSLog(@"number of regions: %lu", (unsigned long)[self.mapVC.scapeRegions count]);
     [self.tabController setSelectedViewController:self.mapVC];
 }
 

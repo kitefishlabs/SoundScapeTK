@@ -134,7 +134,7 @@
     NSLog(@" count:: %lu || region list: %@", (unsigned long)[regionList count], [regionList objectAtIndex:0]);
     
     if ([[regionList objectAtIndex:0] respondsToSelector:@selector(idNum)]) {
-        HTLPLog(@" count:: %lu || id num: %ul", (unsigned long)[regionList count], [[regionList objectAtIndex:0] idNum]);
+        HTLPLog(@" count:: %lu || id num: %lu", (unsigned long)[regionList count], [[regionList objectAtIndex:0] idNum]);
     }
     if (([regionList count] == 1) && (![[regionList objectAtIndex:0] respondsToSelector:@selector(idNum)])) {
         
@@ -190,6 +190,8 @@
         
         for (id lcr in regionList) {
             
+            NSLog(@"LCR: %@", lcr);
+            
             if ([lcr isKindOfClass:[kflLinkedCircleSFRegion class]]) {
 
                 kflLinkedCircleSFRegion *lcsfr = lcr;
@@ -231,10 +233,11 @@
                 }
 
                 
-            } else if ([lcr isKindOfClass:[kflLinkedCircleSFRegion class]]) {
+            } else if ([lcr isKindOfClass:[kflLinkedCircleSynthRegion class]]) {
                 
                 kflLinkedCircleSynthRegion *lcsr = lcr;
                 
+                NSLog(@"%@ | %i | %i", lcsr.state, lcsr.active, lcsr.numLives);
                 if (([lcsr.state compare:@"ready"] == NSOrderedSame) && (lcsr.active) && (lcsr.numLives > 0)) {
                 
                     HTLPLog(@"LCSR: %@ ready --> playing", lcsr);
