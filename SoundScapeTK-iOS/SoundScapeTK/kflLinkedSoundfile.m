@@ -36,7 +36,7 @@
         NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
         NSURL *docsURL = [NSURL fileURLWithPath:[documentsPath stringByAppendingPathComponent:fileName]];
         
-        DLog(@"\n\nLSF BUNDLE URL: %@: \n(GOOD:%i)\n\n", [docsURL path], [[NSFileManager defaultManager] fileExistsAtPath:[bundleURL path]]);
+        DLog(@"\n\nLSF BUNDLE URL: %@: \n(GOOD:%i)\n\n", [bundleURL path], [[NSFileManager defaultManager] fileExistsAtPath:[bundleURL path]]);
         DLog(@"\n\nLSF DOCS URL:   %@: \n(GOOD:%i)\n\n", [docsURL path], [[NSFileManager defaultManager] fileExistsAtPath:[docsURL path]]);
         
         /**
