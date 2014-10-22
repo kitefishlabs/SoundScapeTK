@@ -29,10 +29,10 @@
 
     if (lrr) {
         lrr.idNum = idNum;
-        lrr.numPoints = [points count];
+        lrr.numPoints = (int)[points count];
         lrr.prect = rect;
         lrr.linkedSoundfiles = lsf;
-        lrr.numLinkedSoundfiles = [lsf count];
+        lrr.numLinkedSoundfiles = (int)[lsf count];
         lrr.attackTime = atk;
         lrr.releaseTime = rel;
         lrr.numLoops = loops;

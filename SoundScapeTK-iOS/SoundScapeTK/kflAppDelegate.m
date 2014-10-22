@@ -35,10 +35,6 @@ extern void mp3play_tilde_setup(void);
 //    mp3play_tilde_setup();
     [PdBase setDelegate:self];
     
-//    UINavigationController *navCtlr;
-//    navCtlr = [[UINavigationController alloc] init];
-//    [navCtlr.navigationBar setTintColor:[UIColor blackColor]];
-    
     self.aboutVC = [[kflAboutViewController alloc] initWithNibName:@"kflAboutViewController"
                                                             bundle:[NSBundle mainBundle]];
     self.aboutVC.title = @"ABOUT";
@@ -110,7 +106,7 @@ extern void mp3play_tilde_setup(void);
 }
 
 - (void)launchMapView {
-    NSLog(@"number of regions: %i", [self.mapVC.scapeRegions count]);
+    NSLog(@"number of regions: %lul", (unsigned long)[self.mapVC.scapeRegions count]);
     [self.tabController setSelectedViewController:self.mapVC];
 }
 

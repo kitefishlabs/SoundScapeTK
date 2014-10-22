@@ -34,7 +34,7 @@
         lcr.idNum = idNum; // this is the idNum of the region and the primary key
         lcr.label = label;
         lcr.linkedSoundfiles = lsf;
-        lcr.numLinkedSoundfiles = [lsf count]; // should always == 1, for now...
+        lcr.numLinkedSoundfiles = (int)[lsf count]; // should always == 1, for now...
         lcr.attackTime = atk;
         lcr.releaseTime = rel;
         lcr.finishRule = rule;
@@ -77,7 +77,7 @@
         lcr.idNum = idNum; // this is the idNum of the region and the primary key
         lcr.label = label;
         lcr.linkedParameters = params;
-        lcr.numLinkedParams = [params count]; // should always == 2 for param regions
+        lcr.numLinkedParams = (int)[params count]; // should always == 2 for param regions
         lcr.attackTime = atk;
         lcr.releaseTime = rel;
         lcr.numLives = lives;

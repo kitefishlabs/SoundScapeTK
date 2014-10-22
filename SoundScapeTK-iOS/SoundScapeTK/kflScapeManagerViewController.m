@@ -124,7 +124,7 @@
 }
 
 - (void)launchMapView:(UIButton *)sender {
-    NSLog(@"number of regions: %i", [self.mapVC.scapeRegions count]);
+    NSLog(@"number of regions: %lu", (unsigned long)[self.mapVC.scapeRegions count]);
     [self.navigationController pushViewController:self.mapVC animated:YES];
 }
 

@@ -68,7 +68,7 @@
 
 - (NSString *)hitTestRegionsWithLocation:(CGPoint)location {
     
-    HTLPLog(@"SCAPE: %i", [scapeRegions count]);
+    HTLPLog(@"SCAPE: %lul", (unsigned long)[scapeRegions count]);
     HTLPLog(@">>HIT-TESTING LOCATION: %f, %f", location.x, location.y);
     HTLPLog(@"loc x: %f y: %f", location.x, location.y);
     
@@ -87,7 +87,7 @@
             if (dist <= (lcr.radius+0.00001)) { // && (![[self.scapeSoundfiles objectForKey:[lcr.linkedSoundfiles objectAtIndex:0]] playing])) {
                 
                 lcr.internalDistance = dist / lcr.radius;
-                HTLPLog(@"====== circle HIT: %i ====== int. dist: %f", lcr.idNum, lcr.internalDistance);
+                HTLPLog(@"====== circle HIT: %ul ====== int. dist: %f", lcr.idNum, lcr.internalDistance);
                 [hitRegions addObject:lcr];
             }
             
@@ -99,7 +99,7 @@
             
             //HTLPLog(@"lat/lon/radius||x,y: %f, %f, %f || %f, %f", lcr.center.x, lcr.center.y, (lcr.radius+0.00001), location.x, location.y);
             
-            if (dist <= lcsr.radius+0.00001) {
+            if (dist <= lcsr.radius) {
                 
                 float angle = atan2f((location.y - lcsr.center.y), (location.x - lcsr.center.x));
                 NSLog(@"angle----------");
@@ -119,19 +119,19 @@
                 NSLog(@"angle4: %f", angle);
                 
                 lcsr.angle = angle;
-                HTLPLog(@"====== circle HIT: %i ====== int. dist: %f", lcsr.idNum, lcsr.internalDistance);
+                HTLPLog(@"====== circle HIT: %ul ====== int. dist: %f", lcsr.idNum, lcsr.internalDistance);
                 [hitRegions addObject:lcsr];
             }
         }
     }
-    HTLPLog(@"hit regions: count: %i", [hitRegions count]);
+    HTLPLog(@"hit regions: count: %lul", (unsigned long)[hitRegions count]);
     for (kflLinkedCircleSFRegion *r in hitRegions) {
         NSLog(@"hr: %@, %@, %i", r, [[r.linkedSoundfiles objectAtIndex:0] fileName], r.idNum);
     }
     if ([hitRegions count] > 0) {
         HTLPLog(@"ACTIVE HASH AFTER hit----: %@", audioFileRouter.activeHash);
         [self processEnterAndExitEvents:hitRegions];
-        return [NSString stringWithFormat:@"HIT(S): %i", [hitRegions count]];
+        return [NSString stringWithFormat:@"HIT(S): %lul", (unsigned long)[hitRegions count]];
         
     } else { // nothing hit!
         
@@ -152,10 +152,10 @@
     // if only one region, and idnum == -1, this is a signal to EXIT ALL REGIONS!
     // - pause playing ones according to the rule
     // - or allow playing ones to finish!
-    NSLog(@" count:: %i || region list: %@", [regionList count], [regionList objectAtIndex:0]);
+    NSLog(@" count:: %lul || region list: %@", (unsigned long)[regionList count], [regionList objectAtIndex:0]);
     
     if ([[regionList objectAtIndex:0] respondsToSelector:@selector(idNum)]) {
-        HTLPLog(@" count:: %i || id num: %i", [regionList count], [[regionList objectAtIndex:0] idNum]);
+        HTLPLog(@" count:: %lul || id num: %ul", (unsigned long)[regionList count], [[regionList objectAtIndex:0] idNum]);
     }
     if (([regionList count] == 1) && (![[regionList objectAtIndex:0] respondsToSelector:@selector(idNum)])) {
         
@@ -164,7 +164,7 @@
             HTLPLog(@"region ID: %@", activeSlot);
             
             kflLinkedSoundfile *lsf = [self.audioFileRouter.activeHash objectForKey:activeSlot];
-            kflLinkedCircleSFRegion *lcr = [self.scapeRegions objectForKey:[NSString stringWithFormat:@"%i", lsf.idNum]];
+            kflLinkedCircleSFRegion *lcr = [self.scapeRegions objectForKey:[NSString stringWithFormat:@"%ul", lsf.idNum]];
             
             // check each active region:
             //      if cutoff bit == 1, kill & remove
@@ -172,11 +172,11 @@
 
             // if region.rule == 1
             int finishrule = lcr.finishRule;
-            HTLPLog(@"fr: %i", finishrule);
+            HTLPLog(@"fr: %ul", finishrule);
             if ((finishrule & 1) == 0) { // let-finish bit IS NOT set
 
                 // now stop it (also removes from activeHash!
-                DLog(@"\nSTOP from COMPLETE MISS!\nrid: %@ | %i | %i", lcr, lcr.idNum, lsf.idNum);
+                DLog(@"\nSTOP from COMPLETE MISS!\nrid: %@ | %ul | %ul", lcr, lcr.idNum, lsf.idNum);
                 lcr.state = @"stop";
                 [self scheduleLSFToStopForRegion:lcr];
                 
@@ -221,10 +221,10 @@
             if ([region isKindOfClass:[kflLinkedCircleSFRegion class]]) {
                 
                 kflLinkedCircleSFRegion *lcr = region;
-                //lcr = [self.scapeRegions objectForKey:[NSString stringWithFormat:@"%i", lcr.idNum]];
+                //lcr = [self.scapeRegions objectForKey:[NSString stringWithFormat:@"%ul", lcr.idNum]];
                 
                 // current state of each LR
-                HTLPLog(@"LR: %i | %i | %i | %i | %i | %f", lcr.active, lcr.numLives, lcr.numLinkedSoundfiles, lcr.idNum, lcr.numLoops, lcr.internalDistance);
+                HTLPLog(@"LR: %ul | %ul | %ul | %ul | %ul | %f", lcr.active, lcr.numLives, lcr.numLinkedSoundfiles, lcr.idNum, lcr.numLoops, lcr.internalDistance);
                 HTLPLog(@"%@", lcr.linkedSoundfiles);
                 
                 // make sure that the region is active and that there is at least one life left
@@ -239,7 +239,7 @@
                         HTLPLog(@"play this: %@", lsf);
                         HTLPLog(@"assign...");
                         int foundSlot = [self.audioFileRouter assignSlotForLSF:lsf];
-                        HTLPLog(@"assigned to slot: %i", foundSlot);
+                        HTLPLog(@"assigned to slot: %ul", foundSlot);
                         if (foundSlot > -1) {
                             [self scheduleLSFToPlayForRegion:lcr afterDelay:0.f];;
                         }
@@ -249,30 +249,19 @@
                         
                     } else if ([lcr.state compare:@"playing"] == NSOrderedSame) {
                         // adjust the level of an already-playing LSF
-                        HTLPLog(@"just adjust the level: %f for %@ + %i", MAX(1.0 - lcr.internalDistance, 0.0), lsf.fileName, lcr.idNum);
+                        HTLPLog(@"just adjust the level: %f for %@ + %ul", MAX(1.0 - lcr.internalDistance, 0.0), lsf.fileName, lcr.idNum);
                         [self.audioFileRouter adjustVolumeForLSF:lsf to:MAX((1.0 - lcr.internalDistance), 0.0) withRampTime:1000];
                     } else {
                         HTLPLog(@"UHOH! State should have been either playing or ready");
                     }
                 }
                 
-                //            // A region can activate other regions
-                //            if (lcr.idsToActivate != nil) {
-                //                DLog(@"ids TO BE ACTIVATED: %@", lcr.idsToActivate);
-                //
-                //                for (NSNumber *idnum in lcr.idsToActivate) {
-                //                    DLog(@"setting ID #%i to ACTIVE...", [idnum intValue]);
-                //                    DLog(@"before: %i : %i", [idnum intValue], [[scapeRegions objectForKey:[idnum stringValue]] active]);
-                //                    [[scapeRegions objectForKey:[idnum stringValue]] setActive:YES];
-                //                    DLog(@"after: %i : %i", [idnum intValue], [[scapeRegions objectForKey:[idnum stringValue]] active]);
-                //                }
-                //                lcr.idsToActivate = nil;
-                //            }
+                // REIMPLEMENT A region can activate other regions
 
             } else if ([region isKindOfClass:[kflLinkedCircleSynthRegion class]]) {
                 
                 kflLinkedCircleSynthRegion *lcsr = region;
-                //lcr = [self.scapeRegions objectForKey:[NSString stringWithFormat:@"%i", lcr.idNum]];
+                //lcr = [self.scapeRegions objectForKey:[NSString stringWithFormat:@"%ul", lcr.idNum]];
                 
                 if (([lcsr.state compare:@"ready"] == NSOrderedSame) && (lcsr.active) && (lcsr.numLives > 0)) {
                 
@@ -330,10 +319,10 @@
         for (kflLinkedSoundfile *lsf in lsfsNotInLastRegionHit) {
             
             // get the lcr by looking it up by its region ID (should match)
-            kflLinkedCircleSFRegion *lcr = [self.scapeRegions objectForKey:[NSString stringWithFormat:@"%i", lsf.idNum]];
+            kflLinkedCircleSFRegion *lcr = [self.scapeRegions objectForKey:[NSString stringWithFormat:@"%ul", lsf.idNum]];
             
             // if region.rule == 1
-            HTLPLog(@"loop rule: %i", lcr.finishRule);
+            HTLPLog(@"loop rule: %ul", lcr.finishRule);
             if ((lcr.finishRule & 1) == 1) { // cutoff bit set
 
                 // @@@ add this region/lsf to the list of paused regions with it's time offset
@@ -377,13 +366,13 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
         //                [[LAPManager sharedManager] recordTrackingMarkerWithType:@"PLAY" andArgs:[NSArray arrayWithObject:[NSNumber numberWithInt:lsf.idNum]]];
-        NSLog(@"stop region with lsfID: %i", lcr.idNum);
+        NSLog(@"stop region with lsfID: %ul", lcr.idNum);
         [self.audioFileRouter stopLinkedSoundFileForRegion:lcr];
         
         [NSThread sleepForTimeInterval:(lsf.releaseTime * 0.001)];
         
         [self.audioFileRouter resetLinkedSoundFileForRegion:lcr];
-        NSLog(@"set paused offset: %f (ID: %i)", lsf.pausedOffset, lsf.idNum);
+        NSLog(@"set paused offset: %f (ID: %ul)", lsf.pausedOffset, lsf.idNum);
         
         dispatch_async(dispatch_get_main_queue(), ^{
             if (bgTaskID != UIBackgroundTaskInvalid)
@@ -426,7 +415,7 @@
         lsf.uniqueID = [[NSDate date] timeIntervalSince1970];
         int currentID = lsf.uniqueID;
         
-        NSLog(@"generating unique ID: %i for LSF ID: %i", currentID, lsf.idNum);
+        NSLog(@"generating unique ID: %ul for LSF ID: %ul", currentID, lsf.idNum);
         
         // default is to play the sound file until told otherwise or until max num. of loops have played
         

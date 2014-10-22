@@ -72,7 +72,7 @@
             
             DLog(@"dur: %f", dumbPlayer.duration);
             self.length = dumbPlayer.duration;
-            self.channels = dumbPlayer.numberOfChannels;
+            self.channels = (int)dumbPlayer.numberOfChannels;
             self.audioPlayer.volume = 1.0;
             
             /**

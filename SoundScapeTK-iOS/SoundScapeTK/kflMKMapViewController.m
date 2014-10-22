@@ -205,7 +205,7 @@
         }
         [_mapView addAnnotations:regionAnnotationPts];
         [hiddenRegionAnnotationPts removeAllObjects];
-        NSLog(@"C: %i, %i, %i", [_mapView.annotations count], [regionAnnotationPts count], [hiddenRegionAnnotationPts count]);
+        NSLog(@"C: %lu, %lu, %lu", (unsigned long)[_mapView.annotations count], (unsigned long)[regionAnnotationPts count], (unsigned long)[hiddenRegionAnnotationPts count]);
         toggle.selected = YES;
     } else {
         for (kflPin *pin in regionAnnotationPts) {
@@ -213,7 +213,7 @@
         }
         [_mapView removeAnnotations:hiddenRegionAnnotationPts];
         [regionAnnotationPts removeAllObjects];
-        NSLog(@"D: %i, %i, %i", [_mapView.annotations count], [regionAnnotationPts count], [hiddenRegionAnnotationPts count]);
+        NSLog(@"D: %lu, %lu, %lu", (unsigned long)[_mapView.annotations count], (unsigned long)[regionAnnotationPts count], (unsigned long)[hiddenRegionAnnotationPts count]);
         toggle.selected = NO;
     }
     [self.view setNeedsDisplay];

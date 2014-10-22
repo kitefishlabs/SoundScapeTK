@@ -33,7 +33,7 @@
     NSFileManager *fm = [[NSFileManager alloc] init];
     ARLog(@"exists? %i", [fm fileExistsAtPath:[NSString stringWithFormat:@"%@/%@", [[NSBundle mainBundle] bundlePath], patchString]]);
 
-    void *x = [PdBase openFile:patchString path:[[NSBundle mainBundle] bundlePath]];
+    [PdBase openFile:patchString path:[[NSBundle mainBundle] bundlePath]];
 	
     return afr;
 }
@@ -259,7 +259,7 @@
     int slot = -1;
     int slotsOpen[4] = {0,1,2,3};
     
-    ARLog(@"active hash size @ time of assignment: %i", [self.activeHash count]);
+    ARLog(@"active hash size @ time of assignment: %lu", (unsigned long)[self.activeHash count]);
     if ([self.activeHash count] < SLOTS) {
         // mark slots that are already occupied, then find an open slot
 //        for (NSString *existingRegionID in [self.activeHash allKeys]) {
