@@ -131,7 +131,7 @@
     // if only one region, and idnum == -1, this is a signal to EXIT ALL REGIONS!
     // - pause playing ones according to the rule
     // - or allow playing ones to finish!
-    NSLog(@" count:: %ul || region list: %@", (unsigned long)[regionList count], [regionList objectAtIndex:0]);
+    NSLog(@" count:: %lu || region list: %@", (unsigned long)[regionList count], [regionList objectAtIndex:0]);
     
     if ([[regionList objectAtIndex:0] respondsToSelector:@selector(idNum)]) {
         HTLPLog(@" count:: %lu || id num: %ul", (unsigned long)[regionList count], [[regionList objectAtIndex:0] idNum]);
@@ -143,23 +143,18 @@
             HTLPLog(@"region ID: %@", activeSlot);
             
             kflLinkedSoundfile *lsf = [self.audioFileRouter.activeHash objectForKey:activeSlot];
-            kflLinkedCircleSFRegion *lcr = [self.scapeRegions objectForKey:[NSString stringWithFormat:@"%ul", lsf.idNum]];
+            kflLinkedCircleSFRegion *lcsfr = [self.scapeRegions objectForKey:[NSString stringWithFormat:@"%ul", lsf.idNum]];
             
             // check each active region:
             //      if cutoff bit == 1, kill & remove
             //      else do nothing
 
-            // if region.rule == 1
-            if ((finishrule & 1) == 0) { // let-finish bit IS NOT set
-
-                // now stop it (also removes from activeHash!
-                DLog(@"\nSTOP from COMPLETE MISS!\nrid: %@ | %ul | %ul", lcr, lcr.idNum, lsf.idNum);
-                lcr.state = @"stop";
-                [self scheduleLSFToStopForRegion:lcr];
-                
-            } else if (([lcr.state compare:@"playing"] == NSOrderedSame)) { // else mark region for loop-end-stop -- let-finish bit IS set; allow sound to finish
-                lcr.state = @"stopRequested";
-                DLog(@"STOP REQUESTED from COMPLETE MISS!");
+            // if playing, call stop (also removes from activeHash!
+            if (([lcsfr.state compare:@"playing"] == NSOrderedSame)) {
+            
+                DLog(@"\nSTOP from COMPLETE MISS!\nrid: %@ | %ul | %ul", lcsfr, lcsfr.idNum, lsf.idNum);
+                lcsfr.state = @"stop";
+                [self scheduleLSFToStopForRegion:lcsfr];
             }
         }
         // update ALL the synth regions
@@ -193,52 +188,52 @@
         
         // positive trigger events, handle the regions in the list!
         
-        for (id region in regionList) {
+        for (id lcr in regionList) {
             
-            if ([region isKindOfClass:[kflLinkedCircleSFRegion class]]) {
-                
-                kflLinkedCircleSFRegion *lcr = region;
-                //lcr = [self.scapeRegions objectForKey:[NSString stringWithFormat:@"%ul", lcr.idNum]];
+            if ([lcr isKindOfClass:[kflLinkedCircleSFRegion class]]) {
+
+                kflLinkedCircleSFRegion *lcsfr = lcr;
+                        // [self.scapeRegions objectForKey:[NSString stringWithFormat:@"%i", lcr.idNum]];
                 
                 // current state of each LR
-                HTLPLog(@"LR: %ul | %ul | %ul | %ul | %ul | %f", lcr.active, lcr.numLives, lcr.numLinkedSoundfiles, lcr.idNum, lcr.numLoops, lcr.internalDistance);
-                HTLPLog(@"%@", lcr.linkedSoundfiles);
+                HTLPLog(@"LR: %i | %i | %i | %i | %i | %f", lcsfr.active, lcsfr.numLives, lcsfr.numLinkedSoundfiles, lcsfr.idNum, lcsfr.numLoops, lcsfr.internalDistance);
+                HTLPLog(@"%@", lcsfr.linkedSoundfiles);
                 
                 // make sure that the region is active and that there is at least one life left
-                if ((lcr.active) && (lcr.numLives > 0)) {
+                if ((lcsfr.active) && (lcsfr.numLives > 0)) {
                     
-                    kflLinkedSoundfile *lsf = [lcr.linkedSoundfiles objectAtIndex:0];
+                    kflLinkedSoundfile *lsf = [lcsfr.linkedSoundfiles objectAtIndex:0];
                     HTLPLog(@"LSF: : %@", lsf);
-                    HTLPLog(@"state: %@", lcr.state);
-                    if ([lcr.state compare:@"ready"] == NSOrderedSame) {
-                        //DLog(@"%@\n%@\n", scapeSoundfiles, [scapeSoundfiles objectForKey:[[lr.linkedSoundfiles objectAtIndex:0] stringValue]]);
+                    HTLPLog(@"state: %@", lcsfr.state);
+                    if ([lcsfr.state compare:@"ready"] == NSOrderedSame) {
+                        //HTLPLog(@"%@\n%@\n", scapeSoundfiles, [scapeSoundfiles objectForKey:[[lr.linkedSoundfiles objectAtIndex:0] stringValue]]);
                         
                         HTLPLog(@"play this: %@", lsf);
                         HTLPLog(@"assign...");
+                        // check for an open slot
                         int foundSlot = [self.audioFileRouter assignSlotForLSF:lsf];
-                        HTLPLog(@"assigned to slot: %ul", foundSlot);
+                        HTLPLog(@"assigned to slot: %i", foundSlot);
                         if (foundSlot > -1) {
-                            [self scheduleLSFToPlayForRegion:lcr afterDelay:0.f];;
+                            [self scheduleLSFToPlayForRegion:lcsfr afterDelay:0.f];
+                            //                        assert(lsf.assignedSlot == foundSlot);
                         }
                         
                         // ===== scheduleLSFToPlay should cause audiofilerouter to put this LSF/region into an active hash
                         // AND mark this LSF as @"playing"
                         
-                    } else if ([lcr.state compare:@"playing"] == NSOrderedSame) {
+                    } else if ([lcsfr.state compare:@"playing"] == NSOrderedSame) {
                         // adjust the level of an already-playing LSF
-                        HTLPLog(@"just adjust the level: %f for %@ + %ul", MAX(1.0 - lcr.internalDistance, 0.0), lsf.fileName, lcr.idNum);
-                        [self.audioFileRouter adjustVolumeForLSF:lsf to:MAX((1.0 - lcr.internalDistance), 0.0) withRampTime:1000];
+                        HTLPLog(@"just adjust the level: %f for %@ + %i", MAX(1.0 - lcsfr.internalDistance, 0.0), lsf.fileName, lcsfr.idNum);
+                        [self.audioFileRouter adjustVolumeForLSF:lsf to:MAX((1.0 - lcsfr.internalDistance), 0.0) withRampTime:1000];
                     } else {
                         HTLPLog(@"UHOH! State should have been either playing or ready");
                     }
                 }
-                
-                // REIMPLEMENT A region can activate other regions
 
-            } else if ([region isKindOfClass:[kflLinkedCircleSynthRegion class]]) {
                 
-                kflLinkedCircleSynthRegion *lcsr = region;
-                //lcr = [self.scapeRegions objectForKey:[NSString stringWithFormat:@"%ul", lcr.idNum]];
+            } else if ([lcr isKindOfClass:[kflLinkedCircleSFRegion class]]) {
+                
+                kflLinkedCircleSynthRegion *lcsr = lcr;
                 
                 if (([lcsr.state compare:@"ready"] == NSOrderedSame) && (lcsr.active) && (lcsr.numLives > 0)) {
                 
@@ -296,16 +291,16 @@
         for (kflLinkedSoundfile *lsf in lsfsNotInLastRegionHit) {
             
             // get the lcr by looking it up by its region ID (should match)
-            LinkedCircleRegion *lcr = [self.scapeRegions objectForKey:[NSString stringWithFormat:@"%i", lsf.regIdNum]];
+            kflLinkedCircleSFRegion *lcsfr = [self.scapeRegions objectForKey:[NSString stringWithFormat:@"%i", lsf.idNum]];
             
             // ONLY stop if PLAYING
-            if ([lcr.state compare:@"playing"] == NSOrderedSame) { // cutoff bit set
+            if ([lcsfr.state compare:@"playing"] == NSOrderedSame) { // cutoff bit set
                 
                 // @@@ add this region/lsf to the list of paused regions with it's time offset
                 
-                HTLPLog(@"HTLP stop from diff\nSTATE for region ID %i -- %@ ----> stop", lcr.idNum, lcr.state);
-                lcr.state = @"stop";
-                [self scheduleLSFToStopForRegion:lcr];
+                HTLPLog(@"HTLP stop from diff\nSTATE for region ID %i -- %@ ----> stop", lcsfr.idNum, lcsfr.state);
+                lcsfr.state = @"stop";
+                [self scheduleLSFToStopForRegion:lcsfr];
             }
         }
     }
