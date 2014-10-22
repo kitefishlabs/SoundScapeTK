@@ -11,7 +11,7 @@
 @implementation kflLinkedParameter
 
 @synthesize paramName;
-@synthesize lowValue, highValue, angleOffset;
+@synthesize lowValue, highValue, angleOffset, angle;
 
 + (kflLinkedParameter *)kflLinkedParameterWithString:(NSString *)name
                                         lowMappedVal:(float)low
@@ -23,7 +23,8 @@
         lp.paramName = name;
         lp.lowValue = low;
         lp.highValue = high;
-        lp.angleOffset = 0.0; // don't care
+        lp.angleOffset = 0.0;   // don't care
+        lp.angle = 0.f;         // don't care
     }
     return lp;
 }
@@ -40,6 +41,7 @@
         lp.lowValue = low;
         lp.highValue = high;
         lp.angleOffset = anglOffset;
+        lp.angle = 0.f;                 // using this as a temp var
     }
     return lp;
 }

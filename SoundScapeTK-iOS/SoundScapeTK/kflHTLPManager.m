@@ -134,7 +134,7 @@
     NSLog(@" count:: %lu || region list: %@", (unsigned long)[regionList count], [regionList objectAtIndex:0]);
     
     if ([[regionList objectAtIndex:0] respondsToSelector:@selector(idNum)]) {
-        HTLPLog(@" count:: %lu || id num: %lu", (unsigned long)[regionList count], [[regionList objectAtIndex:0] idNum]);
+        HTLPLog(@" count:: %lu || id num: %d", (unsigned long)[regionList count], [[regionList objectAtIndex:0] idNum]);
     }
     if (([regionList count] == 1) && (![[regionList objectAtIndex:0] respondsToSelector:@selector(idNum)])) {
         
@@ -163,14 +163,17 @@
         for (NSString *lrkey in self.scapeRegions) {
             HTLPLog(@"%@", lrkey);
             id region = [self.scapeRegions objectForKey:lrkey];
+            
             if ([region isKindOfClass:[kflLinkedCircleSynthRegion class]]) {
+            
                 kflLinkedCircleSynthRegion *lcsr = region;
                 HTLPLog(@"lcsr: %@", lcsr);
-                NSArray *params = lcsr.linkedParameters;
-                for (kflLinkedParameter *param in params) {
+                NSDictionary *params = lcsr.linkedParameters;
+                NSLog(@"PARAMS: %@", [params allKeys]);
+                for (NSString *paramKeyString in [params allKeys]) {
                     // adjust it to 0.0 if it's a _level pararam
+                    kflLinkedParameter *param = [params objectForKey:paramKeyString];
                     if (([param.paramName rangeOfString:@"_level"].location != NSNotFound) || ([param.paramName rangeOfString:@"_level"].location != NSNotFound)) {
-
                         [PdBase sendFloat:0.0 toReceiver:param.paramName];
                     }
                 }

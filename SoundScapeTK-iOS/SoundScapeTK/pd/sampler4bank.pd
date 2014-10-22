@@ -1,9 +1,9 @@
-#N canvas 657 650 802 303 10;
-#X msg -96 -253 play;
-#X msg -60 -253 stop;
-#X msg -22 -253 level 1;
-#X obj -96 -167 s 1_in;
-#X obj -13 -181 s 1_open;
+#N canvas 74 545 1435 455 10;
+#X msg -334 -241 play;
+#X msg -298 -241 stop;
+#X msg -260 -241 level 1;
+#X obj -334 -155 s 1_in;
+#X obj -251 -169 s 1_open;
 #N canvas 857 406 822 376 DAC 0;
 #X obj 447 -765 line~;
 #X obj 447 -823 / 127;
@@ -115,21 +115,37 @@ so the recirculation gain is limited to 0.5.;
 #X connect 19 0 6 1;
 #X restore -126 -26 pd DAC;
 #X obj -123 -49 hsl 128 15 0 127 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 0 1;
-#X obj 94 -174 noise~;
-#X obj 94 -145 send~ noise;
-#X text 81 -43 10_ = vox \, 1 = noise_level multiply \, 9 = harmonic
-\, 24300 = 2 second period \, left = channel;
-#X obj 94 -119 bpf_demo_ios 10 1 9 24300 ctr;
-#X obj -373 -136 play_sf_stereo 0;
-#X msg -13 -223 /Users/kfl/dev/git/public_projects/SoundScapeTK/SoundScapeTK-iOS/SoundScapeTK/pd/01.wav
+-1 -1 3000 1;
+#X obj 192 -140 noise~;
+#X obj 192 -111 send~ noise;
+#X obj -343 -86 play_sf_stereo 0;
+#X msg -251 -211 /Users/kfl/dev/git/public_projects/SoundScapeTK/SoundScapeTK-iOS/SoundScapeTK/pd/01.wav
 0;
-#X obj -270 -136 play_sf_stereo 1;
-#X obj -65 -136 play_sf_stereo 3;
-#X obj -167 -136 play_sf_stereo 2;
+#X obj -240 -86 play_sf_stereo 1;
+#X obj -35 -86 play_sf_stereo 3;
+#X obj -137 -86 play_sf_stereo 2;
+#X obj 192 -85 bpf_demo_ios 10 20 9 24300 ctr;
+#X text 81 -43 10_ = vox \, 20_ = center freq group/namespace (for
+sends) \, 9 = harmonic \, 24300 = 2 second period \, left = channel
+\,;
+#X obj 468 -116 s 10_lfo_phase;
+#X obj 558 -116 s 10_noise_level;
+#X obj 660 -116 s 10_pulse_width;
+#X obj 762 -116 s 10_pulse_level;
+#X obj 366 -116 s 20_center_freq;
+#X floatatom 365 -142 5 0 0 0 - - -;
+#X floatatom 467 -143 5 0 0 0 - - -;
+#X floatatom 560 -146 5 0 0 0 - - -;
+#X floatatom 662 -147 5 0 0 0 - - -;
+#X floatatom 761 -148 5 0 0 0 - - -;
 #X connect 0 0 3 0;
 #X connect 1 0 3 0;
 #X connect 2 0 3 0;
 #X connect 6 0 5 0;
 #X connect 7 0 8 0;
-#X connect 12 0 4 0;
+#X connect 10 0 4 0;
+#X connect 21 0 20 0;
+#X connect 22 0 16 0;
+#X connect 23 0 17 0;
+#X connect 24 0 18 0;
+#X connect 25 0 19 0;

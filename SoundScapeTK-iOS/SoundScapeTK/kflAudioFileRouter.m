@@ -304,35 +304,37 @@
     
     ARLog(@"linked params (%i): %@", lcsr.idNum, lcsr.linkedParameters);
 
-    if ([lcsr.linkedParameters count] ==2) {
+    if ([lcsr.linkedParameters objectForKey:@"rad"] != nil) {
         
-        kflLinkedParameter *lpA = [lcsr.linkedParameters objectAtIndex:0];
+        kflLinkedParameter *lpA = [lcsr.linkedParameters objectForKey:@"rad"];
         ARLog(@"lpA type: %@", [lpA class]);
-        ARLog(@"lpA type: %@, %@, %i", [lpA.paramName class], lpA.paramName, [lpA.paramName intValue]);
+        ARLog(@"lpA type: %@, %@, %i :: %f | %f", [lpA.paramName class], lpA.paramName, [lpA.paramName intValue], lpA.highValue, lpA.lowValue);
         
-        if ([lpA.paramName compare:@"x"] != NSOrderedSame) {
-            float normedDist = lcsr.internalDistance;
-            float interpolatedParamVal = (normedDist * (lpA.highValue - lpA.lowValue)) + lpA.lowValue;
-            ARLog(@"%f | %f | %f", normedDist, lpA.lowValue, lpA.highValue);
-            ARLog(@"interped: %f TO: %@", interpolatedParamVal, lpA.paramName);
-            [PdBase sendFloat:interpolatedParamVal toReceiver:lpA.paramName];
-        }
+        float normedDist = lcsr.internalDistance;
+        float interpolatedParamVal = (normedDist * (lpA.highValue - lpA.lowValue)) + lpA.lowValue;
+        ARLog(@"%f | %f | %f", normedDist, lpA.lowValue, lpA.highValue);
+        ARLog(@"interped: %f TO: %@", interpolatedParamVal, lpA.paramName);
+        [PdBase sendFloat:interpolatedParamVal toReceiver:lpA.paramName];
+    }
         
-        kflLinkedParameter *lpB = [lcsr.linkedParameters objectAtIndex:1];
-        ARLog(@"lpB type: %@", [lpB class]);
-        ARLog(@"lpB type: %@, %@, %i", [lpB.paramName class], lpB.paramName, [lpB.paramName intValue]);
-        
-        if ([lpB.paramName compare:@"x"] != NSOrderedSame) {
-            float angle = lcsr.angle;
-            ARLog(@"angle: %f", lcsr.angle);
-            ARLog(@"offset: %f", lcsr.angleOffset);
+    if ([lcsr.linkedParameters objectForKey:@"theta"] != nil) {
 
-            float interpolatedParamVal = angle / PI;
-            ARLog(@"%f", interpolatedParamVal);
+        kflLinkedParameter *lpB = [lcsr.linkedParameters objectForKey:@"theta"];
+        ARLog(@"lpB type: %@", [lpB class]);
+        ARLog(@"lpB type: %@, %@, %i :: %f | %f | %f | %f", [lpB.paramName class], lpB.paramName, [lpB.paramName intValue], lpB.highValue, lpB.lowValue, lpB.angle, lpB.angleOffset);
+        
+        float angle = lcsr.angle;
+        ARLog(@"angle: %f", lcsr.angle);
+        ARLog(@"offset: %f", lcsr.angleOffset);
+
+        float interpolatedParamVal = angle / PI;
+        ARLog(@"%f", interpolatedParamVal);
+        
+        interpolatedParamVal = (interpolatedParamVal * (lpB.highValue - lpB.lowValue)) + lpB.lowValue;
+        ARLog(@"%f", interpolatedParamVal);
             
-            ARLog(@"interped: %f TO: %@", interpolatedParamVal, lpB.paramName);
-            [PdBase sendFloat:interpolatedParamVal toReceiver:lpB.paramName];
-        }
+        ARLog(@"interped: %f TO: %@", interpolatedParamVal, lpB.paramName);
+        [PdBase sendFloat:interpolatedParamVal toReceiver:lpB.paramName];
     }
 }
 

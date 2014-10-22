@@ -627,7 +627,7 @@
                     NSArray *radiusArray = [paramsDict objectForKey:@"rad"];
                     
                     
-                    if ((radiusArray != nil) && ([radiusArray count] == 2)) {
+                    if ((radiusArray != nil) && ([radiusArray count] == 3)) {
                         
                         /**
                          *  TODO: More logic and error checking
@@ -639,12 +639,10 @@
                         JSONLog(@"reading low: %f", lowValA);
                         JSONLog(@"reading high: %f", highValA);
                         lpA = [kflLinkedParameter kflLinkedParameterWithString:paramStringA lowMappedVal:lowValA andHighMappedValue:highValA];
-                    } else {
-                        lpA = [kflLinkedParameter kflLinkedParameterWithString:@"x" lowMappedVal:0 andHighMappedValue:0];
                     }
 
                     NSArray *thetaArray = [[[rdict objectForKey:lrid] objectForKey:@"params"] objectForKey:@"theta"];
-                    if ((thetaArray != nil) && ([thetaArray count] == 3)) {
+                    if ((thetaArray != nil) && ([thetaArray count] == 4)) {
                         
                         /**
                          *  TODO: More logic and error checking
@@ -656,20 +654,33 @@
                         JSONLog(@"reading param string: %@", paramStringB);
                         JSONLog(@"reading low: %f", lowValB);
                         JSONLog(@"reading high: %f", highValB);
-                        lpB = [kflLinkedParameter kflLinkedParameterWithString:paramStringB lowMappedVal:lowValB andHighMappedValue:highValB];
+                        JSONLog(@"reading rot offset: %f", rotOffsetB);
+                        lpB = [kflLinkedParameter kflLinkedParameterWithString:paramStringB lowMappedVal:lowValB highMappedValue:highValB andAngleOffset:rotOffsetB];
                     
-                    } else {
-                        lpB = [kflLinkedParameter kflLinkedParameterWithString:@"x" lowMappedVal:0 andHighMappedValue:0];
                     }
+                    
+                    NSString *therad = nil;
+                    NSString *thetheta = nil;
                     
                     NSLog(@"??? %i, %i", (lpA != nil), (lpB != nil));
                     if ((lpA != nil) || (lpB != nil)) {
+                        if (lpA == nil) {
+                            therad = nil;
+                        } else {
+                            therad = @"rad";
+                        }
+                        if (lpB == nil) {
+                            thetheta = nil;
+                        } else {
+                            thetheta = @"theta";
+                        }
                         
                         kflLinkedCircleSynthRegion *lcsr = [kflLinkedCircleSynthRegion kflLinkedCircleSynthRegionWithCenter:ctr
                                                                                                                      radius:radius
                                                                                                                       idNum:[lrid intValue]
                                                                                                                       label:labelString
-                                                                                                               linkedParams:[NSArray    arrayWithObjects:lpA, lpB, nil]
+                                                                                                               linkedParams:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:lpA, lpB, nil]
+                                                                                                                                                        forKeys:[NSArray arrayWithObjects:therad, thetheta, nil]]
                                                                                                                 angleOffset:rotOffsetB
                                                                                                                      attack:attack
                                                                                                                     release:release
