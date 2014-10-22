@@ -8,23 +8,28 @@
 
 #import "kflLinkedCircleRegion.h"
 
+@implementation kflLinkedCircleRegion
+@synthesize radius, angle, angleOffset;
+@end
+
 @implementation kflLinkedCircleSFRegion
 
-@synthesize radius, numLinkedSoundfiles, numLoops, linkedSoundfiles, finishRule;
+@synthesize numLinkedSoundfiles, numLoops, linkedSoundfiles, finishRule, radiusMapped;
 
 + (kflLinkedCircleSFRegion *)kflLinkedCircleSFRegionWithCenter:(CGPoint)center
-                                              radius:(float)radius
-                                               idNum:(int)idNum
-                                               label:(NSString *)label
-                                    linkedSoundFiles:(NSArray *)lsf
-                                              attack:(int)atk
-                                             release:(int)rel
-                                               loops:(int)loops
-                                            finishRule:(kflRegionFinishRule)rule
-                                               lives:(int)lives
-                                              active:(BOOL)activeFlag
-                                          toActivate:(NSArray *)regionIDS
-                                            andState:(NSString *)state {
+                                                        radius:(float)radius
+                                                         idNum:(int)idNum
+                                                         label:(NSString *)label
+                                              linkedSoundFiles:(NSArray *)lsf
+                                                  radiusMapped:(BOOL)radMapped
+                                                        attack:(int)atk
+                                                       release:(int)rel
+                                                         loops:(int)loops
+                                                    finishRule:(kflRegionFinishRule)rule
+                                                         lives:(int)lives
+                                                        active:(BOOL)activeFlag
+                                                    toActivate:(NSArray *)regionIDS
+                                                      andState:(NSString *)state {
 
     kflLinkedCircleSFRegion *lcr = [[kflLinkedCircleSFRegion alloc] init];
     
@@ -34,6 +39,7 @@
         lcr.idNum = idNum; // this is the idNum of the region and the primary key
         lcr.label = label;
         lcr.linkedSoundfiles = lsf;
+        lcr.radiusMapped = radMapped;
         lcr.numLinkedSoundfiles = (int)[lsf count]; // should always == 1, for now...
         lcr.attackTime = atk;
         lcr.releaseTime = rel;
@@ -54,20 +60,20 @@
 
 @implementation kflLinkedCircleSynthRegion
 
-@synthesize radius, angle, angleOffset, linkedParameters, numLinkedParams;
+@synthesize linkedParameters, numLinkedParams;
 
 + (kflLinkedCircleSynthRegion *)kflLinkedCircleSynthRegionWithCenter:(CGPoint)center
-                                                    radius:(float)radius
-                                                     idNum:(int)idNum
-                                                     label:(NSString *)label
-                                              linkedParams:(NSArray *)params
+                                                              radius:(float)radius
+                                                               idNum:(int)idNum
+                                                               label:(NSString *)label
+                                                        linkedParams:(NSArray *)params
                                                          angleOffset:(float)aoffset
-                                                    attack:(int)atk
-                                                   release:(int)rel
-                                                     lives:(int)lives
-                                                    active:(BOOL)activeFlag
-                                                toActivate:(NSArray *)regionIDS
-                                                  andState:(NSString *)state {
+                                                              attack:(int)atk
+                                                             release:(int)rel
+                                                               lives:(int)lives
+                                                              active:(BOOL)activeFlag
+                                                          toActivate:(NSArray *)regionIDS
+                                                            andState:(NSString *)state {
     
     kflLinkedCircleSynthRegion *lcr = [[kflLinkedCircleSynthRegion alloc] init];
     

@@ -10,18 +10,29 @@
 #import <CoreLocation/CoreLocation.h>
 #import "kflLinkedRegion.h"
 
-@interface kflLinkedCircleSFRegion : kflLinkedRegion
 
-@property           float                   radius;
+
+@interface kflLinkedCircleRegion : kflLinkedRegion
+
+@property           float                   radius, angle, angleOffset;
+
+@end
+
+
+
+@interface kflLinkedCircleSFRegion : kflLinkedCircleRegion
+
 @property           int                     numLinkedSoundfiles, numLoops;
 @property           NSArray                 *linkedSoundfiles;
 @property           kflRegionFinishRule     finishRule;
+@property           BOOL                    radiusMapped;
 
 + (kflLinkedCircleSFRegion *)kflLinkedCircleSFRegionWithCenter:(CGPoint)center
                                                         radius:(float)radius
                                                          idNum:(int)idNum
                                                          label:(NSString *)label
                                               linkedSoundFiles:(NSArray *)lsf
+                                                  radiusMapped:(BOOL)radMapped
                                                         attack:(int)atk
                                                        release:(int)rel
                                                          loops:(int)loops
@@ -32,9 +43,10 @@
                                                       andState:(NSString *)state;
 @end
 
-@interface kflLinkedCircleSynthRegion : kflLinkedRegion
 
-@property           float                   radius, angle, angleOffset;
+
+@interface kflLinkedCircleSynthRegion : kflLinkedCircleRegion
+
 @property           int                     numLinkedParams;
 @property           NSArray                 *linkedParameters;
 
