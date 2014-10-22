@@ -703,6 +703,7 @@
                                                                                                         idNum:[lrid intValue]
                                                                                                         label:labelString
                                                                                              linkedSoundFiles:[NSArray arrayWithObject:lsf]
+                                                                                                 radiusMapped:YES
                                                                                                        attack:attack
                                                                                                       release:release
                                                                                                         loops:0

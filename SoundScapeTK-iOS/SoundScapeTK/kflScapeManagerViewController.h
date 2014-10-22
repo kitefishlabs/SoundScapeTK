@@ -65,7 +65,7 @@
 - (void)    readScapeFromJSON:(NSString *)jsonPath;
 - (void)    writeScapeToJSON;
 
-- (void)    flyToLocation:(CLLocationCoordinate2D)coords;
+- (void)    flyToLocation:(CLLocationCoordinate2D)coords; // FOR TESTING PURPOSES ONLY
 
 @end
 
