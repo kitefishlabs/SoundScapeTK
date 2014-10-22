@@ -16,35 +16,23 @@
 #define NPTS 3
 #define MIN_TIME_BETWEEN_HITS 0.1
 
+#define TIMEOUT 0.75
+#define TIME_DELTA 1.0
+
 @interface kflScapeManagerViewController()<MFMailComposeViewControllerDelegate>
-
-@property (strong, nonatomic) kflAppDelegate *appDelegate;
-
 @end
 
 @implementation kflScapeManagerViewController
 
-@synthesize appDelegate, notifyLbl, goBtn;
+@synthesize notifyLbl, goBtn;
 @synthesize jsonFilePath, locationManager, lapManager, htlpManager;
-@synthesize bLocationTrackingActive, timeout, timedelta, runningAcc;
+@synthesize bLocationTrackingActive;
 @synthesize titleCirclesImgView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        
-        self.appDelegate = (kflAppDelegate *)[[UIApplication sharedApplication] delegate];
-        
-        // setup "ENV" variables
-        timeout = 0.75;             // time to wait for a location fix after requesting it
-        timedelta = 1.0;            // time interval between location requests
-        runningAcc = 0.0;           // var for tracking the running avg. of the accuracy
-        
-        for (int i=0; i<NPTS; i++) {    //
-            runningAvgs[i] = 0.0;
-        }
-        raIndex = 0;                // running avg. index - index to the running avg. array
         
         [self resetTimingLoop];     //
         
@@ -58,12 +46,15 @@
         } else if ([CLLocationManager locationServicesEnabled]) {
             
             DLog(@"Core Location services are enabled!");
-            self.locationManager = [[CLLocationManager alloc] init];
+            locationManager = [[CLLocationManager alloc] init];
             
             [locationManager setDelegate:self];
             [locationManager setDistanceFilter:kCLDistanceFilterNone];
             [locationManager setDesiredAccuracy:kCLLocationAccuracyNearestTenMeters];
 //            [locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
+            if ([locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
+                [locationManager performSelector:@selector(requestWhenInUseAuthorization)];
+            }
         }
         self.mapVC = [[kflMKMapViewController alloc] initWithScapeVC:self];
     }
@@ -145,16 +136,16 @@
         [self resetTimingLoop];
         [self backgroundUpdate];
         NSLog(@"activate audio");
-        [self.appDelegate activateAudio:YES];
+        [(kflAppDelegate *)[[UIApplication sharedApplication] delegate] activateAudio:YES];
 //        [self.gpsVC.locTrackingSwitch setOn:YES];
         [self.goBtn setTitle:@"stop tracking" forState:UIControlStateNormal];
-        [self.appDelegate launchMapView];
+        [(kflAppDelegate *)[[UIApplication sharedApplication] delegate] launchMapView];
         NSLog(@"ON!");
     } else {
         //TURNING OFF
         [htlpManager killAll];
         [htlpManager.audioFileRouter resetRouter];
-        [self.appDelegate activateAudio:NO];
+        [(kflAppDelegate *)[[UIApplication sharedApplication] delegate] activateAudio:NO];
 //        [self.gpsVC.locTrackingSwitch setOn:NO];
         [self.goBtn setTitle:@"start tracking" forState:UIControlStateNormal];
         NSLog(@"off.");
@@ -166,7 +157,7 @@
 
 - (void) resetTimingLoop {
     
-    lapManager.timeout = timeout;
+    lapManager.timeout = TIMEOUT;
 }
 
 - (void) resetUserState {
@@ -205,19 +196,6 @@
 //    self.timedelta = floor(sender.value);
 //    [timedeltaLbl setText:[NSString stringWithFormat:@"%.2f", self.timedelta]];
 //}
-
-- (void) updateRunningAccAvg:(float)amount {
-    
-    runningAvgs[raIndex] = amount;
-    float sum = 0.0;
-    for (int i=0; i<NPTS; i++) {
-        sum += runningAvgs[i];
-    }
-    raIndex = (raIndex + 1) % NPTS;
-    [self.gpsVC.avgAccLbl setText:[NSString stringWithFormat:@"%.02f", (sum / (float)NPTS)]];
-}
-
-
 
 #ifdef LOG_TO_EMAIL
 #pragma mark logging to email
@@ -293,7 +271,7 @@
             
             // Create and register your timers
             // ...
-            NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:timedelta
+            NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:TIME_DELTA
                                                               target:self
                                                             selector:@selector(backgroundUpdate)
                                                             userInfo:nil
@@ -319,7 +297,6 @@
     //  update the labels
     [self.gpsVC.latLbl setText:[NSString stringWithFormat:@"%f", newLat]];
     [self.gpsVC.longLbl setText:[NSString stringWithFormat:@"%f", newLon]];
-    [self updateRunningAccAvg:9.0];
     
     // CLLocation with offset
     CLLocation *theLoc = [[CLLocation alloc] initWithLatitude:newLat longitude:newLon];

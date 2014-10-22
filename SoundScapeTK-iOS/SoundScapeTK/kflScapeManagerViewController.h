@@ -37,11 +37,9 @@
 @property (strong, nonatomic)   kflHTLPManager          *htlpManager;
 
 @property                       BOOL                    bLocationTrackingActive;
-@property                       float                   timeout, timedelta, runningAcc;
 
 @property (strong, nonatomic)   kflMKMapViewController  *mapVC;
-
-@property (strong, nonatomic)   kflStatusViewController    *gpsVC;
+@property (strong, nonatomic)   kflStatusViewController *gpsVC;
 
 @property (strong, nonatomic)   IBOutlet UIImageView    *titleCirclesImgView;
 
@@ -63,7 +61,6 @@
 - (void)    backgroundUpdate;
 - (void)    updateLocation;
 - (void)    stopUpdatingLocation:(NSString *)state;
-- (void)    updateRunningAccAvg:(float)amount;
 
 - (void)    readScapeFromJSON:(NSString *)jsonPath;
 - (void)    writeScapeToJSON;
