@@ -69,6 +69,51 @@
         //trigger play
         ARLog(@"PLAY: %@", [NSString stringWithFormat:@"%i_in", slot]);
         [PdBase sendMessage:@"play" withArguments:nil toReceiver:[NSString stringWithFormat:@"%i_in", slot]];
+        
+        
+        
+        __block UIBackgroundTaskIdentifier bgTaskID = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler: ^{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (bgTaskID != UIBackgroundTaskInvalid)
+                {
+                    [[UIApplication sharedApplication] endBackgroundTask:bgTaskID];
+                    bgTaskID = UIBackgroundTaskInvalid;
+                }
+            });
+        }];
+        
+        
+        NSDictionary *dict = [NSDictionary dictionaryWithObject:lcr forKey:@"lcr"];
+        NSLog(@"schedule timer %f seconds from now.", (lsf.length - lsf.pausedOffset));
+        NSTimer *stopTimer = [NSTimer timerWithTimeInterval:(lsf.length - lsf.pausedOffset) target:self selector:@selector(stopLinkedSoundFileForTimer:) userInfo:dict repeats:NO];
+        
+        lcr.stopTimer = stopTimer;
+        NSLog(@"stop timer: %@", lcr.stopTimer);
+        
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            
+            //change to NSRunLoopCommonModes
+            [ [NSRunLoop currentRunLoop] addTimer:stopTimer
+                                          forMode:NSRunLoopCommonModes];
+            
+            // Create/get a run loop an run it
+            // Note: will return after the last timer's delegate has completed its job
+            [[NSRunLoop currentRunLoop] run];
+            
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (bgTaskID != UIBackgroundTaskInvalid)
+                {
+                    // if you don't call endBackgroundTask, the OS will exit your app.
+                    [[UIApplication sharedApplication] endBackgroundTask:bgTaskID];
+                    bgTaskID = UIBackgroundTaskInvalid;
+                }
+            });
+        });
+        NSLog(@"At end of play call:\nSTATE for region ID %i -- %@", lcr.idNum, lcr.state);
+        
+        
         return lsf.pausedOffset;
     } else {
         return -1.f;

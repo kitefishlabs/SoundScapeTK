@@ -84,18 +84,18 @@
             if (dist <= lcr.radius) {
                 
                 float angle = atan2f((location.y - lcr.center.y), (location.x - lcr.center.x));
-                NSLog(@"angle----------");
-                NSLog(@"angle1: %f", angle);
+                HTLPLog(@"angle----------");
+                HTLPLog(@"angle1: %f", angle);
                 
                 lcr.internalDistance = dist / lcr.radius;
                 angle -= (lcr.angleOffset * PI);
-                NSLog(@"angle2: %f", angle);
+                HTLPLog(@"angle2: %f", angle);
                 
                 if (angle <= -PI) { angle += TWO_PI; }
-                NSLog(@"angle3: %f", angle);
+                HTLPLog(@"angle3: %f", angle);
                 
                 angle = ABS(angle);
-                NSLog(@"angle4: %f", angle);
+                HTLPLog(@"angle4: %f", angle);
                 
                 lcr.angle = angle;
                 HTLPLog(@"====== circle HIT: %ul ====== int. dist: %f", lcr.idNum, lcr.internalDistance);
@@ -169,7 +169,7 @@
                 kflLinkedCircleSynthRegion *lcsr = region;
                 HTLPLog(@"lcsr: %@", lcsr);
                 NSDictionary *params = lcsr.linkedParameters;
-                NSLog(@"PARAMS: %@", [params allKeys]);
+                HTLPLog(@"PARAMS: %@", [params allKeys]);
                 for (NSString *paramKeyString in [params allKeys]) {
                     // adjust it to 0.0 if it's a _level pararam
                     kflLinkedParameter *param = [params objectForKey:paramKeyString];
