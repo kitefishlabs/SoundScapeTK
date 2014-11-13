@@ -32,11 +32,41 @@
             "attack" : 1000,
             "release" : 1000,
             "params" : {
-                "rad" : ["10_level", 1, 0 ],
-                "theta" : ["10_phase", 0, 1, 0.5]
+                "rad" : ["10_noise_level", 1, 0 ],
+                "theta" : ["20_center_freq", 100, 120, 0.0]
             },
             "lives" : 99,
-            "label" : "no3"
+            "label" : "no3a"
+        },
+        "4" : {
+            "shape" : "CIRCLE",
+            "lat" : 42.925704,
+            "lon" : -78.873758,
+            "rad" : 0.00024,
+            "trig" : "-1",
+            "attack" : 1000,
+            "release" : 1000,
+            "params" : {
+            "rad" : ["10_pulse_level", 1, 0 ],
+            "theta" : ["10_pulse_width", 0, 1, 0.5]
+            },
+            "lives" : 99,
+            "label" : "no3b"
+        },
+        "5" : {
+            "shape" : "CIRCLE",
+            "lat" : 42.925704,
+            "lon" : -78.873758,
+            "rad" : 0.00024,
+            "trig" : "-1",
+            "attack" : 1000,
+            "release" : 1000,
+            "params" : {
+            "rad" : ["10_lfo_phase", 0, 1 ]
+            },
+            "lives" : 99,
+            "label" : "no3c"
         }
+
     }
 }

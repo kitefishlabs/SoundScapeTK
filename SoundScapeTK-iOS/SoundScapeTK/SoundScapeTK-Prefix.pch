@@ -16,7 +16,7 @@
 #endif
 
 //#define LOCOFFSET
-//#define MONITOR_PD
+#define MONITOR_PD
 //#define LOG_TO_EMAIL
 //#define SHOW_CIRCLES
 #define FLY_TO_LOC
@@ -52,9 +52,9 @@
 
 
 // uncomment to debug JSON reads (and, someday, writes)
-//#ifndef DEBUG_JSON
-//#define DEBUG_JSON
-//#endif
+#ifndef DEBUG_JSON
+#define DEBUG_JSON
+#endif
 
 #if defined(DEBUG_JSON) && defined(DEBUG)
 #define JSONLog(...) NSLog(@"%s %@", __PRETTY_FUNCTION__, [NSString stringWithFormat:__VA_ARGS__])
@@ -85,9 +85,9 @@
 #endif
 
 // uncomment to debug Pd Logs
-//#ifndef DEBUG_PD
-//#define DEBUG_PD
-//#endif
+#ifndef DEBUG_PD
+#define DEBUG_PD
+#endif
 
 #if defined(DEBUG_PD) && defined(DEBUG)
 #define PdLog(...) NSLog(@"%s %@", __PRETTY_FUNCTION__, [NSString stringWithFormat:__VA_ARGS__])
@@ -106,7 +106,7 @@
 #define HTLPLog(...) do { } while (0)
 #endif
 
-// uncomment to debug HTLP Logs
+// uncomment to debug AUDIO_ROUTER Logs
 #ifndef DEBUG_AUDIO_ROUTER
 #define DEBUG_AUDIO_ROUTER
 #endif
