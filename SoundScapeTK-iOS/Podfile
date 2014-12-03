@@ -1,0 +1,9 @@
+platform :ios, "8.0"
+
+
+target "WheelWithinWheel" do
+
+pod 'libpd', '~> 0.7'
+
+end
+
