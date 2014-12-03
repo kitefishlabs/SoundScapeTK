@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		22FA08C200B242DA95418E1C /* libPods-WheelWithinWheel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B95E69E99CB4879A27602D0 /* libPods-WheelWithinWheel.a */; };
 		860697A11930E92B000353A3 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8638E44819048C1E007371CE /* AudioToolbox.framework */; };
 		860697A21930E92B000353A3 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8638E44919048C1E007371CE /* AVFoundation.framework */; };
 		860697A31930E92B000353A3 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8638E44A19048C1E007371CE /* CoreLocation.framework */; };
@@ -21,6 +22,7 @@
 		860697AC1930E92B000353A3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8638E3B2190489A3007371CE /* Foundation.framework */; };
 		860697D81930EE8A000353A3 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 860697D71930EE8A000353A3 /* Default-568h@2x.png */; };
 		8608EC3019C925D400B2D73B /* 02_cymbal.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8608EC2F19C925D400B2D73B /* 02_cymbal.wav */; };
+		860BD7FD1A2FA469007D0440 /* SoundScapeTKTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 860BD7FC1A2FA469007D0440 /* SoundScapeTKTests.m */; };
 		861105081964785A00CD810A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 861104FE1964785A00CD810A /* InfoPlist.strings */; };
 		861105091964785A00CD810A /* kflAboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 861105001964785A00CD810A /* kflAboutViewController.xib */; };
 		8611050A1964785A00CD810A /* kflStatusViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 861105021964785A00CD810A /* kflStatusViewController.xib */; };
@@ -44,9 +46,8 @@
 		862D789E19648DEA00CA278C /* kflLinkedParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = 862D789D19648DEA00CA278C /* kflLinkedParameter.m */; };
 		862D78A01964958700CA278C /* buffalony.gpson in Resources */ = {isa = PBXBuildFile; fileRef = 862D789F1964958700CA278C /* buffalony.gpson */; };
 		862D78A61964AAEA00CA278C /* kflHTLPManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 862D78A31964AAEA00CA278C /* kflHTLPManager.m */; };
-		869B3FAC1969A44900742F05 /* bpf_demo_ios.pd in Resources */ = {isa = PBXBuildFile; fileRef = 869B3FAA1969A44900742F05 /* bpf_demo_ios.pd */; };
-		869B3FAD1969A44900742F05 /* demo_synthesizer_ios.pd in Resources */ = {isa = PBXBuildFile; fileRef = 869B3FAB1969A44900742F05 /* demo_synthesizer_ios.pd */; };
-		869B3FB2196A0A2D00742F05 /* reverb-echo.pd in Resources */ = {isa = PBXBuildFile; fileRef = 869B3FB1196A0A2D00742F05 /* reverb-echo.pd */; };
+		864346D819F824550064F2F2 /* bpf_demo_ios.pd in Resources */ = {isa = PBXBuildFile; fileRef = 864346D619F824550064F2F2 /* bpf_demo_ios.pd */; };
+		864346D919F824550064F2F2 /* reverb-echo.pd in Resources */ = {isa = PBXBuildFile; fileRef = 864346D719F824550064F2F2 /* reverb-echo.pd */; };
 		86DC88B3196C4E7C00ABA100 /* Images-2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86DC88B2196C4E7C00ABA100 /* Images-2.xcassets */; };
 		86E278A319C9190E0032134D /* 01.wav in Resources */ = {isa = PBXBuildFile; fileRef = 86E278A019C9190E0032134D /* 01.wav */; };
 		86E278A419C9190E0032134D /* play_sf_mono.pd in Resources */ = {isa = PBXBuildFile; fileRef = 86E278A119C9190E0032134D /* play_sf_mono.pd */; };
@@ -54,26 +55,23 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		864346D019F73CD90064F2F2 /* PBXContainerItemProxy */ = {
+		860BD7FE1A2FA469007D0440 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 86652094192CF92600EFFA60 /* libpd.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D2AAC07E0554694100DB518D;
-			remoteInfo = "libpd-ios";
-		};
-		864346D219F73CD90064F2F2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 86652094192CF92600EFFA60 /* libpd.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 119013AB1486450C00086F19;
-			remoteInfo = "libpd-osx";
+			containerPortal = 8638E3A7190489A3007371CE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 860697861930E92B000353A3;
+			remoteInfo = WheelWithinWheel;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5B95E69E99CB4879A27602D0 /* libPods-WheelWithinWheel.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WheelWithinWheel.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		860697CE1930E92B000353A3 /* SoundScapeTK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SoundScapeTK.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		860697D71930EE8A000353A3 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		8608EC2F19C925D400B2D73B /* 02_cymbal.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = 02_cymbal.wav; path = SoundScapeTK/pd/02_cymbal.wav; sourceTree = SOURCE_ROOT; };
+		860BD7F81A2FA469007D0440 /* SoundScapeTKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SoundScapeTKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		860BD7FB1A2FA469007D0440 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		860BD7FC1A2FA469007D0440 /* SoundScapeTKTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SoundScapeTKTests.m; sourceTree = "<group>"; };
 		861104FF1964785A00CD810A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = SoundScapeTK/en.lproj/InfoPlist.strings; sourceTree = SOURCE_ROOT; };
 		861105011964785A00CD810A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = SoundScapeTK/en.lproj/kflAboutViewController.xib; sourceTree = SOURCE_ROOT; };
 		861105031964785A00CD810A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = SoundScapeTK/en.lproj/kflStatusViewController.xib; sourceTree = SOURCE_ROOT; };
@@ -127,15 +125,14 @@
 		8638E44E19048C1E007371CE /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		8638E44F19048C1E007371CE /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		8638E45019048C1E007371CE /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		86652094192CF92600EFFA60 /* libpd.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = libpd.xcodeproj; path = "../../../tools/pd-for-ios/libpd/libpd.xcodeproj"; sourceTree = "<group>"; };
-		869B3FAA1969A44900742F05 /* bpf_demo_ios.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = bpf_demo_ios.pd; path = SoundScapeTK/bpf_demo_ios.pd; sourceTree = SOURCE_ROOT; };
-		869B3FAB1969A44900742F05 /* demo_synthesizer_ios.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = demo_synthesizer_ios.pd; path = SoundScapeTK/demo_synthesizer_ios.pd; sourceTree = SOURCE_ROOT; };
-		869B3FB1196A0A2D00742F05 /* reverb-echo.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "reverb-echo.pd"; path = "SoundScapeTK/reverb-echo.pd"; sourceTree = SOURCE_ROOT; };
+		864346D619F824550064F2F2 /* bpf_demo_ios.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = bpf_demo_ios.pd; path = SoundScapeTK/pd/bpf_demo_ios.pd; sourceTree = SOURCE_ROOT; };
+		864346D719F824550064F2F2 /* reverb-echo.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "reverb-echo.pd"; path = "SoundScapeTK/pd/reverb-echo.pd"; sourceTree = SOURCE_ROOT; };
 		86DC88B2196C4E7C00ABA100 /* Images-2.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = "Images-2.xcassets"; path = "SoundScapeTK/Images-2.xcassets"; sourceTree = SOURCE_ROOT; };
 		86DC88B8196C529700ABA100 /* icon1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon1024.png; path = SoundScapeTK/icon1024.png; sourceTree = "<group>"; };
 		86E278A019C9190E0032134D /* 01.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = 01.wav; path = SoundScapeTK/pd/01.wav; sourceTree = SOURCE_ROOT; };
 		86E278A119C9190E0032134D /* play_sf_mono.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = play_sf_mono.pd; path = SoundScapeTK/pd/play_sf_mono.pd; sourceTree = SOURCE_ROOT; };
 		86E278A219C9190E0032134D /* play_sf_stereo.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = play_sf_stereo.pd; path = SoundScapeTK/pd/play_sf_stereo.pd; sourceTree = SOURCE_ROOT; };
+		9AC80FA170F544D6BEA58B40 /* Pods-WheelWithinWheel.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WheelWithinWheel.xcconfig"; path = "Pods/Pods-WheelWithinWheel.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,20 +152,46 @@
 				860697AA1930E92B000353A3 /* CoreGraphics.framework in Frameworks */,
 				860697AB1930E92B000353A3 /* UIKit.framework in Frameworks */,
 				860697AC1930E92B000353A3 /* Foundation.framework in Frameworks */,
+				22FA08C200B242DA95418E1C /* libPods-WheelWithinWheel.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		860BD7F51A2FA469007D0440 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		860BD7F91A2FA469007D0440 /* SoundScapeTKTests */ = {
+			isa = PBXGroup;
+			children = (
+				860BD7FC1A2FA469007D0440 /* SoundScapeTKTests.m */,
+				860BD7FA1A2FA469007D0440 /* Supporting Files */,
+			);
+			path = SoundScapeTKTests;
+			sourceTree = "<group>";
+		};
+		860BD7FA1A2FA469007D0440 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				860BD7FB1A2FA469007D0440 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		8638E3A6190489A3007371CE = {
 			isa = PBXGroup;
 			children = (
 				860697D71930EE8A000353A3 /* Default-568h@2x.png */,
-				86652094192CF92600EFFA60 /* libpd.xcodeproj */,
 				8638E3B8190489A3007371CE /* SoundScapeTK */,
+				860BD7F91A2FA469007D0440 /* SoundScapeTKTests */,
 				8638E3B1190489A3007371CE /* Frameworks */,
 				8638E3B0190489A3007371CE /* Products */,
+				9AC80FA170F544D6BEA58B40 /* Pods-WheelWithinWheel.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -176,6 +199,7 @@
 			isa = PBXGroup;
 			children = (
 				860697CE1930E92B000353A3 /* SoundScapeTK.app */,
+				860BD7F81A2FA469007D0440 /* SoundScapeTKTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -196,6 +220,7 @@
 				8638E3B4190489A3007371CE /* CoreGraphics.framework */,
 				8638E3B6190489A3007371CE /* UIKit.framework */,
 				8638E3CB190489A3007371CE /* XCTest.framework */,
+				5B95E69E99CB4879A27602D0 /* libPods-WheelWithinWheel.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -258,23 +283,13 @@
 			children = (
 				86E278A019C9190E0032134D /* 01.wav */,
 				8608EC2F19C925D400B2D73B /* 02_cymbal.wav */,
+				864346D619F824550064F2F2 /* bpf_demo_ios.pd */,
+				864346D719F824550064F2F2 /* reverb-echo.pd */,
 				86E278A119C9190E0032134D /* play_sf_mono.pd */,
 				86E278A219C9190E0032134D /* play_sf_stereo.pd */,
-				869B3FAA1969A44900742F05 /* bpf_demo_ios.pd */,
-				869B3FAB1969A44900742F05 /* demo_synthesizer_ios.pd */,
-				869B3FB1196A0A2D00742F05 /* reverb-echo.pd */,
 				861105411964796900CD810A /* sampler4bank.pd */,
 			);
 			path = pd;
-			sourceTree = "<group>";
-		};
-		864346CC19F73CD90064F2F2 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				864346D119F73CD90064F2F2 /* libpd-ios.a */,
-				864346D319F73CD90064F2F2 /* libpd-osx.a */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		86C1F3971937E748006F661F /* GPSONs */ = {
@@ -325,22 +340,42 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		860697861930E92B000353A3 /* WheelWithinWheel */ = {
+		860697861930E92B000353A3 /* SoundScapeTK */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 860697CB1930E92B000353A3 /* Build configuration list for PBXNativeTarget "WheelWithinWheel" */;
+			buildConfigurationList = 860697CB1930E92B000353A3 /* Build configuration list for PBXNativeTarget "SoundScapeTK" */;
 			buildPhases = (
+				600332CEE6CA489F9E20F19B /* Check Pods Manifest.lock */,
 				860697891930E92B000353A3 /* Sources */,
 				8606979F1930E92B000353A3 /* Frameworks */,
 				860697AD1930E92B000353A3 /* Resources */,
+				80C98EF3903940689A0F11B6 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = WheelWithinWheel;
+			name = SoundScapeTK;
 			productName = ArnoldArboretum2;
 			productReference = 860697CE1930E92B000353A3 /* SoundScapeTK.app */;
 			productType = "com.apple.product-type.application";
+		};
+		860BD7F71A2FA469007D0440 /* SoundScapeTKTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 860BD8001A2FA469007D0440 /* Build configuration list for PBXNativeTarget "SoundScapeTKTests" */;
+			buildPhases = (
+				860BD7F41A2FA469007D0440 /* Sources */,
+				860BD7F51A2FA469007D0440 /* Frameworks */,
+				860BD7F61A2FA469007D0440 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				860BD7FF1A2FA469007D0440 /* PBXTargetDependency */,
+			);
+			name = SoundScapeTKTests;
+			productName = SoundScapeTKTests;
+			productReference = 860BD7F81A2FA469007D0440 /* SoundScapeTKTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -351,6 +386,12 @@
 				CLASSPREFIX = kfl;
 				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = "Kitefish Labs";
+				TargetAttributes = {
+					860BD7F71A2FA469007D0440 = {
+						CreatedOnToolsVersion = 6.1.1;
+						TestTargetID = 860697861930E92B000353A3;
+					};
+				};
 			};
 			buildConfigurationList = 8638E3AA190489A3007371CE /* Build configuration list for PBXProject "SoundScapeTK" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -362,35 +403,13 @@
 			mainGroup = 8638E3A6190489A3007371CE;
 			productRefGroup = 8638E3B0190489A3007371CE /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 864346CC19F73CD90064F2F2 /* Products */;
-					ProjectRef = 86652094192CF92600EFFA60 /* libpd.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
-				860697861930E92B000353A3 /* WheelWithinWheel */,
+				860697861930E92B000353A3 /* SoundScapeTK */,
+				860BD7F71A2FA469007D0440 /* SoundScapeTKTests */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		864346D119F73CD90064F2F2 /* libpd-ios.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "libpd-ios.a";
-			remoteRef = 864346D019F73CD90064F2F2 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		864346D319F73CD90064F2F2 /* libpd-osx.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "libpd-osx.a";
-			remoteRef = 864346D219F73CD90064F2F2 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		860697AD1930E92B000353A3 /* Resources */ = {
@@ -405,10 +424,9 @@
 				861105081964785A00CD810A /* InfoPlist.strings in Resources */,
 				862308AB196C549D0022D8D7 /* icon1024-noALPHA.png in Resources */,
 				860697D81930EE8A000353A3 /* Default-568h@2x.png in Resources */,
-				869B3FAD1969A44900742F05 /* demo_synthesizer_ios.pd in Resources */,
-				869B3FB2196A0A2D00742F05 /* reverb-echo.pd in Resources */,
+				864346D919F824550064F2F2 /* reverb-echo.pd in Resources */,
 				861105481964796900CD810A /* sampler4bank.pd in Resources */,
-				869B3FAC1969A44900742F05 /* bpf_demo_ios.pd in Resources */,
+				864346D819F824550064F2F2 /* bpf_demo_ios.pd in Resources */,
 				86E278A419C9190E0032134D /* play_sf_mono.pd in Resources */,
 				86DC88B3196C4E7C00ABA100 /* Images-2.xcassets in Resources */,
 				86E278A519C9190E0032134D /* play_sf_stereo.pd in Resources */,
@@ -416,7 +434,47 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		860BD7F61A2FA469007D0440 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		600332CEE6CA489F9E20F19B /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		80C98EF3903940689A0F11B6 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-WheelWithinWheel-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		860697891930E92B000353A3 /* Sources */ = {
@@ -442,7 +500,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		860BD7F41A2FA469007D0440 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				860BD7FD1A2FA469007D0440 /* SoundScapeTKTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		860BD7FF1A2FA469007D0440 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 860697861930E92B000353A3 /* SoundScapeTK */;
+			targetProxy = 860BD7FE1A2FA469007D0440 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		861104FE1964785A00CD810A /* InfoPlist.strings */ = {
@@ -483,6 +557,7 @@
 /* Begin XCBuildConfiguration section */
 		860697CC1930E92B000353A3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9AC80FA170F544D6BEA58B40 /* Pods-WheelWithinWheel.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -492,17 +567,18 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SoundScapeTK/SoundScapeTK-Prefix.pch";
 				INFOPLIST_FILE = "SoundScapeTK-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				PRODUCT_NAME = SoundScapeTK;
 				PROVISIONING_PROFILE = "";
 				USER_HEADER_SEARCH_PATHS = "~/dev/git/tools/pd-for-ios/libpd/** ~/dev/git/public_projects/SoundScapeTK/**";
-				VALID_ARCHS = "armv7 armv7s";
+				VALID_ARCHS = "armv7 armv7s arm64";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
 		};
 		860697CD1930E92B000353A3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9AC80FA170F544D6BEA58B40 /* Pods-WheelWithinWheel.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -513,12 +589,54 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SoundScapeTK/SoundScapeTK-Prefix.pch";
 				INFOPLIST_FILE = "SoundScapeTK-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				PRODUCT_NAME = SoundScapeTK;
 				PROVISIONING_PROFILE = "";
 				USER_HEADER_SEARCH_PATHS = "~/dev/git/tools/pd-for-ios/libpd/** ~/dev/git/public_projects/SoundScapeTK/**";
-				VALID_ARCHS = "armv7 armv7s";
+				VALID_ARCHS = "armv7 armv7s arm64";
 				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		860BD8011A2FA469007D0440 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = SoundScapeTKTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SoundScapeTK.app/SoundScapeTK";
+			};
+			name = Debug;
+		};
+		860BD8021A2FA469007D0440 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = SoundScapeTKTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SoundScapeTK.app/SoundScapeTK";
 			};
 			name = Release;
 		};
@@ -559,7 +677,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "899628E3-BB88-4437-88F7-275EA004E587";
 				SDKROOT = iphoneos;
-				VALID_ARCHS = "armv7 armv7s";
+				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Debug;
 		};
@@ -594,14 +712,14 @@
 				PROVISIONING_PROFILE = "899628E3-BB88-4437-88F7-275EA004E587";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
-				VALID_ARCHS = "armv7 armv7s";
+				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		860697CB1930E92B000353A3 /* Build configuration list for PBXNativeTarget "WheelWithinWheel" */ = {
+		860697CB1930E92B000353A3 /* Build configuration list for PBXNativeTarget "SoundScapeTK" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				860697CC1930E92B000353A3 /* Debug */,
@@ -609,6 +727,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		860BD8001A2FA469007D0440 /* Build configuration list for PBXNativeTarget "SoundScapeTKTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				860BD8011A2FA469007D0440 /* Debug */,
+				860BD8021A2FA469007D0440 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		8638E3AA190489A3007371CE /* Build configuration list for PBXProject "SoundScapeTK" */ = {
 			isa = XCConfigurationList;

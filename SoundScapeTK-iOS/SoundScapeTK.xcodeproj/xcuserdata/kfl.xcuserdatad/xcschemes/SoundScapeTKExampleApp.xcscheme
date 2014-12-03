@@ -20,6 +20,34 @@
                ReferencedContainer = "container:ArnoldArboretum.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "860BD7E81A2FA43C007D0440"
+               BuildableName = "WheelWithinWheel Tests.xctest"
+               BlueprintName = "WheelWithinWheel Tests"
+               ReferencedContainer = "container:SoundScapeTK.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "860BD7F71A2FA469007D0440"
+               BuildableName = "SoundScapeTKTests.xctest"
+               BlueprintName = "SoundScapeTKTests"
+               ReferencedContainer = "container:SoundScapeTK.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -28,13 +56,33 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Debug">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "860BD7E81A2FA43C007D0440"
+               BuildableName = "WheelWithinWheel Tests.xctest"
+               BlueprintName = "WheelWithinWheel Tests"
+               ReferencedContainer = "container:SoundScapeTK.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "860BD7F71A2FA469007D0440"
+               BuildableName = "SoundScapeTKTests.xctest"
+               BlueprintName = "SoundScapeTKTests"
+               ReferencedContainer = "container:SoundScapeTK.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "860697861930E92B000353A3"
             BuildableName = "SoundScapeTK.app"
-            BlueprintName = "WheelWithinWheel"
+            BlueprintName = "SoundScapeTK"
             ReferencedContainer = "container:SoundScapeTK.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -53,7 +101,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "860697861930E92B000353A3"
             BuildableName = "SoundScapeTK.app"
-            BlueprintName = "WheelWithinWheel"
+            BlueprintName = "SoundScapeTK"
             ReferencedContainer = "container:SoundScapeTK.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

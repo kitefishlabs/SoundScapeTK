@@ -5,7 +5,7 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>03560677-4B6D-40AA-B4C6-DAED8EB7C8E1</string>
+	<string>DE811100-B5EF-4A0E-AEC5-AAE9D5FA7730</string>
 	<key>IDESourceControlProjectName</key>
 	<string>SoundScapeTK</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
@@ -14,11 +14,11 @@
 		<string>github.com:kitefishlabs/SoundScapeTK.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>SoundScapeTK-iOS/SoundScapeTK.xcodeproj</string>
+	<string>SoundScapeTK-iOS/SoundScapeTK.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>593714E2B130DF6D675FF031F4B386F87ED6AA5E</key>
-		<string>../../..</string>
+		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>github.com:kitefishlabs/SoundScapeTK.git</string>

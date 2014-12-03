@@ -517,13 +517,10 @@
         
         JSONLog(@"origin: %@, %@, relative?: %i", origin_X, origin_Y, relFlag);
         
-        if ((origin_X != nil) && (origin_Y != nil)) {
-            
-            if (relFlag) {
-                originX = [origin_X floatValue];
-                originY = [origin_Y floatValue];
-            }
-        }  
+        if (((origin_X != nil) && (origin_Y != nil)) && relFlag) {
+            originX = [origin_X floatValue];
+            originY = [origin_Y floatValue];
+        }
 
         for (int i=0; i<[rdkeys count]; i++) {
             
