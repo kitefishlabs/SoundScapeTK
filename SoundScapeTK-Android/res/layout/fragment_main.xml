@@ -10,6 +10,7 @@
         android:id="@+id/btn_start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/button_start" />
+        android:textOff="@string/button_start"
+        android:textOn="@string/button_stop" />
 	
 </LinearLayout>

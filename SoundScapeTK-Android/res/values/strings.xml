@@ -6,7 +6,7 @@
     <string name="title_status">Status</string>
     <string name="title_map">Map</string>
     <string name="action_settings">Settings</string>
-    <string name="button_start">START</string>
+    <string name="button_start">START</string><string name="button_stop">STOP</string>
     <string name="gps_section_title">GPS Info</string>
     <string name="gps_status_label">GPS:</string>
     <string name="gps_status">OFF</string>

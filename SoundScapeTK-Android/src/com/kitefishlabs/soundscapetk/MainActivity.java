@@ -146,26 +146,25 @@ public class MainActivity extends ActionBarActivity implements
 		// Start with updates turned off
 		mUpdatesRequested = false;
 
-		ToggleButton onoffTgl = (ToggleButton)
-		findViewById(com.kitefishlabs.soundscapetk.R.id.btn_start);
+//		ToggleButton onoffTgl = (ToggleButton)findViewById(com.kitefishlabs.soundscapetk.R.id.btn_start);
+//		
+//		 Log.v("tgl: ", onoffTgl.toString());
 		
-		 Log.v("tgl: ", onoffTgl.toString());
-		
-		 onoffTgl.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-			 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				if (isChecked) {
-					// The toggle is enabled
-					mUpdatesRequested = true;
-					mEditor.putBoolean("KEY_UPDATES_ON", true);
-					mEditor.commit();
-				} else {
-					// The toggle is disabled
-					mUpdatesRequested = false;
-					mEditor.putBoolean("KEY_UPDATES_ON", false);
-					mEditor.commit();
-				}
-			}
-		});
+//		 onoffTgl.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//			 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//				if (isChecked) {
+//					// The toggle is enabled
+//					mUpdatesRequested = true;
+//					mEditor.putBoolean("KEY_UPDATES_ON", true);
+//					mEditor.commit();
+//				} else {
+//					// The toggle is disabled
+//					mUpdatesRequested = false;
+//					mEditor.putBoolean("KEY_UPDATES_ON", false);
+//					mEditor.commit();
+//				}
+//			}
+//		});
 	}
 
 	@Override
