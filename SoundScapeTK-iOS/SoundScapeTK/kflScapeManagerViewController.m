@@ -29,39 +29,16 @@
 @synthesize bLocationTrackingActive;
 @synthesize titleCirclesImgView;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        
-        [self resetTimingLoop];     //
-        
-        if (![CLLocationManager locationServicesEnabled]) { // class method!
-            UIAlertView *servicesDisabledAlert = [[UIAlertView alloc] initWithTitle:@"Location Services Disabled"
-                                                                            message:@"You currently have all location services for this device disabled. If you proceed, you will be asked to confirm whether location services should be reenabled."
-                                                                           delegate:nil
-                                                                  cancelButtonTitle:@"OK"
-                                                                  otherButtonTitles:nil];
-            [servicesDisabledAlert show];
-        } else if ([CLLocationManager locationServicesEnabled]) {
-            
-            DLog(@"Core Location services are enabled!");
-            locationManager = [[CLLocationManager alloc] init];
-            
-            [locationManager setDelegate:self];
-            [locationManager setDistanceFilter:kCLDistanceFilterNone];
-            [locationManager setDesiredAccuracy:kCLLocationAccuracyNearestTenMeters];
-//            [locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
-            if ([locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
-                [locationManager performSelector:@selector(requestWhenInUseAuthorization)];
-            }
-        }
-        self.mapVC = [[kflMKMapViewController alloc] initWithScapeVC:self];
+        [self resetTimingLoop];
+        [self initLocationServices];
     }
     return self;
 }
 
--(UIStatusBarStyle)preferredStatusBarStyle{
+-(UIStatusBarStyle)preferredStatusBarStyle {
     return UIStatusBarStyleDefault;
 }
 
@@ -70,19 +47,17 @@
     [self setUpViewForOrientation:interfaceOrientation];
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
 }
 
-- (void)viewDidUnload
-{
+- (void)viewDidUnload {
     [super viewDidUnload];
 
 }
 
-- (void)setUpViewForOrientation:(UIInterfaceOrientation)orientation
-{
+- (void)setUpViewForOrientation:(UIInterfaceOrientation)orientation {
+    
     if(UIInterfaceOrientationIsLandscape(orientation))
     {
         
@@ -109,17 +84,36 @@
     }
 }
 
--(void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-{
+-(void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration{
     [self setUpViewForOrientation:toInterfaceOrientation];
+}
+
+// TODO: Move this init to htlp manager class
+- (void) initLocationServices {
+    if (![CLLocationManager locationServicesEnabled]) { // class method!
+        UIAlertView *servicesDisabledAlert = [[UIAlertView alloc] initWithTitle:@"Location Services Disabled"
+                                                                        message:@"You currently have all location services for this device disabled. If you proceed, you will be asked to confirm whether location services should be reenabled."
+                                                                       delegate:nil
+                                                              cancelButtonTitle:@"OK"
+                                                              otherButtonTitles:nil];
+        [servicesDisabledAlert show];
+    } else if ([CLLocationManager locationServicesEnabled]) {
+        
+        DLog(@"Core Location services are enabled!");
+        self.locationManager = [[CLLocationManager alloc] init];
+        [self.locationManager setDelegate:self];
+        [self.locationManager setDistanceFilter:kCLDistanceFilterNone];
+        [self.locationManager setDesiredAccuracy:kCLLocationAccuracyNearestTenMeters];
+        if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
+            [self.locationManager performSelector:@selector(requestWhenInUseAuthorization)];
+        }
+    }
 }
 
 - (void)launchMapView:(UIButton *)sender {
     NSLog(@"number of regions: %lu", (unsigned long)[self.mapVC.scapeRegions count]);
     [self.navigationController pushViewController:self.mapVC animated:YES];
 }
-
-#pragma mark reset and startup methods
 
 - (IBAction)toggleGoBtn:(UIButton *)sender {
     NSLog(@"toggle go button!");
@@ -188,14 +182,6 @@
     // at this this point, this method returns, init returns, and then app delegate returns
     
 }
-
-#pragma mark GUI update methods
-
-//- (IBAction)updateTimeDelta:(UISlider *)sender {
-//    
-//    self.timedelta = floor(sender.value);
-//    [timedeltaLbl setText:[NSString stringWithFormat:@"%.2f", self.timedelta]];
-//}
 
 #ifdef LOG_TO_EMAIL
 #pragma mark logging to email
@@ -463,6 +449,8 @@
     [locationManager setDelegate:nil];
     
 }
+
+
 
 #pragma mark GPSON/JSON methods
 

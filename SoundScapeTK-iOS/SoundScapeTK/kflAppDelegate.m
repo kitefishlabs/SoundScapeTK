@@ -148,9 +148,6 @@ extern void mp3play_tilde_setup(void);
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     NSLog(@"will resign active!");
-//    [self.scapeManagerVC toggleLocationTracking];
-//    [self.scapeManagerVC.goBtn setSelected:NO];
-//    [self.scapeManagerVC.gpsVC.locTrackingSwitch setOn:NO];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
