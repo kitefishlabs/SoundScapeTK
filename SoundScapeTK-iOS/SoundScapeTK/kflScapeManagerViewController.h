@@ -51,21 +51,21 @@
 @property (strong, nonatomic)   IBOutlet UIButton       *goBtn;
 
 
-- (IBAction)toggleGoBtn:(id)sender;
+- (IBAction)    toggleGoBtn:(id)sender;
 
-- (void)    setUpViewForOrientation:(UIInterfaceOrientation)orientation;
-- (void)    toggleLocationTracking;
-- (void)    launchMapView:(UIButton *)sender;
-- (void)    resetUserState;
-- (void)    resetTimingLoop;
-- (void)    backgroundUpdate;
-- (void)    updateLocation;
-- (void)    stopUpdatingLocation:(NSString *)state;
+- (void)        setUpViewForOrientation:(UIInterfaceOrientation)orientation;
+- (void)        toggleLocationTracking;
+- (void)        launchMapView:(UIButton *)sender;
+- (void)        resetUserState;
+- (void)        resetTimingLoop;
+- (void)        backgroundUpdate;
+- (void)        updateLocation;
+- (void)        stopUpdatingLocation:(NSString *)state;
 
-- (void)    readScapeFromJSON:(NSString *)jsonPath;
-- (void)    writeScapeToJSON;
+- (NSString *)  readScapeFromJSON:(NSString *)jsonPath;
+- (void)        writeScapeToJSON;
 
-- (void)    flyToLocation:(CLLocationCoordinate2D)coords; // FOR TESTING PURPOSES ONLY
+- (void)        flyToLocation:(CLLocationCoordinate2D)coords; // FOR TESTING PURPOSES ONLY
 
 @end
 

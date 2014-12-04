@@ -46,8 +46,6 @@
 }
 
 - (void)reset {
-
-    DLog(@"\n\n\n********RESET HTLP MANAGER*****\n\n\n");
     
     if (scapeRegions == nil) {
         scapeRegions = [NSMutableDictionary dictionaryWithCapacity:1];

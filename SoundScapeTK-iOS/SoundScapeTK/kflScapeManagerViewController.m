@@ -131,7 +131,6 @@
         [self backgroundUpdate];
         NSLog(@"activate audio");
         [(kflAppDelegate *)[[UIApplication sharedApplication] delegate] activateAudio:YES];
-//        [self.gpsVC.locTrackingSwitch setOn:YES];
         [self.goBtn setTitle:@"stop tracking" forState:UIControlStateNormal];
         [(kflAppDelegate *)[[UIApplication sharedApplication] delegate] launchMapView];
         NSLog(@"ON!");
@@ -140,12 +139,9 @@
         [htlpManager killAll];
         [htlpManager.audioFileRouter resetRouter];
         [(kflAppDelegate *)[[UIApplication sharedApplication] delegate] activateAudio:NO];
-//        [self.gpsVC.locTrackingSwitch setOn:NO];
         [self.goBtn setTitle:@"start tracking" forState:UIControlStateNormal];
-        NSLog(@"off.");
+        NSLog(@"off...");
     }
-    
-    // should the raIndex be reset? no
     // *** what else should be reset?
 }
 
@@ -168,8 +164,6 @@
     } else {
         [htlpManager reset];
     }
-        
-    // init trail of last N points or clear -- now contained in lapManager reset
     
     // grab the defaults for the app
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -234,6 +228,7 @@
     
     [lapManager clearLocations];
 }
+
 #endif
 
 
@@ -454,35 +449,26 @@
 
 #pragma mark GPSON/JSON methods
 
-- (void) readScapeFromJSON:(NSString *)jsonPath {
-    JSONLog(@"Read JSON...");
-    JSONLog(@"%@", jsonPath);
-    JSONLog(@"    grab the JSON file; throw error or exit if non-existant.");
+- (NSString *) readScapeFromJSON:(NSString *)jsonPath {
     
     NSError *error;
     NSString *stringFromFileAtPath = [[NSString alloc] initWithContentsOfFile:jsonPath
                                                                      encoding:NSUTF8StringEncoding
                                                                         error:&error];
     if (error != nil) {
-        NSLog(@"Error reading JSON: %@", [error description]);
+        return @"StringFromPathError";
     }
 
     NSData *jsonData = [stringFromFileAtPath dataUsingEncoding:NSUTF8StringEncoding];
     
-    if ((stringFromFileAtPath == nil) || (jsonData == nil)) {
+    if (jsonData == nil) {
         
-        JSONLog(@"Error reading file at location: %@\n%@",
-              jsonPath,
-              [error description]);
+        return @"JSONDataReadError";
         
     } else {
         
-        JSONLog(@"    read was successful(!), clear any existing data.");
-        
-        [lapManager clearLocations];                    // reinit managers! - #CLEANME
-        [htlpManager.scapeRegions removeAllObjects];
-
-        JSONLog(@"HTLP SF MANAGER: %@\n%@", htlpManager.scapeRegions, htlpManager.scapeSoundfiles);
+        [[kflLAPManager sharedManager] clearLocations];             // reinit managers! - #CLEANME
+        [[kflHTLPManager sharedManager] reset];                     // WARNING! clears both regions and linked sound files
         
         error = nil;
         NSMutableDictionary *dict = [NSJSONSerialization JSONObjectWithData:jsonData options:kNilOptions error:&error];
@@ -716,6 +702,7 @@
                 }
             }
         }
+    return @"Success";
     }
 }
 
