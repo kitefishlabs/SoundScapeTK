@@ -54,10 +54,9 @@
             if (error) {
                 DLog(@"***ERROR: %@", [error description]);
             }
-            //            // attempt to skip backup to iCloud or some BS that doesn't actually work, so skipping *** follow up on whther this is even necessary
-            //            //BOOL res = [self addSkipBackupAttributeToItemAtURL:[NSURL URLWithString:docPath]];
-            //            //DLog(@"===========RES: %i", res);
-            
+
+            BOOL res = [self addSkipBackupAttributeToItemAtURL:docsURL]; // how to really test this???
+            NSLog(@"res: %i", res);
 
         }
         
@@ -87,6 +86,19 @@
         dumbPlayer = nil;
     }
     return self;
+}
+
+- (BOOL)addSkipBackupAttributeToItemAtURL:(NSURL *)URL
+{
+    assert([[NSFileManager defaultManager] fileExistsAtPath: [URL path]]);
+    
+    NSError *error = nil;
+    BOOL success = [URL setResourceValue: [NSNumber numberWithBool: YES]
+                                  forKey: NSURLIsExcludedFromBackupKey error: &error];
+    if(!success){
+        NSLog(@"Error excluding %@ from backup %@", [URL lastPathComponent], error);
+    }
+    return success;
 }
 
 
