@@ -475,6 +475,7 @@
         
         if (error != nil) {
             JSONLog(@" --error: %@", [error description]);
+            return [error description];
         }
         JSONLog(@"    regions: %@\n\n", [dict objectForKey:@"regions"]);
         
@@ -484,14 +485,10 @@
         
         NSNumber *origin_X = [[dict objectForKey:@"origin"] objectForKey:@"lat"];
         NSNumber *origin_Y = [[dict objectForKey:@"origin"] objectForKey:@"lon"];
-        NSNumber *relativeFlag = [[dict objectForKey:@"origin"] objectForKey:@"rel"];
         
         float originX = 0.f, originY = 0.f;
-        BOOL relFlag = ((relativeFlag == nil) ? FALSE : [relativeFlag boolValue]);
         
-        JSONLog(@"origin: %@, %@, relative?: %i", origin_X, origin_Y, relFlag);
-        
-        if (((origin_X != nil) && (origin_Y != nil)) && relFlag) {
+        if (((origin_X != nil) && (origin_Y != nil)) && [[[dict objectForKey:@"origin"] objectForKey:@"rel"] boolValue]) {
             originX = [origin_X floatValue];
             originY = [origin_Y floatValue];
         }
@@ -524,7 +521,7 @@
             
             /**
              *  FINISHRULE BOOL: finishrule
-             *  default = 0
+             *  default = 0 (kREGION_FINISH)
              *  if set, allow sound file to finish playing once triggered
              */
             int finishrule = kREGION_FINISH;
@@ -568,9 +565,9 @@
                  *  TODO: perform logical and error testing on lat/lon/radius!
                  */
                 
-                JSONLog(@"reading ctr x: %f", ctr.x);
-                JSONLog(@"reading ctr y: %f", ctr.y);
-
+                JSONLog(@"reading ctr x:  %f", ctr.x);
+                JSONLog(@"reading ctr y:  %f", ctr.y);
+                JSONLog(@"reading radius: %f", radius);
                 
                 /**
                  *  Scanning for @"params" is the way to look for parameters.
