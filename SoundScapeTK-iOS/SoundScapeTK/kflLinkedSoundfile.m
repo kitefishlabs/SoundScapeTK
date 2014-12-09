@@ -23,9 +23,9 @@
     if (self = [super init]) {
         self.fileName = soundFileName;
         self.idNum = regionIDNum;
-        self.pausedOffset = 0;
         self.routerSlot = -1;
-        self.startTime = nil;
+        [self clearStart];
+        [self clearOffset];
         self.attackTime = attack;
         self.releaseTime = release;
         self.assignedSlot = -1;
