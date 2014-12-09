@@ -33,8 +33,6 @@
 @property (strong, nonatomic)   NSString                *jsonFilePath;
 
 @property (strong, nonatomic)   CLLocationManager       *locationManager;
-@property (strong, nonatomic)   kflLAPManager           *lapManager;
-@property (strong, nonatomic)   kflHTLPManager          *htlpManager;
 
 @property                       BOOL                    bLocationTrackingActive;
 

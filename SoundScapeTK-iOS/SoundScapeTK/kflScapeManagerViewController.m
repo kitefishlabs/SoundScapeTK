@@ -25,7 +25,7 @@
 @implementation kflScapeManagerViewController
 
 @synthesize notifyLbl, goBtn;
-@synthesize jsonFilePath, locationManager, lapManager, htlpManager;
+@synthesize jsonFilePath, locationManager;
 @synthesize bLocationTrackingActive;
 @synthesize titleCirclesImgView;
 
@@ -136,8 +136,8 @@
         NSLog(@"ON!");
     } else {
         //TURNING OFF
-        [htlpManager killAll];
-        [htlpManager.audioFileRouter resetRouter];
+        [[kflHTLPManager sharedManager] killAll];
+        [[[kflHTLPManager sharedManager] audioFileRouter] resetRouter];
         [(kflAppDelegate *)[[UIApplication sharedApplication] delegate] activateAudio:NO];
         [self.goBtn setTitle:@"start tracking" forState:UIControlStateNormal];
         NSLog(@"off...");
@@ -147,18 +147,20 @@
 
 - (void) resetTimingLoop {
     
-    lapManager.timeout = TIMEOUT;
+    [[kflLAPManager sharedManager] setTimeout:TIMEOUT];
 }
 
 - (void) resetUserState {
     
     DLog(@"Reset user state...");
     // check to see that the managers exist or create them on reset
+    kflLAPManager *lapManager = [kflLAPManager sharedManager];
     if (lapManager == nil) {
         lapManager = [kflLAPManager sharedManager];
     } else {
         [lapManager reset];
     }
+    kflHTLPManager *htlpManager = [kflLAPManager sharedManager];
     if (htlpManager == nil) {
         htlpManager = [kflHTLPManager sharedManager];
     } else {
@@ -282,12 +284,12 @@
     // CLLocation with offset
     CLLocation *theLoc = [[CLLocation alloc] initWithLatitude:newLat longitude:newLon];
     
-    CGPoint pt = [lapManager recordLocationWithLocation:theLoc];
+    CGPoint pt = [[kflLAPManager sharedManager] recordLocationWithLocation:theLoc];
     LocUpdateLog(@"    RES PT: %f | %f", pt.x, pt.y);
     
     if ((pt.x != 0.f)&&(pt.y != 0.f)) {
         //CGPoint pt = CGPointMake(newLat, newLocation.coordinate.longitude);
-        NSString *hitRes = [htlpManager hitTestRegionsWithLocation:pt];
+        NSString *hitRes = [[kflHTLPManager sharedManager] hitTestRegionsWithLocation:pt];
         // the hitRes is the state label generated
         // - one of the following:
         //   - HIT!
@@ -392,7 +394,7 @@
     LocUpdateLog(@"ScapeManager: Searching...");
     [self.gpsVC.stateLbl setText:@"Searching..."];
     
-    [self performSelector:@selector(stopUpdatingLocation:) withObject:@"Timed Out" afterDelay:lapManager.timeout];
+    [self performSelector:@selector(stopUpdatingLocation:) withObject:@"Timed Out" afterDelay:[[kflLAPManager sharedManager] timeout]];
     
 }
 
@@ -657,7 +659,7 @@
                                                                                                                  toActivate:nil
                                                                                                                    andState:@"ready"];
                         NSLog(@"ADDING LCSynthR:\n%@", lcsr);
-                        [htlpManager addRegion:lcsr forIndex:lrid];
+                        [[kflHTLPManager sharedManager] addRegion:lcsr forIndex:lrid];
                         [self.mapVC addRegion:lcsr];
                     }
                 }
@@ -693,7 +695,7 @@
                                                                                                      andState:@"ready"];
                     NSLog(@"ADDING LSF:\n%@", lsf);
                     NSLog(@"ADDING LCSFR:\n%@", lcr);
-                    [htlpManager addRegion:lcr forIndex:lrid];
+                    [[kflHTLPManager sharedManager] addRegion:lcr forIndex:lrid];
                     [self.mapVC addRegion:lcr];
 
                 }
