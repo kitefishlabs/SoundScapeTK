@@ -12,6 +12,7 @@
 #import "kflLinkedParameter.h"
 #import "kflLinkedRegion.h"
 #import "kflLinkedCircleRegion.h"
+#import "kflLinkedSoundfile.h"
 
 
 @interface SoundScapeTKTests : XCTestCase
@@ -23,9 +24,6 @@
 - (void)setUp {
     [super setUp];
     // Put setup code here. This method is called before the invocation of each test method in the class.
-    
-    
-    
 }
 
 - (void)tearDown {
@@ -122,6 +120,27 @@
     XCTAssertEqual(lcsRegion.state , @"ready");
     XCTAssertEqual(lcsRegion.angleOffset, 1.0);
 }
+
+- (void)testLinkedSoundfileCreationAndSimpleLifeCycle {
+    kflLinkedSoundfile *lsf = [kflLinkedSoundfile linkedSoundfileForFile:@"01.wav" idNum:88 attack:200 andRelease:400];
+    // test creation
+    XCTAssertEqual(lsf.fileName, @"01.wav");
+    XCTAssertEqual(lsf.idNum, 88);
+    XCTAssertEqual(lsf.attackTime, 200);
+    XCTAssertEqual(lsf.releaseTime, 400);
+    
+    NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSURL *docsURL = [NSURL fileURLWithPath:[documentsPath stringByAppendingPathComponent:lsf.fileName]];
+    XCTAssert([[NSFileManager defaultManager] fileExistsAtPath:[docsURL path]]);
+    
+    XCTAssertEqualWithAccuracy(lsf.length, 17.528163, 0.000001);
+    XCTAssertEqual(lsf.channels, 2);
+    
+    XCTAssertNil(lsf.startTime);
+    XCTAssertEqual(lsf.pausedOffset, 0.0);
+    
+}
+
 
 
 @end
