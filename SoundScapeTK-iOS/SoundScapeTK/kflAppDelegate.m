@@ -7,6 +7,8 @@
 //
 
 #import "kflAppDelegate.h"
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
 #import "PdAudioController.h"
 #import "PdBase.h"
 
@@ -91,6 +93,9 @@ extern void mp3play_tilde_setup(void);
     // kick off loc. tracking
     [self.scapeManagerVC toggleLocationTracking];
     [self launchMapView];
+
+    [Fabric with:@[CrashlyticsKit]];
+
     return YES;
 }
 

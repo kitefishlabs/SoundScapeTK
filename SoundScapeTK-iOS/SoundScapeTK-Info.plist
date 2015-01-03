@@ -43,8 +43,24 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>Fabric</key>
+	<dict>
+		<key>APIKey</key>
+		<string>1c935ab009e6d614764eb0a8bd959294f7260dac</string>
+		<key>Kits</key>
+		<array>
+			<dict>
+				<key>KitInfo</key>
+				<dict/>
+				<key>KitName</key>
+				<string>Crashlytics</string>
+			</dict>
+		</array>
+	</dict>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>SoundScapeTK uses your location to trigger audio playback and synthesis.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>audio</string>
@@ -81,7 +97,5 @@
 			</dict>
 		</dict>
 	</array>
-    <key>NSLocationWhenInUseUsageDescription</key>
-    <string>SoundScapeTK uses your location to trigger audio playback and synthesis.</string>
 </dict>
 </plist>
